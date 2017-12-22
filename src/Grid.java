@@ -9,6 +9,19 @@ public class Grid {
 	 * A way to display images to the console/output method
 	 * Needs to hold the location of each Animal and other object (rocks, grass, whatever)
 	 * A way to be custom set by the user
+	 * display elapsed time
+	 */
+	
+	/**
+	 * Visual rep:
+	 * Background 
+	 * Animals and food images
+	 * Play pause help buttons (we need to figure out where to put the help menu)
+	 * 
+	 */
+	
+	/**
+	 * Because the char representation of Animals and Food is not final I am going to have the printableGrid generate those instead of pulling them from the actors
 	 */
 	
 	
