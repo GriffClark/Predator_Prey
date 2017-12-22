@@ -1,0 +1,11 @@
+Rules for generating food:
+food generates on 3/5 of tiles. Every turn food generates on between 1/10 and 2/5 of the empty tiles
+
+Rules for generating prey:
+(assuming that each food yields 2-3 nutrition points) prey regenerates when 2 prey of the same species next to each other have 4 or more nutrition points. 
+They lose 3 nutrition points, don't move, and create a new prey of the same species. This take one turn instead of moving. If conditions to breed are not met nothing happens.
+Prey generates randomly (amount based on user input or preset)
+
+Rules for generating predators:
+(assuming that prey yields nutririon equal to 1/2 (rounded up) of the nutrition that it had)
+They lose 3 nutrition points, don't move, and create a new prey of the same species. This take one turn instead of moving. If conditions to breed are not met nothing happens.
