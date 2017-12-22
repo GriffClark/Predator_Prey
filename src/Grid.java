@@ -2,7 +2,9 @@
 public class Grid {
 	private int r; //rows
 	private int c; //columns
-	private char printableGrid[][]; //size to be declared later. Also called printable grid because it will reflect the grid holding actors
+	public static Actor fullGrid[][];
+	public static Animal animalGrid[][]; //this is because on this grid there can be collisions 
+	private static char printableGrid[][]; //size to be declared later. Also called printable grid because it will reflect the grid holding actors
 	
 	/*Grid needs:
 	 * Consider creating a JFrame to put this in instead of console output (if we have time)
@@ -25,10 +27,26 @@ public class Grid {
 	 */
 	
 	
-	public Grid()
+	public Grid(int r, int c)
 	{
-		r = 20;
-		c = 20;
+		fullGrid = new Actor[r][c];
+		animalGrid = new Animal[r][c];
+		printableGrid = new char[r][c];
+		/**
+		 * this 'layered' grid system works like this. The user sees the printable grid, which is just a matrix of askii characters.
+		 * when animals are checking for valid moves or to reproduce, the animal grid is used
+		 * when animals want to eat, they check with the fullGrid to see if there is something there to eat
+		 */
+		
+	}
+	
+	public static boolean isLocationEmpty(int[][] locationToCheck)
+	{
+		if (animalGrid[locationToCheck.length][locationToCheck[0].length] == null)
+		{
+			return true;
+		}
+		return false;
 	}
 	
 

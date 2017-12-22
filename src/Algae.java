@@ -1,10 +1,14 @@
 import java.awt.image.BufferedImage;
 
-public class WaterBug extends Food{
+public class Algae extends Actor{
 	
-	public WaterBug()
+	public Algae()
 	{
 		nutritionValue = (int)(Math.random() * 3) + 1;
 //		image = new BufferedImage();
 	}
+	
+	/**
+	 *how do I make it so that each algae can only be eaten once
+	 */
 }

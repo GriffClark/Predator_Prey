@@ -7,10 +7,12 @@ public class Predator extends Animal{
 	 * 
 	 */
 	
-	public void eatPrey(Prey prey)
+	@Override
+	public void eat(Actor deadThing)
 	{
-		//Needs to delete the prey from existance and modify predators stats
-		
+		nutrition += (deadThing.getNutritionValue() + 1) / 2; //only gets half as much energy from eating living things
+		deadThing.getEaten();
 	}
+	
 
 }
