@@ -20,6 +20,7 @@ public class Actor {
 	public void getEaten()
 	{
 		isAlive = false;
+		//so from here though I need to find a way to remove the dead thing
 	}
 	
 	public boolean getIsAlive()
