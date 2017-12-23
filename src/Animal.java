@@ -62,6 +62,11 @@ public class Animal extends Actor{
 			 */
 		}
 	}
+	
+	public void doThings /* couldn't come up with a better name for it*/()
+	{
+		//all the code for the decision tree. This should also be overwridden for each Animal but wanted to put a default here that can be used 
+	}
 
 
 }

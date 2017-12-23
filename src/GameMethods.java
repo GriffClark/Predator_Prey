@@ -29,6 +29,7 @@ public class GameMethods {
 		 
 	}
 	
+	
 	public static boolean makeValidMove(Animal animal, int[][] moveRequest) //this methods takes an animal that wants to move and checks if the move it wants to make is valid. If it is, it makes the move and returns true. Otherwise, it returns false
 	{//this move request will be the result of calling  Animal.genreateMoveRequest()
 		if(Grid.isLocationEmpty(moveRequest) == true) //so if the location on the grid is empty
