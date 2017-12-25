@@ -1,4 +1,12 @@
-
+/**
+ * 
+ * @author Griffin 
+ *
+ *
+ *Methods here:  note that all methods here should be static
+ *	getDistance
+ *	record
+ */
 public class GameMethods {
 	
 	/*
@@ -30,21 +38,12 @@ public class GameMethods {
 	}
 	
 	
-	public static boolean makeValidMove(Animal animal, int[][] moveRequest) //this methods takes an animal that wants to move and checks if the move it wants to make is valid. If it is, it makes the move and returns true. Otherwise, it returns false
-	{//this move request will be the result of calling  Animal.genreateMoveRequest()
-		if(Grid.isLocationEmpty(moveRequest) == true) //so if the location on the grid is empty
-		{
-			animal.setLocation(moveRequest);
-			return true;
-		}
-		else //if there is already someone at that location
-		{
-			return false;
-		}
-	} //also not sure that this belongs in GameMethods and not in Animal
 	
 	public static void record()
 	{
+		/*
+		 * records the number of sharks, minnows, and algae incase this needs to be used 
+		 */
 		int sharks = 0;
 		int minnows = 0;
 		int algae = 0;
@@ -65,6 +64,8 @@ public class GameMethods {
 		
 		//no idea if this method of accounting data works or not
 	}
+	
+
 	
 
 }

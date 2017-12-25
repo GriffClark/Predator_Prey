@@ -1,4 +1,9 @@
 import java.util.ArrayList;
+/**
+ *Methods here:
+ *	start
+ *	main
+ */
 import java.util.Scanner;
 public class Game {
 	/*
@@ -13,7 +18,7 @@ public class Game {
 		steps = input;
 	}
 	
-	public static ArrayList <Animal> totalPopulation;
+	public static ArrayList <Animal> totalPopulation; //need to update this totalPopulation so that it contians everything in totalPredators and totalPrey if this data is needed
 	public static ArrayList <Predator> totalPredators;
 	public static ArrayList<Prey> totalPrey;
 	public static ArrayList<Actor> everything;
@@ -24,6 +29,22 @@ public class Game {
 	public static int[] sharks;
 	public static int[] minnows;
 	public static int[] algae;
+	
+	/*
+	 * should I be doing all of this data management in the core or should it be done during the graphing phase?
+	 * does it matter?
+	 */
+	
+	//trying to make this easy to see
+	public static int nutritionMinnowsStartWith = 2;
+	public static int nutritionSharksStartWith = 4;
+	public static int setSharkSpeed = 2;
+	public static int setMinnowSpeed = 1;
+
+	
+	/**
+	 * is this method easier than just finding where to set it in the code? I think it is but not sure
+	 */
 
 	public static void main(String[] args) {
 		//initializing variables
@@ -54,9 +75,14 @@ public class Game {
 						totalFood.remove(j);
 						//if the food was eaten get rid of it
 					}
-				} //I do not like this way of doing it because it is not very effective and will take up a lot of computing pwoer
+				} //I do not like this way of doing it because it is not very effective and will take up a lot of computing power
+				
+				//now to print out what the new grid looks like
 				
 			}
+			
+			//this should be the last method
+			GameMethods.record(); //records population data
 			
 		}while(stepsTaken < steps); //while you have not taken as many steps as you wanted
 		

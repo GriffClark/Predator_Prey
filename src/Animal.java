@@ -38,7 +38,7 @@ public class Animal extends Actor{
 		{
 			return false;
 		}
-		return isAlive; //if you have nutrition returns wheter or not you are alive. If nutrition is 0 then you are dead
+		return isAlive; //if you have nutrition returns whether or not you are alive. If nutrition is 0 then you are dead
 	}
 	
 	public int getSpeed()
@@ -53,15 +53,7 @@ public class Animal extends Actor{
 		//so this will store your positive or negative movement along the grid
 	}
 	
-	public Animal reproduce(Animal a, Animal b)
-	{
-		if(a.getName().equals(b.getName())) //if animal a and animal b are the same
-		{
-			/*
-			 * without knowing what type animal a and b are, I need to create a new Animal of that same type. Not sure how to do that
-			 */
-		}
-	}
+
 	
 	public void doThings /* couldn't come up with a better name for it*/()
 	{
