@@ -65,10 +65,10 @@ public class Grid {
 		return fullGrid[0].length;
 	}
 	
-	public Grid generateInitialGrid(int algNo, int minnowNo, int sharkNo, int[][] gridSize)
+	public static Grid generateInitialGrid(int algNo, int minnowNo, int sharkNo, int[][] gridSize)
 	{
 		int everything = algNo + minnowNo + sharkNo;
-		Grid newGrid = new Grid (gridSize);
+		Grid newGrid = new Grid (gridSize); //I need to get this grid to hold actors
 		
 		for(int i = 0; i < algNo; i++)
 		{
@@ -91,14 +91,14 @@ public class Grid {
 		for(int i = 0; i < Game.everything.size(); i++)
 		{
 			//based on what is in everything<> objects will be added to their appropriate ArrayLists so that the data can be accessed
-			Actor bob = Game.everything.get(i);
+			Actor actor = Game.everything.get(i);
 			switch (Game.everything.get(i).getName())
 			{
-			case "Minnow": Game.totalMinnows.add((Minnow) bob); //I think that's correct because bob should already be a Minnow
+			case "Minnow": Game.totalMinnows.add((Minnow) actor); //I think that's correct because bob should already be a Minnow
 			
-			case "Shark": Game.totalSharks.add((Shark)bob);
+			case "Shark": Game.totalSharks.add((Shark)actor);
 			
-			default: /*if it isn't a shark or a minnow it must be food*/ Game.totalFood.add(bob);
+			default: /*if it isn't a shark or a minnow it must be food*/ Game.totalFood.add(actor);
 			}
 		}
 		
@@ -141,7 +141,7 @@ public class Grid {
 	
 	//this methods takes an animal that wants to move and checks if the move it wants to make is valid. If it is, it makes the move and returns true. Otherwise, it returns false
 	{//this move request will be the result of calling  Animal.genreateMoveRequest()
-		if(animalGrid.isLocationEmpty(moveRequest) == true) //also throwing a weird error at me
+		if(animalGrid.isLocationEmpty(moveRequest) == true) //so I don't want animalGrid to be static because I want to access the grid being used in Game. How do I do that?
 		{
 			animal.setLocation(moveRequest);
 			return true;

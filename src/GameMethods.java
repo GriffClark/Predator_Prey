@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * 
  * @author Griffin 
@@ -37,33 +39,63 @@ public class GameMethods {
 		 
 	}
 	
-	
-	
-	public static void record()
+	public static Grid getNewGrid()
 	{
-		/*
-		 * records the number of sharks, minnows, and algae incase this needs to be used 
+		
+		/**
+		 * will build the initial grid based around user input. We could also make a defualt grid that uses random numbers, too. But this gives us more control for testing
 		 */
-		int sharks = 0;
-		int minnows = 0;
-		int algae = 0;
-		for (int i = 0; i < Game.everything.size(); i++)
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("How big would you like your grid? 'x''y'");
+		
+		int x = keyboard.nextInt();
+		int y = keyboard.nextInt();
+		int[][] gridSize = new int [x][y];
+		
+		System.out.println("How many algae do you want?"); //or should I automatically make the number of algae a function of the number of minnows?
+		
+		int algNo = keyboard.nextInt();
+		
+		if(algNo >= x * y)
 		{
-			String thisString = Game.everything.get(i).getName();
-			switch( thisString )
-			{
-			case "Shark": sharks++; break;
-			case "Minnow": minnows++; break;
-			case "Algae": algae++; break;			
-			} //need to test this
+			//error
+			System.out.println("Unhandled error about someone putting to much shit in the grid");
 		}
 		
-		Game.sharks[Game.steps] = sharks;
-		Game.minnows[Game.steps] = minnows;
-		Game.algae[Game.steps] = algae;
+		System.out.println("how many minnows do you want?"); //should we make it so that the number of minnows has to be less then the number of algae?
 		
-		//no idea if this method of accounting data works or not
+		int minnowNo = keyboard.nextInt();
+		
+		if(minnowNo >= x * y)
+		{
+			//error
+			System.out.println("Unhandled error about someone putting to much shit in the grid");
+		}
+		
+		System.out.println("how many sharks do you want?");
+		
+		int sharkNo = keyboard.nextInt();
+		
+		if(sharkNo >= x * y)
+		{
+			//error
+			System.out.println("Unhandled error about someone putting to much shit in the grid");
+		}
+		
+		Grid grid = Grid.generateInitialGrid(algNo, minnowNo, sharkNo, gridSize);
+		return grid;
 	}
+	
+	public static void start()
+	{
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("how many steps would you like to see?");
+		int input = keyboard.nextInt(); //input will be re-used. Steps will be a constant value 
+		Game.steps = input;
+		
+		//is this the correct way of going about starting?
+	}
+	
 	
 
 	
