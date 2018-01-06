@@ -7,11 +7,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class Game {
 	/*
-	 * just a main method with some instances of other classes
+	 * User enters desired # of steps
+	 * grid is generated with all necessary actors
+	 * steps are executed
+	 * 	predators and prey move 
+	 * 	predators can eat prey if in valid location
+	 * 	predators and prey reproduce
+	 * 	data is collected and stored
+	 * graphs are generated and end screen is displayed (not my job hopefully @Griffin) 
 	 */
 	public static int steps;
 	
 	public static ArrayList <Animal> totalPopulation; //is the combined populations of TotalPredator and TotalPrey
+	// make sure Snubby isn't in 2 places.  You probably don't need "totalPopulation" or "everything"  
+	// each animal must only be in 1 list
 	public static ArrayList <Predator> totalPredators;
 	public static ArrayList<Prey> totalPrey;
 	public static ArrayList<Actor> everything;

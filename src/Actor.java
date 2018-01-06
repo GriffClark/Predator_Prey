@@ -5,7 +5,7 @@ public class Actor {
 	protected BufferedImage image;
 	protected String name;
 	protected boolean isAlive;
-	protected int[][] location;
+	protected Location location;
 	protected char askiiRep; //this will give a rough visualization for what it will look like
 
 	public char getAskiiRep()
@@ -30,27 +30,27 @@ public class Actor {
 	
 	public void setLocation(int x, int y)
 	{
-		this.location = new int[x][y];
+		this.location = new Location(x, y);
 	}
 	
-	public void setLocation(int[][] location)
+	public void setLocation(Location location)
 	{
 		this.location = location;
 	}
 	
-	public int[][] getLocation()
+	public Location getLocation()
 	{
 		return location;
 	}
 	
 	public int getX()
 	{
-		return location.length;
+		return location.getX();
 	}
 	
 	public int getY()
 	{
-		return location[0].length;
+		return location.getY();
 	}
 	
 	public String getName()

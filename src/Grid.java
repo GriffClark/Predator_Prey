@@ -141,7 +141,7 @@ public class Grid {
 	
 	//this methods takes an animal that wants to move and checks if the move it wants to make is valid. If it is, it makes the move and returns true. Otherwise, it returns false
 	{//this move request will be the result of calling  Animal.genreateMoveRequest()
-		if(animalGrid.isLocationEmpty(moveRequest) == true) //so I don't want animalGrid to be static because I want to access the grid being used in Game. How do I do that?
+		if(animalGrid.isLocationEmpty(moveRequest) == true) //so I don't want animalGrid to be static because I want to access the grid being used in Game. How do I do that?325
 		{
 			animal.setLocation(moveRequest);
 			return true;
