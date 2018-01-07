@@ -11,6 +11,8 @@
  *	placeObject
  *	makeValidMove
  *	printGrid
+ *
+ *also this grid needs to be reworked to follow MVC. It should be nothing more then a visual representation of the model
  */
 public class Grid {
 	public Actor fullGrid[][];

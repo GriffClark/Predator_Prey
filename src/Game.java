@@ -1,3 +1,7 @@
+/**
+ * most important thing to work on here is to make sure that each thing only has one location... right now a single object can be stored in multiple places. This can lead to many errors and make things mroe complicated then they need to be
+ */
+
 import java.util.ArrayList;
 /**
  *Methods here:
@@ -17,6 +21,10 @@ public class Game {
 	 * graphs are generated and end screen is displayed (not my job hopefully @Griffin) 
 	 */
 	public static int steps;
+	
+	/**
+	 * a lot of these can be removed, but need to pencil and paper out which ones are aboslutely necessary 
+	 */
 	
 	public static ArrayList <Animal> totalPopulation; //is the combined populations of TotalPredator and TotalPrey
 	// make sure Snubby isn't in 2 places.  You probably don't need "totalPopulation" or "everything"  

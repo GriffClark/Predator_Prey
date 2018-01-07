@@ -1,4 +1,8 @@
-
+/**
+ * 
+ * @author Griffin 
+ *building everything in Minnow first then will write one for Shark
+ */
 public class Shark extends Predator{
 	
 	public Shark(int nutrition)
@@ -11,3 +15,4 @@ public class Shark extends Predator{
 	}
 
 }
+

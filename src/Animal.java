@@ -13,17 +13,21 @@ public class Animal extends Actor{
 	 * Decision tree to determine movement (this will be different for predators and prey)
 	 * System for animals to reproduce
 	 * colissions - no 2 animals can occupy the same space
+	 * 
 	 */
+
+	
+	public Animal(int x, int y, int nutrition)
+	{
+		super(x, y);
+		this.nutrition = nutrition;
+	}
 	
 	public int getNutrition()
 	{
 		return nutrition;
 	}
-	
-	public void Animal()
-	{
-		
-	}
+
 	
 	public void eat(Actor deadThing)
 	{
@@ -60,8 +64,10 @@ public class Animal extends Actor{
 		//all the code for the decision tree. This should also be overwritten for each Animal but wanted to put a default here that can be used 
 		
 		/**
+		 * do I need to make another isAlive check here?
 		 * move method
 		 * reproduce check
+		 * 
 		 */
 	}
 

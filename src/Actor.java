@@ -1,3 +1,6 @@
+/**
+ * should each Actor have it's own unique ID? Is that necessary?
+ */
 import java.awt.image.BufferedImage;
 
 public class Actor {
@@ -7,6 +10,14 @@ public class Actor {
 	protected boolean isAlive;
 	protected Location location;
 	protected char askiiRep; //this will give a rough visualization for what it will look like
+	
+	public Actor(int x, int y)
+	{
+		this.location = new Location(x,y); //proper way to invoke location?
+		/*
+		 * should there also be a way to generate an Actor at a new random location or should I handle random xy values in the main method of Game?
+		 */
+	}
 
 	public char getAskiiRep()
 	{
