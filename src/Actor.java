@@ -52,6 +52,7 @@ public class Actor {
 	public Location getLocation()
 	{
 		return location;
+		//what is this returning, specifically?
 	}
 	
 	public int getX()

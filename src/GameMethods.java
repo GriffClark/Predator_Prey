@@ -6,8 +6,7 @@ import java.util.Scanner;
  *
  *
  *Methods here:  note that all methods here should be static
- *	getDistance
- *	record
+ *	should I move these static methods into the Game class or leave them here? Would it make a difference for the user?
  */
 public class GameMethods {
 	
