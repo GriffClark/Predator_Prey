@@ -6,3 +6,12 @@ TODO:
 4) Build View class
 5) Structure the model so that things can start happening. This will require a basic ASCII representation to see how things are working
 6) Figure out how multi-threading will work to make sure that things happen as efficinetly as possible
+
+
+		Notes to self
+
+
+things to look into:
+* more effective search algorithims
+*do actors need unique ID
+* 
