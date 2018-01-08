@@ -9,7 +9,7 @@ import java.util.ArrayList;
  *	main
  */
 import java.util.Scanner;
-public class Game {
+public class Controller {
 	/*
 	 * User enters desired # of steps
 	 * grid is generated with all necessary actors
@@ -26,35 +26,7 @@ public class Game {
 	 * a lot of these can be removed, but need to pencil and paper out which ones are aboslutely necessary 
 	 */
 	
-	public static ArrayList <Animal> totalPopulation; //is the combined populations of TotalPredator and TotalPrey
-	// make sure Snubby isn't in 2 places.  You probably don't need "totalPopulation" or "everything"  
-	// each animal must only be in 1 list
-	public static ArrayList <Predator> totalPredators;
-	public static ArrayList<Prey> totalPrey;
-	public static ArrayList<Actor> everything;
-	public static ArrayList<Minnow> totalMinnows;
-	public static ArrayList<Shark> totalSharks;
-	public static ArrayList<Actor> totalFood;
-	//all of these I can use to record data [time][number of ___ ] 
-	public static int[][] sharks;
-	public static int[][] minnows;
-	public static int[][] algae;
 	
-	/*
-	 * should I be doing all of this data management in the core or should it be done during the graphing phase?
-	 * does it matter?
-	 */
-	
-	//trying to make this easy to see
-	public static int nutritionMinnowsStartWith = 2;
-	public static int nutritionSharksStartWith = 4;
-	public static int setSharkSpeed = 2;
-	public static int setMinnowSpeed = 1;
-
-	
-	/**
-	 * is this method easier than just finding where to set it in the code? I think it is but not sure
-	 */
 	
 	//need to build the grid
 	

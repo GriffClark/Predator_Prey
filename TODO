@@ -1,0 +1,8 @@
+TODO:
+
+1) ArrayLists<> need to be cleaned up. Singleton format must be strictly followed to ensure that bugs do not persist in the program
+2) Grid needs to be cleaned up so that MVC is strictly followed. Make it very obvious why each method or data type is part of the model, view, or controller. This will improve readability and reduce bugs
+3) Build Animal.doThings() along with reproduce methods
+4) Build View class
+5) Structure the model so that things can start happening. This will require a basic ASCII representation to see how things are working
+6) Figure out how multi-threading will work to make sure that things happen as efficinetly as possible
