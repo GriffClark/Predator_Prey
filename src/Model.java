@@ -19,6 +19,7 @@ public class Model {
 	private ArrayList<Record> recordLibrary;
 	private int stepsComplete;
 	public static int desiredSteps;
+	
 
 	
 	//trying to make this easy to see
@@ -58,25 +59,22 @@ public class Model {
 		
 		switch(specification)
 		{
-		case "Minnow": Minnow minnow = new Minnow(x,y,nutrition); 
-		singleModel.actors.add(minnow);
-		break;
-		
-		case "Shark": Shark shark = new Shark (x,y,nutrition);
-		singleModel.actors.add(shark);
-		break;
-		
-		case "Algae": Algae algae = new Algae(x,y);
-		singleModel.actors.add(algae);
-		break;
+			case "Minnow": 
+				Minnow minnow = new Minnow(x,y,nutrition); 
+				singleModel.actors.add(minnow);
+			break;
+			
+			case "Shark": 
+				Shark shark = new Shark (x,y,nutrition);
+				singleModel.actors.add(shark);
+			break;
+			
+			case "Algae": 
+				Algae algae = new Algae(x,y);
+				singleModel.actors.add(algae);
+			break;
 		}
 		
-		
-		
-		//same method should be created for minnow and algae
-		
-		Minnow minnow = new Minnow(x, y, nutrition);
-	  actors.add(minnow);
 	}
 	
 	public ArrayList copyOfActors()

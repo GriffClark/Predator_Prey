@@ -14,17 +14,6 @@ public class GameStatus {
 	
 	public GameStatus(int step, ArrayList <Actor> actors) {
 		
-		
-//		for(int i = 0; i < actors.size(); i++)
-//		{
-//			switch(actors.get(i).getName())
-//			{
-//			case "Shark": sharkNo++; continue;
-//			case "Minnow": minnowNo++; continue;
-//			case "Algae": algaeNo++; continue;
-//			}
-//		}
-		
 		this.actors = actors; //this works...?
 		
 		// TODO Auto-generated constructor stub
