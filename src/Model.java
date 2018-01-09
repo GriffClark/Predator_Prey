@@ -32,6 +32,11 @@ public class Model {
 	public static int numberOfMinnows;
 	public static int halfLife;
 	
+	
+	public static ArrayList<Algae> algaeHolder = new ArrayList<Algae>();
+	
+
+	
 	/**
 	 * is this method easier than just finding where to set it in the code? I think it is but not sure
 	 */
@@ -103,6 +108,11 @@ public class Model {
 	
 	public void CompleteStep(int step, ArrayList<Actor> localActors)
 	{
+		
+		for(int i = 0; i < Model.algaeHolder.size(); i++)
+		{
+			singleModel.addActor(algae, algaeHolder.get(i).getX(), algaeHolder.get(i).getY(), algaeHolder.get(i).getNutrition()); //double cheeck this
+		}
 		
 		int sharks = 0;
 		int minnows = 0;
