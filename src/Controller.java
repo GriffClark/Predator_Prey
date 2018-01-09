@@ -35,7 +35,7 @@ public class Controller {
 			
 			for (int i = 0; i < Model.getActorsSize(); i++)
 			{
-				localActors.add((Actor) localModel.copyOfActors().get(i)); //cast should have no effect
+				localActors.add((Actor) GameMethods.getActorArrayList().get(i)); //cast should have no effect
 			}			
 			
 			for (int i = 0; i < Model.getActorsSize(); i++)
@@ -55,6 +55,8 @@ public class Controller {
 			}
 			
 			localModel.CompleteStep(stepsTaken, localActors); //makes a record of what step you are on and what actors exist
+			
+			View.printGrid();
 			
 			stepsTaken++; //increase the number of steps taken
 

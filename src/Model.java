@@ -23,11 +23,14 @@ public class Model {
 
 	
 	//trying to make this easy to see
+	public static int[][] gridSize;
 	public static int nutritionMinnowsStartWith = 2;
 	public static int nutritionSharksStartWith = 4;
 	public static int setSharkSpeed = 2;
 	public static int setMinnowSpeed = 1;
-
+	public static int numberOfSharks;
+	public static int numberOfMinnows;
+	public static int halfLife;
 	
 	/**
 	 * is this method easier than just finding where to set it in the code? I think it is but not sure

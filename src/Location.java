@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * 
  * @author Griffin 
@@ -14,12 +16,44 @@ public class Location {
 	{
 		this.x = x;
 		this.y = y;
+		checkValidLocation(x,y);
+	}
+	
+	public void checkValidLocation(int x, int y)
+	{
+		while (x > Model.gridSize.length || y > Model.gridSize[0].length)
+		{
+			this.x--;
+			this.y--;
+			//there could also be bugs here. Need a way to say ... "pick an empty valid location"
+		}
+		
+		ArrayList<Actor> localActors = new ArrayList<Actor>();
+		boolean isLocationEmpty = true;
+		for(int t = 0; t < GameMethods.getActorArrayList().size(); t++)
+		{
+			localActors.add((Actor)GameMethods.getActorArrayList().get(t));
+			//might as well create a local copy while searching if the location is occupied
+			if(localActors.get(t).getX() == x || localActors.get(t).getY() == y)
+			{
+				isLocationEmpty = false;
+			}
+		}
+		
+		if(isLocationEmpty == false)
+		{
+			checkValidLocation(x-1,y-1);
+			//this solution is bad but will work for many cases. Need a better solution for this
+		}
+
+		
 	}
 	
 	public Location (int[][] location) //do I want to accept int[][] or should I force xy nomenclature?
 	{
 		this.x = location.length;
 		this.y = location[0].length;
+		checkValidLocation(x,y);
 	}
 	
 	public int getX() { return x; }

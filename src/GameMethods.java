@@ -28,6 +28,19 @@ public class GameMethods {
 		 
 	}
 	
+	public static ArrayList getActorArrayList()
+	{
+		Model localModel = Model.getGameModel();
+		ArrayList<Actor> localActors = new ArrayList<Actor>();
+		
+		for (int i = 0; i < Model.getActorsSize(); i++)
+		{
+			localActors.add((Actor) localModel.copyOfActors().get(i)); //cast should have no effect
+		}	
+		
+		return localActors;
+	}
+	
 	
 	public static void start()
 	{
