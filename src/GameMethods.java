@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -6,22 +7,11 @@ import java.util.Scanner;
  *
  *
  *Methods here:  note that all methods here should be static
- *	should I move these static methods into the Game class or leave them here? Would it make a difference for the user?
  */
 public class GameMethods {
 	
-	/*
-	 * Holds the methods that Game will use
-	 * pause/play
-	 * speed up
-	 * stop
-	 * get info (displays no. of animals)
-	 * reset
-	 * customize grid
-	 * cusomise animals
-	 */
 	
-	public static int getDistance(Actor a, Actor b)
+	public static int getDistance(Location a, Location b)
 	{
 		//returns the distance of two actors from each other
 		double dis;
@@ -38,62 +28,36 @@ public class GameMethods {
 		 
 	}
 	
-	public static Grid getNewGrid()
-	{
-		
-		/**
-		 * will build the initial grid based around user input. We could also make a defualt grid that uses random numbers, too. But this gives us more control for testing
-		 */
-		Scanner keyboard = new Scanner(System.in);
-		System.out.println("How big would you like your grid? 'x''y'");
-		
-		int x = keyboard.nextInt();
-		int y = keyboard.nextInt();
-		int[][] gridSize = new int [x][y];
-		
-		System.out.println("How many algae do you want?"); //or should I automatically make the number of algae a function of the number of minnows?
-		
-		int algNo = keyboard.nextInt();
-		
-		if(algNo >= x * y)
-		{
-			//error
-			System.out.println("Unhandled error about someone putting to much shit in the grid");
-		}
-		
-		System.out.println("how many minnows do you want?"); //should we make it so that the number of minnows has to be less then the number of algae?
-		
-		int minnowNo = keyboard.nextInt();
-		
-		if(minnowNo >= x * y)
-		{
-			//error
-			System.out.println("Unhandled error about someone putting to much shit in the grid");
-		}
-		
-		System.out.println("how many sharks do you want?");
-		
-		int sharkNo = keyboard.nextInt();
-		
-		if(sharkNo >= x * y)
-		{
-			//error
-			System.out.println("Unhandled error about someone putting to much shit in the grid");
-		}
-		
-		Grid grid = Grid.generateInitialGrid(algNo, minnowNo, sharkNo, gridSize);
-		return grid;
-	}
 	
 	public static void start()
 	{
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("how many steps would you like to see?");
 		int input = keyboard.nextInt(); //input will be re-used. Steps will be a constant value 
-		Game.steps = input;
+		Model.desiredSteps = input;
 		
 		//is this the correct way of going about starting?
 	}
+	
+	public static ArrayList getActorOfSpecifiedType (String specification)
+	{ //based on the current status of the game gets you all actors of a specific type
+		GameStatus currentStatus = Model.getCurrentStatus();
+		ArrayList<Actor> localCopyOfAllActors = currentStatus.actors; //is this a valid way of copying it? To tired to figure it out
+		ArrayList<Actor> specifiedActors = new ArrayList<Actor>();
+		
+		
+		for(int i = 0; i < Model.getActorsSize(); i++)
+		{
+			if(localCopyOfAllActors.get(i).getName().equals(specification))
+			{
+				specifiedActors.add(localCopyOfAllActors.get(i));
+			}
+		}
+		
+		return specifiedActors;
+		//this way I don't need to create a new getter for each type of actor created
+	}
+	
 	
 	
 

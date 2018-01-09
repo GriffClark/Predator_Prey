@@ -15,24 +15,11 @@ public class Model {
 	/**
 	 * also while this is getting cleaned up note that these shouldn't be static or public
 	 */
-	public static ArrayList <Predator> totalPredators;
-	public static ArrayList<Prey> totalPrey;
-	public static ArrayList<Actor> everything;
-	public static ArrayList<Minnow> totalMinnows;
-	public static ArrayList<Shark> totalSharks;
-	public static ArrayList<Actor> totalFood;
-	//all of these I can use to record data [time][number of ___ ] 
-	public static int[][] sharks;
-	public static int[][] minnows;
-	public static int[][] algae;
-	
-	//storing the gameStatus here
-	
-	public static ArrayList<GameStatus> gameStatus;
-	/*
-	 * should I be doing all of this data management in the core or should it be done during the graphing phase?
-	 * does it matter?
-	 */
+	private ArrayList<Actor> actors;
+	private ArrayList<Record> recordLibrary;
+	private int stepsComplete;
+	public static int desiredSteps;
+
 	
 	//trying to make this easy to see
 	public static int nutritionMinnowsStartWith = 2;
@@ -48,58 +35,99 @@ public class Model {
 	/* use the "singleton" design pattern to ensure that there is one one GameModel which is shared across the entire process.
      * this makes it impossible to create 2 GameModel instances by accident.
      */
-	private static GameModel theSingletonGameModel = null;
+	private static Model singleModel = null;
 	
-    public static GameModel getGameModel()
+    public static Model getGameModel()
     {
-      if (theSingletonGameModel == null)
+      if (singleModel == null)
       {
-        theSingletonGameModel = new GameModel();
+        singleModel = new Model();
       }
       
-      return GameModel.theSingletonGameModel; //refrencing static SingletonGameModel
+      return Model.singleModel; //refrencing static SingletonGameModel
      }
     
     /* private contstuctor used only by singleton accessor GetGameModel */
-    private GameModel()
-    {
+    private Model()
+    {     
 
 	}
 	
-	private void addMinnow(int x, int y, int nutrition)
+	private void addActor(String specification, int x, int y, int nutrition)
 	{
+		
+		switch(specification)
+		{
+		case "Minnow": Minnow minnow = new Minnow(x,y,nutrition); 
+		singleModel.actors.add(minnow);
+		break;
+		
+		case "Shark": Shark shark = new Shark (x,y,nutrition);
+		singleModel.actors.add(shark);
+		break;
+		
+		case "Algae": Algae algae = new Algae(x,y);
+		singleModel.actors.add(algae);
+		break;
+		}
+		
+		
 		
 		//same method should be created for minnow and algae
 		
 		Minnow minnow = new Minnow(x, y, nutrition);
-	  totalMinnows.add(minnow);
+	  actors.add(minnow);
 	}
 	
-	/* put the rest of the "Add.." methods here for minnows, algae, etc */
-	
-	
-	
-	public ArrayList<Minnow> getMinnowList()
+	public ArrayList copyOfActors()
 	{
-		//designed to replace the Minnow ArrayList<>... and for all other actors
-	  ArrayList<Minnow> copyOfMinnowList = new ArrayList<Minnow>();
-	  for (int i = 0; i < everything.size(); i++) //do I want to be using everything here
-	  {
-	    if(everything.get(i).getName().equals("minnow"))
-	    {
-	    	copyOfMinnowList.add((Minnow) everything.get(i)); //the cast shouldn't have any effect but eclipse insists on it
-	    	//searches all actors to figure out which are minnows. Adds the minnows
-	    }
-	  }
-	  return copyOfMinnowList;
+		ArrayList<Actor> returnActors = new ArrayList<Actor>();
+		
+		for (int i = 0; i < singleModel.actors.size(); i++)
+		{
+			returnActors.add( singleModel.actors.get(i));
+		}
+		
+		return returnActors;
 	}
+	
+	public static int getActorsSize()
+	{
+		//dont't want actors getting accessed directly
+		return singleModel.actors.size();
+	}
+	
 	
 	/* put the rest of the "getter" functions here...*/
 	
-	public void CompleteStep(int step)
+	public void CompleteStep(int step, ArrayList<Actor> localActors)
 	{
-	  GameStatus newStatus = new GameStatus(step, totalSharks.size(), totalMinnows.size(), totalFood.size()); //if those ArrayLists are getting cut out then the method here needs to be changed, but core functionality remains the same
-	  gameStatus.add(newStatus); //stores newStatus
+		
+		int sharks = 0;
+		int minnows = 0;
+		int algae = 0;
+		
+		for(int i = 0; i < localActors.size(); i++)
+		{
+			switch(localActors.get(i).getName())
+			{
+			case "Minnow": minnows++; break;
+			case "Shark": sharks++; break;
+			case "Algae": algae++; break;
+			
+			}
+		}
+		
+	  Record newRecord = new Record(step, sharks, minnows, algae);
+	  recordLibrary.add(newRecord); //stores newStatus
+	}
+	
+	public static GameStatus getCurrentStatus()
+	{
+		GameStatus newStatus = new GameStatus(singleModel.stepsComplete, singleModel.copyOfActors());
+		return newStatus;
+		//makes a copy of the current gameStatus and returns it 
+			
 	}
 	
 

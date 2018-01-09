@@ -1,4 +1,5 @@
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 //all things that move are animals
 public class Animal extends Actor{
 	
@@ -16,11 +17,10 @@ public class Animal extends Actor{
 	 * 
 	 */
 
-	
-	public Animal(int x, int y, int nutrition)
+	public Animal(int x, int y)
 	{
 		super(x, y);
-		this.nutrition = nutrition;
+		
 	}
 	
 	public int getNutrition()
@@ -29,11 +29,7 @@ public class Animal extends Actor{
 	}
 
 	
-	public void eat(Actor deadThing)
-	{
-		nutrition += deadThing.getNutritionValue();
-		deadThing.getEaten();
-	}
+
 	
 	@Override //this method is slightly different for animals then for Algae
 	public boolean getIsAlive()
@@ -50,26 +46,86 @@ public class Animal extends Actor{
 		return speed;
 	}
 	
-	public int[][] generateMoveRequest(int x, int y)
-	{ //takes a desired X and Y value and returns a request to go to that spot (or at least this int[][] will be turned into a request in GameMethods
-		int[][] movement = new int[x][y];
-		return movement;
-		//so this will store your positive or negative movement along the grid
-	}
-	
 
-	
-	public void doThings /* couldn't come up with a better name for it*/()
+	@Override
+	public void doThings()
 	{
-		//all the code for the decision tree. This should also be overwritten for each Animal but wanted to put a default here that can be used 
+		
+		//all the code for this is going to be pushed down to the children
 		
 		/**
-		 * do I need to make another isAlive check here?
 		 * move method
 		 * reproduce check
+		 * feed
 		 * 
 		 */
 	}
+	
+	public Animal reproduce(Animal a, Animal b, int distance) //this int distance should be GameMethods.getDistance
+	{
+		if(a.getName().equals(b.getName()) && distance ==1) //if animal a and animal b are the same and they are close enough
+		{
+			int passedInNutrition= (a.getNutrition() + b.getNutrition() + 1) / 2;
+			
+			String species = a.getName(); //could be A or B because they should have the same name
+			
+			switch(species)
+			{
+			
+			//need a way to find valid location to spawn new child. Search all adjacent squares
+			case "Minnow": 
+				Minnow minnow = new Minnow(x, y,  passedInNutrition); //not sure how to get this xy value pair. Needs to be adjacent to parents I think but not sure what to do past that
+				while(minnow.getLocation() == null)
+				{
+					//need to write a method that will check all valid locations around the two parents until it finds a place to put the new minnow
+				}
+				return minnow;
+			
+			}
+			
+			
+		
+		
+		}
+	}
+	
+	public void move(ArrayList localActors, Location target)
+	{
+		ArrayList<Animal> animalList = new ArrayList<Animal>();
+		boolean isLocationEmpty = true;
+		
+		if(GameMethods.getDistance(location, target) <= speed)
+		{
+			for(int i = 0; i < localActors.size(); i++)
+			{
+				if(localActors.get(i)/*need a way to tell if it is an animal*/)
+				{
+					animalList.add((Animal) localActors.get(i));
+				}
+			}
+			
+			for(int i =0; i < animalList.size(); i++)
+			{
+				if(animalList.getLocation() == target) //not sure why this doesn't work
+				{
+					isLocationEmpty = false;
+				}
+			}
+			
+			if(isLocationEmpty == true)
+			{
+				this.location = target;
+			}
+			
+		}
+		
+	}
+	//do I need some way to check that the move was valid? Maybe there should also be a checkValidMove(location,target)
 
+	public void feed(Actor deadThing)
+	{
+		nutrition += deadThing.getNutritionValue();
+		deadThing.getEaten();
+	}
 
 }

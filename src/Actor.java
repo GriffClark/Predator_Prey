@@ -70,5 +70,11 @@ public class Actor {
 		return name;
 	}
 	
+	public void doThings()
+	{
+		//only has an effect in Animal. Doesn't do anything here..3
+		
+	}
 	
+
 }
