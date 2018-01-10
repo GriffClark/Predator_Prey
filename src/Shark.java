@@ -5,25 +5,14 @@
  */
 public class Shark extends Animal{
 	
-	public Shark(int x, int y)
+	public Shark( Location location, int nutrition)
 	{
-		super(x,y);
+		super(location, nutrition);
 		askiiRep = 'S';
 		speed = Model.setSharkSpeed;
 		name = "Shark";
 		isAlive = true;
 		nutrition= Model.nutritionSharksStartWith; //nutrition needs to be passed in because it is a function of the parents, or a default
-	}
-	
-	public Shark(int x, int y, int nutrition)
-	{
-		super(x,y);
-		askiiRep = 'S';
-		speed = Model.setSharkSpeed;
-		name = "Shark";
-		isAlive = true;
-		this.nutrition = nutrition;
-		
 	}
 	
 	@Override

@@ -30,7 +30,8 @@ public class Model {
 	public static int setMinnowSpeed = 1;
 	public static int numberOfSharks;
 	public static int numberOfMinnows;
-	public static int halfLife;
+	public static int numberOfAlgae; //a function of the number of Minnows?
+	public static int halfLife = 3; //how many steps it takes algae to reproduce
 	
 	
 	public static ArrayList<Algae> algaeHolder = new ArrayList<Algae>();
@@ -62,13 +63,13 @@ public class Model {
 
 	}
 	
-	private void addActor(String specification, int x, int y, int nutrition)
+	private void addActor(String specification, Location location, int nutrition)
 	{
 		
 		switch(specification)
 		{
 			case "Minnow": 
-				Minnow minnow = new Minnow(x,y,nutrition); 
+				Minnow minnow = new Minnow(location,nutrition); 
 				singleModel.actors.add(minnow);
 			break;
 			

@@ -19,7 +19,7 @@ public class Location {
 		checkValidLocation(x,y);
 	}
 	
-	public void checkValidLocation(int x, int y)
+	public boolean checkValidLocation(int x, int y)
 	{
 		while (x > Model.gridSize.length || y > Model.gridSize[0].length)
 		{
@@ -40,12 +40,42 @@ public class Location {
 			}
 		}
 		
-		if(isLocationEmpty == false)
-		{
-			checkValidLocation(x-1,y-1);
-			//this solution is bad but will work for many cases. Need a better solution for this
-		}
+		return isLocationEmpty;
 
+		
+	}
+	
+	public static Location generateAtValidLocation()
+	{
+		int rows = Model.gridSize.length;
+		int cols = Model.gridSize[0].length;
+		int randomX = (int)(Math.random() * rows);
+		int randomY = (int)(Math.random() * cols);
+		
+		ArrayList<Actor> localActors = new ArrayList<Actor>();
+		
+		for(int i = 0; i < GameMethods.getActorArrayList().size(); i++)
+		{
+			localActors.add((Actor) GameMethods.getActorArrayList().get(i));
+		}
+		Location finalLocation = null;
+		Location testLocation = new Location(randomX, randomY );
+		boolean isTestLocationValid = true;
+		
+		for(int i = 0; i < localActors.size(); i++)
+		{
+			if(testLocation == localActors.get(i).getLocation())
+			{
+				isTestLocationValid = false;
+			}
+			
+		}
+		
+		if(isTestLocationValid == true)
+		{
+			testLocation = finalLocation;
+		}
+		return finalLocation;
 		
 	}
 	

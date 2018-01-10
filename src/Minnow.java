@@ -1,25 +1,14 @@
 
 public class Minnow extends Animal{
-	
-	public Minnow(int x, int y) 
+		
+	public Minnow(Location location, int nutrition)
 	{
-		super(x, y);
-		askiiRep = 'M';
-		speed = Model.setMinnowSpeed;
-		name = "Minnow";
-		isAlive = true;
-		nutrition = Model.nutritionMinnowsStartWith;
-	}
-	
-	public Minnow(int x, int y, int nutrition)
-	{
-		super(x,y);
+		super(location, nutrition);
 		askiiRep = 'M';
 		speed = Model.setMinnowSpeed;
 		name = "Minnow";
 		isAlive = true;
 		this.nutrition = nutrition;
-		
 	}
 
 	

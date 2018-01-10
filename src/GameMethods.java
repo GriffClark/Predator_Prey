@@ -69,6 +69,33 @@ public class GameMethods {
 		
 		return specifiedActors;
 		//this way I don't need to create a new getter for each type of actor created
+		
+		
+	}
+	/**
+	 * make sure that there is a constant check running to make sure that no two objects occupy the same loocation
+	 * @return
+	 */
+	
+	public Actor generateActorAtRandomLocation(String specification)
+	{
+		switch(specification)
+		{
+			case "Minnow":
+				Minnow minnow = new Minnow(Location.generateAtValidLocation(), Model.nutritionMinnowsStartWith);
+				return minnow;
+			case "Shark":
+				Shark shark = new Shark(Location.generateAtValidLocation(), Model.nutritionSharksStartWith);
+				return shark;
+			case "Algae":
+				Algae algae = new Algae(Location.generateAtValidLocation());
+				return algae;
+			default:
+				//if nothing worked
+				return null;
+				
+		
+		}
 	}
 	
 	

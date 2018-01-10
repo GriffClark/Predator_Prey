@@ -17,10 +17,11 @@ public class Animal extends Actor{
 	 * 
 	 */
 
-	public Animal(int x, int y)
+	
+	public Animal(Location location, int nutrition)
 	{
-		super(x, y);
-		
+		super(location);
+		this.nutrition = nutrition;
 	}
 	
 	public int getNutrition()
