@@ -42,12 +42,26 @@ public class GameMethods {
 	}
 	
 	
-	public static void start()
+	public static void start() throws InterruptedException
 	{
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("how many steps would you like to see?");
 		int input = keyboard.nextInt(); //input will be re-used. Steps will be a constant value 
 		Model.desiredSteps = input;
+		//we should add a defualt number of sharks and minnows to start with
+		System.out.println("how many sharks would you like to start with?");
+		int sharkStart = keyboard.nextInt();
+		System.out.println("how many minnows do you want to start with?");
+		int minnowStart = keyboard.nextInt();
+		System.out.println("One second while the game initializes...");
+		Thread.sleep(500); //half a second
+		Model.numberOfMinnows = minnowStart;
+		Model.numberOfSharks = sharkStart;
+		Model.numberOfAlgae = minnowStart *2; //just an idea not a solution
+		System.out.println("...");
+		Thread.sleep(500);
+		System.out.println("Model has been initialized!");
+		
 		
 		//is this the correct way of going about starting?
 	}
