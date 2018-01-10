@@ -28,6 +28,72 @@ public class GameMethods {
 		 
 	}
 	
+	public static Location generateValidLocation()
+	{
+		int rows = Model.gridSize.length;
+		int cols = Model.gridSize[0].length;
+		int randomX = (int)(Math.random() * rows);
+		int randomY = (int)(Math.random() * cols);
+		
+		ArrayList<Actor> localActors = new ArrayList<Actor>();
+		
+		for(int i = 0; i < GameMethods.getActorArrayList().size(); i++)
+		{
+			localActors.add((Actor) GameMethods.getActorArrayList().get(i));
+		}
+		Location finalLocation = null;
+		Location testLocation = new Location(randomX, randomY );
+		boolean isTestLocationValid = true;
+		
+		for(int i = 0; i < localActors.size(); i++)
+		{
+			if(testLocation == localActors.get(i).getLocation())
+			{
+				isTestLocationValid = false;
+			}
+			
+		}
+		
+
+		
+		if(isTestLocationValid == true)
+		{
+			testLocation = finalLocation;
+		}
+		return finalLocation;
+		
+	}
+	
+	public static void placeSpawn(Actor child, Actor parentA, Actor parentB)
+	{
+		Location a = parentA.getLocation();
+		Location b = parentB.getLocation();
+		boolean valid = false;
+		Location newLocation = GameMethods.generateValidLocation();
+
+		
+		while(valid == false)
+		{
+			if(GameMethods.getDistance(newLocation, a) <= 2 || GameMethods.getDistance(newLocation, b) <=2)
+			{
+				valid = true;
+			}
+			else
+			{
+				newLocation = GameMethods.generateValidLocation();
+			}
+		}
+		
+		switch(parentA.getName())
+		{
+		case ("Minnow"):
+			Minnow m = new Minnow(newLocation, (((Animal) parentA).getNutrition() + ((Animal) parentB).getNutrition())/2);
+			//what do I do with this minnow?
+		}
+		
+		
+	}
+	
 	public static ArrayList getActorArrayList()
 	{
 		Model localModel = Model.getGameModel();
@@ -59,9 +125,26 @@ public class GameMethods {
 		Model.numberOfSharks = sharkStart;
 		Model.numberOfAlgae = minnowStart *2; //just an idea not a solution
 		System.out.println("...");
+		for(int i = 0; i < Model.numberOfMinnows; i++)
+		{
+			GameMethods.generateActorAtRandomLocation("Minnow");
+		}
+		for(int i = 0; i < Model.numberOfSharks; i++)
+		{
+			GameMethods.generateActorAtRandomLocation("Shark");
+		}
+		for(int i = 0; i < Model.numberOfAlgae; i++)
+		{
+			GameMethods.generateActorAtRandomLocation("Algae");
+		}
 		Thread.sleep(500);
 		System.out.println("Model has been initialized!");
 		
+		//debug check
+		for(int i = 0; i < GameMethods.getActorArrayList().size(); i++)
+		{
+			System.out.println(GameMethods.getActorArrayList().get(i).toString());
+		}
 		
 		//is this the correct way of going about starting?
 	}
@@ -91,29 +174,29 @@ public class GameMethods {
 	 * @return
 	 */
 	
-	public Actor generateActorAtRandomLocation(String specification)
+	public static void generateActorAtRandomLocation(String specification)
 	{
 		switch(specification)
 		{
 			case "Minnow":
 				Minnow minnow = new Minnow(Location.generateAtValidLocation(), Model.nutritionMinnowsStartWith);
-				return minnow;
+				Model.addActor(minnow);
 			case "Shark":
 				Shark shark = new Shark(Location.generateAtValidLocation(), Model.nutritionSharksStartWith);
-				return shark;
+				Model.addActor(shark);
 			case "Algae":
 				Algae algae = new Algae(Location.generateAtValidLocation());
-				return algae;
-			default:
-				//if nothing worked
-				return null;
+				Model.addActor(algae);
+		
 				
 		
 		}
+		
+	
 	}
 	
 	
-	
+
 
 	
 

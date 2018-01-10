@@ -45,40 +45,6 @@ public class Location {
 		
 	}
 	
-	public static Location generateAtValidLocation()
-	{
-		int rows = Model.gridSize.length;
-		int cols = Model.gridSize[0].length;
-		int randomX = (int)(Math.random() * rows);
-		int randomY = (int)(Math.random() * cols);
-		
-		ArrayList<Actor> localActors = new ArrayList<Actor>();
-		
-		for(int i = 0; i < GameMethods.getActorArrayList().size(); i++)
-		{
-			localActors.add((Actor) GameMethods.getActorArrayList().get(i));
-		}
-		Location finalLocation = null;
-		Location testLocation = new Location(randomX, randomY );
-		boolean isTestLocationValid = true;
-		
-		for(int i = 0; i < localActors.size(); i++)
-		{
-			if(testLocation == localActors.get(i).getLocation())
-			{
-				isTestLocationValid = false;
-			}
-			
-		}
-		
-		if(isTestLocationValid == true)
-		{
-			testLocation = finalLocation;
-		}
-		return finalLocation;
-		
-	}
-	
 	public Location (int[][] location) //do I want to accept int[][] or should I force xy nomenclature?
 	{
 		this.x = location.length;

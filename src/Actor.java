@@ -75,5 +75,10 @@ public class Actor {
 		
 	}
 	
+	public String toString()
+	{
+		return name + " " + location;
+	}
+	
 
 }

@@ -21,7 +21,6 @@ public class GameStatus {
 
 
 
-
 	public int getNumberOfSpecificActor(String specification)
 	{
 		int counter = 0;

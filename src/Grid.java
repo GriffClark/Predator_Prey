@@ -28,8 +28,10 @@ public class Grid {
 		grid = new char[x][y];
 	}
 	
-	public void placeCharAtLocation(char c, int x, int y)
+	public void placeCharAtLocation(char c, Location location)
 	{
+		int x = location.getX();
+		int y = location.getY();
 		grid[x][y] = c;
 	}
 	

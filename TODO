@@ -15,3 +15,5 @@ things to look into:
 * more effective search algorithims
 *do actors need unique ID
 * 
+NEED TO DO:
+didnt think through colisions. No 2 algae can be in same spot but a shark can be on an algae spot, right? 

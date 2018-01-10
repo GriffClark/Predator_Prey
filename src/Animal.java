@@ -3,8 +3,14 @@ import java.util.ArrayList;
 //all things that move are animals
 public class Animal extends Actor{
 	
+	public enum Edibles
+	{
+		Shark, Minnow
+	}
+	
 	protected int speed;	
 	protected int nutrition; //for how much food it has eaten
+	protected Edibles thingsICanEat;
 
 	/*Things animals need:
 	 * Image
@@ -46,20 +52,26 @@ public class Animal extends Actor{
 	{
 		return speed;
 	}
+
 	
 
 	@Override
 	public void doThings()
 	{
-		
-		//all the code for this is going to be pushed down to the children
-		
-		/**
-		 * move method
-		 * reproduce check
-		 * feed
-		 * 
-		 */
+			ArrayList<Actor> thingsNearBy = new ArrayList<Actor>(); //I don't want to keep actors here because I only want each actor to be stored in one location, and animals do not need a running memory of what is around them, since they will always be making this check
+			//need a way to scan all locations within your speed, which is also how far you can see around you
+			
+			//in order for this to work, need to make each actor self-aware. This might also work, though
+			
+			for(int i = 0; i < GameMethods.getActorArrayList().size(); i++)
+			{
+				if(GameMethods.getDistance(((Actor) GameMethods.getActorArrayList().get(i)).getLocation(), location) <= speed && ((Actor) GameMethods.getActorArrayList().get(i)).getLocation() != location)
+				{
+					thingsNearBy.add((Actor) GameMethods.getActorArrayList().get(i));
+					//if there is a thing that you can move to, you are aware that it's there
+				}
+			}
+			//just laying the groundwork. This will be used later by Shark and Minnow
 	}
 	
 	public Animal reproduce(Animal a, Animal b, int distance) //this int distance should be GameMethods.getDistance
@@ -70,20 +82,23 @@ public class Animal extends Actor{
 			
 			String species = a.getName(); //could be A or B because they should have the same name
 			
+			Location location = new Location(/*where should I put the newly spawned thing?*/);
+			
 			switch(species)
 			{
 			
 			//need a way to find valid location to spawn new child. Search all adjacent squares
 			case "Minnow": 
-				Minnow minnow = new Minnow(x, y,  passedInNutrition); //not sure how to get this xy value pair. Needs to be adjacent to parents I think but not sure what to do past that
-				while(minnow.getLocation() == null)
-				{
-					//need to write a method that will check all valid locations around the two parents until it finds a place to put the new minnow
+				Minnow minnow = new Minnow(location,  passedInNutrition); //not sure how to get this xy value pair. Needs to be adjacent to parents I think but not sure what to do past that
+				
+					
+					//think this works
+					
 				}
 				return minnow;
 			
 			}
-			
+			//need to make shark case too
 			
 		
 		
@@ -99,7 +114,7 @@ public class Animal extends Actor{
 		{
 			for(int i = 0; i < localActors.size(); i++)
 			{
-				if(localActors.get(i)/*need a way to tell if it is an animal*/)
+				if(localActors.get(i).getClass() == "Animal") //not sure how to syntax this
 				{
 					animalList.add((Animal) localActors.get(i));
 				}
@@ -107,7 +122,7 @@ public class Animal extends Actor{
 			
 			for(int i =0; i < animalList.size(); i++)
 			{
-				if(animalList.getLocation() == target) //not sure why this doesn't work
+				if((Animal) animalList.getLocation() == target) //not sure why this doesn't work
 				{
 					isLocationEmpty = false;
 				}

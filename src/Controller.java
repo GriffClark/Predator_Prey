@@ -22,7 +22,7 @@ public class Controller {
 	 */
 
 	//this might not want to be a main method
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		int stepsTaken = 0;
 		
 		//after everything has been initalized, the game starts...:
@@ -31,7 +31,7 @@ public class Controller {
 		{
 			GameStatus currentStatus = Model.getCurrentStatus(); //should get the status of Model.singleModel
 			Model localModel = Model.getGameModel();
-			ArrayList<Actor> localActors = new ArrayList<Actor>();
+			ArrayList<Actor> localActors = new ArrayList<Actor>(); //make sure all edits that are made are made to localActors
 			
 			for (int i = 0; i < Model.getActorsSize(); i++)
 			{
@@ -54,9 +54,32 @@ public class Controller {
 				
 			}
 			
-			localModel.CompleteStep(stepsTaken, localActors); //makes a record of what step you are on and what actors exist
+			View.printGrid(); //eventually we will replace this with a real print statement
 			
-			View.printGrid();
+			Thread.sleep(500);
+			
+			if(stepsTaken % Model.halfLife == 0)
+			{
+				int numberOfAlgae = currentStatus.getNumberOfSpecificActor("Algae");
+				for(int i = 0; i < numberOfAlgae; i++)
+				{
+					GameMethods.generateActorAtRandomLocation("Algae");
+				}
+			}
+			
+			
+			//algae reproduce
+			
+			//print out a rough grid of what things look like
+			
+			Grid grid = new Grid(Model.gridSize);
+			for(int i = 0; i < localActors.size(); i++)
+			{
+				grid.placeCharAtLocation(localActors.get(i).getAskiiRep(), localActors.get(i).getLocation());
+			}
+			grid.printGrid();
+			
+			localModel.CompleteStep(stepsTaken, localActors); //makes a record of what step you are on and what actors exist
 			
 			stepsTaken++; //increase the number of steps taken
 

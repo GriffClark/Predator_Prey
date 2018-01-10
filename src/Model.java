@@ -11,7 +11,8 @@ public class Model {
 	// make sure Snubby isn't in 2 places.  You probably don't need "totalPopulation" or "everything"  
 	// each animal must only be in 1 list
 	//reduce
-	
+
+	 
 	/**
 	 * also while this is getting cleaned up note that these shouldn't be static or public
 	 */
@@ -31,11 +32,7 @@ public class Model {
 	public static int numberOfSharks;
 	public static int numberOfMinnows;
 	public static int numberOfAlgae; //a function of the number of Minnows?
-	public static int halfLife = 3; //how many steps it takes algae to reproduce
-	
-	
-	public static ArrayList<Algae> algaeHolder = new ArrayList<Algae>();
-	
+	public static int halfLife = 3; //how many steps it takes algae to reproduce	
 
 	
 	/**
@@ -63,26 +60,9 @@ public class Model {
 
 	}
 	
-	private void addActor(String specification, Location location, int nutrition)
+	public static void addActor(Actor actor)
 	{
-		
-		switch(specification)
-		{
-			case "Minnow": 
-				Minnow minnow = new Minnow(location,nutrition); 
-				singleModel.actors.add(minnow);
-			break;
-			
-			case "Shark": 
-				Shark shark = new Shark (x,y,nutrition);
-				singleModel.actors.add(shark);
-			break;
-			
-			case "Algae": 
-				Algae algae = new Algae(x,y);
-				singleModel.actors.add(algae);
-			break;
-		}
+		singleModel.actors.add(actor);
 		
 	}
 	
@@ -98,6 +78,8 @@ public class Model {
 		return returnActors;
 	}
 	
+
+	
 	public static int getActorsSize()
 	{
 		//dont't want actors getting accessed directly
@@ -105,15 +87,9 @@ public class Model {
 	}
 	
 	
-	/* put the rest of the "getter" functions here...*/
 	
 	public void CompleteStep(int step, ArrayList<Actor> localActors)
 	{
-		
-		for(int i = 0; i < Model.algaeHolder.size(); i++)
-		{
-			singleModel.addActor(algae, algaeHolder.get(i).getX(), algaeHolder.get(i).getY(), algaeHolder.get(i).getNutrition()); //double cheeck this
-		}
 		
 		int sharks = 0;
 		int minnows = 0;
@@ -127,6 +103,14 @@ public class Model {
 			case "Shark": sharks++; break;
 			case "Algae": algae++; break;
 			
+			}
+			
+			actors.removeAll(actors); //this should clear actors
+			
+			for(int j = 0; i < localActors.size(); i++)
+			{
+				actors.add(localActors.get(i));
+				//updates actors
 			}
 		}
 		
