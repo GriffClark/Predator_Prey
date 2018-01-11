@@ -54,8 +54,8 @@ public class GameMethods {
 	
 	public static Location generateValidLocation()
 	{
-		int rows = Model.gridSize.length - 1;
-		int cols = Model.gridSize[0].length-1;
+		int rows = Model.gridSize.length; //nullPointerException error here
+		int cols = Model.gridSize[0].length;
 		int randomX = (int)(Math.random() * rows);
 		int randomY = (int)(Math.random() * cols);
 		
