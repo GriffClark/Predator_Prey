@@ -64,13 +64,12 @@ public class GameMethods {
 		
 	}
 	
-	public static void placeSpawn(Actor child, Actor parentA, Actor parentB)
+	public static Animal placeSpawn(Actor child, Actor parentA, Actor parentB)
 	{
 		Location a = parentA.getLocation();
 		Location b = parentB.getLocation();
 		boolean valid = false;
 		Location newLocation = GameMethods.generateValidLocation();
-
 		
 		while(valid == false)
 		{
@@ -88,10 +87,26 @@ public class GameMethods {
 		{
 		case ("Minnow"):
 			Minnow m = new Minnow(newLocation, (((Animal) parentA).getNutrition() + ((Animal) parentB).getNutrition())/2);
+		return m;
+		case ("Shark"):
+			Shark s = new Shark(newLocation, (((Animal) parentA).getNutrition() + ((Animal) parentB).getNutrition())/2);
+		return s;
+		default:
+			return null;
+			
 			//what do I do with this minnow?
 		}
 		
 		
+	
+	}
+	
+	public static deleteNutrition()
+	{
+		for(int i = 0; i < GameMethods.getActorArrayList().size(); i++)
+		{
+			//subtract a nutrition
+		}
 	}
 	
 	public static ArrayList getActorArrayList()
@@ -101,10 +116,26 @@ public class GameMethods {
 		
 		for (int i = 0; i < Model.getActorsSize(); i++)
 		{
-			localActors.add((Actor) localModel.copyOfActors().get(i)); //cast should have no effect
+			localActors.add((Actor) localModel.copyOfActors().get(i));
 		}	
 		
 		return localActors;
+	}
+	
+	public static void moveToRandomLocation(Animal fred)
+	{
+		boolean foundValidLocation = false;
+		do
+		{
+			Location randomLocation = GameMethods.generateValidLocation();
+			if(GameMethods.getDistance(fred.getLocation(), randomLocation) <= fred.getSpeed())
+			{
+				fred.move(randomLocation);
+			}
+		}while(foundValidLocation == false);
+		
+		
+	
 	}
 	
 	

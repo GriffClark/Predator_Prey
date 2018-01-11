@@ -81,6 +81,8 @@ public class Controller {
 			
 			localModel.CompleteStep(stepsTaken, localActors); //makes a record of what step you are on and what actors exist
 			
+			
+			
 			stepsTaken++; //increase the number of steps taken
 
 		}while(stepsTaken < Model.desiredSteps); 

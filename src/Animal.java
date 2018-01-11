@@ -65,7 +65,7 @@ public class Animal extends Actor{
 			
 			for(int i = 0; i < GameMethods.getActorArrayList().size(); i++)
 			{
-				if(GameMethods.getDistance(((Actor) GameMethods.getActorArrayList().get(i)).getLocation(), location) <= speed && ((Actor) GameMethods.getActorArrayList().get(i)).getLocation() != location)
+				if(GameMethods.getDistance(((Actor) GameMethods.getActorArrayList().get(i)).getLocation(), location) <= speed && ((Actor) GameMethods.getActorArrayList().get(i)).getLocation() != location) //if the distance between this actor and other actor is <= speed && it is not at your current location...
 				{
 					thingsNearBy.add((Actor) GameMethods.getActorArrayList().get(i));
 					//if there is a thing that you can move to, you are aware that it's there
@@ -104,17 +104,20 @@ public class Animal extends Actor{
 		
 		}
 	}
-	
-	public void move(ArrayList localActors, Location target)
+	public void move(Location target)
 	{
-		ArrayList<Animal> animalList = new ArrayList<Animal>();
-		boolean isLocationEmpty = true;
+		/*
+		 * input the location you would like to move to (you need to check validity first. After double checking to make sure there are no bugs, you move there
+		 */
 		
 		if(GameMethods.getDistance(location, target) <= speed)
 		{
+			boolean isLocationEmpty = true;
+			ArrayList<Actor> localActors = new ArrayList<Actor>();
+			ArrayList<Animal> animalList = new ArrayList<Animal>();
 			for(int i = 0; i < localActors.size(); i++)
 			{
-				if(localActors.get(i).getClass() == "Animal") //not sure how to syntax this
+				if(localActors.get(i).getName().equals("Shark") || localActors.get(i).getName().equals("Minnow")) //not sure how to syntax this
 				{
 					animalList.add((Animal) localActors.get(i));
 				}
@@ -122,7 +125,7 @@ public class Animal extends Actor{
 			
 			for(int i =0; i < animalList.size(); i++)
 			{
-				if((Animal) animalList.getLocation() == target) //not sure why this doesn't work
+				if( animalList.get(i).getLocation() == target) //not sure why this doesn't work
 				{
 					isLocationEmpty = false;
 				}
