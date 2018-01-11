@@ -17,6 +17,11 @@ public class Actor {
 	{
 		
 	}
+	
+	public Actor()
+	{
+		
+	}
 
 	public char getAskiiRep()
 	{

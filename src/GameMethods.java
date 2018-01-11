@@ -54,8 +54,8 @@ public class GameMethods {
 	
 	public static Location generateValidLocation()
 	{
-		int rows = Model.gridSize.length;
-		int cols = Model.gridSize[0].length;
+		int rows = Model.gridSize.length - 1;
+		int cols = Model.gridSize[0].length-1;
 		int randomX = (int)(Math.random() * rows);
 		int randomY = (int)(Math.random() * cols);
 		
@@ -88,7 +88,7 @@ public class GameMethods {
 		
 	}
 	
-	public static Animal placeSpawn(Actor child, Actor parentA, Actor parentB)
+	public static void placeSpawn(Actor child, Actor parentA, Actor parentB)
 	{
 		Location a = parentA.getLocation();
 		Location b = parentB.getLocation();
@@ -105,24 +105,33 @@ public class GameMethods {
 			{
 				newLocation = GameMethods.generateValidLocation();
 			}
-		}
-		
-		switch(parentA.getName())
-		{
-		case ("Minnow"):
-			Minnow m = new Minnow(newLocation, (((Animal) parentA).getNutrition() + ((Animal) parentB).getNutrition())/2);
-		return m;
-		case ("Shark"):
-			Shark s = new Shark(newLocation, (((Animal) parentA).getNutrition() + ((Animal) parentB).getNutrition())/2);
-		return s;
-		default:
-			return null;
 			
-			//what do I do with this minnow?
+			child.setLocation(newLocation);
 		}
 		
+		}
 		
-	
+		public static void placeSpawn(Actor child, Actor parentA, Location location)
+		{
+			Location a = parentA.getLocation();
+			Location b = location;
+			boolean valid = false;
+			Location newLocation = GameMethods.generateValidLocation();
+			
+			while(valid == false)
+			{
+				if(GameMethods.getDistance(newLocation, a) <= 2 || GameMethods.getDistance(newLocation, b) <=2)
+				{
+					valid = true;
+				}
+				else
+				{
+					newLocation = GameMethods.generateValidLocation();
+				}
+				
+				child.setLocation(newLocation);
+			}
+
 	}
 	
 	public static void subractNutrition()
@@ -161,6 +170,19 @@ public class GameMethods {
 		
 		
 	
+	}
+	
+	public static void moveToRandomLocation(Location location, int speed)
+	{
+		boolean foundValidLocation = false;
+		do
+		{
+			Location randomLocation = GameMethods.generateValidLocation();
+			if(GameMethods.getDistance(location, randomLocation) <= speed)
+			{
+				location = randomLocation;
+			}
+		}while(foundValidLocation == false);
 	}
 	
 	
@@ -235,13 +257,13 @@ public class GameMethods {
 		switch(specification)
 		{
 			case "Minnow":
-				Minnow minnow = new Minnow(Location.generateAtValidLocation(), Model.nutritionMinnowsStartWith);
+				Minnow minnow = new Minnow(GameMethods.generateValidLocation(), Model.nutritionMinnowsStartWith);
 				Model.addActor(minnow);
 			case "Shark":
-				Shark shark = new Shark(Location.generateAtValidLocation(), Model.nutritionSharksStartWith);
+				Shark shark = new Shark(GameMethods.generateValidLocation(), Model.nutritionSharksStartWith);
 				Model.addActor(shark);
 			case "Algae":
-				Algae algae = new Algae(Location.generateAtValidLocation());
+				Algae algae = new Algae(GameMethods.generateValidLocation());
 				Model.addActor(algae);
 		
 				

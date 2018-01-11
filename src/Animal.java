@@ -79,28 +79,39 @@ public class Animal extends Actor{
 			//just laying the groundwork. This will be used later by Shark and Minnow
 	}
 	
-	public Animal reproduce(Animal a, Animal b, int distance) //this int distance should be GameMethods.getDistance
+	public Animal(int nutrition)
 	{
-		if(a.getName().equals(b.getName()) && distance ==1) //if animal a and animal b are the same and they are close enough
+		this.nutrition=nutrition;
+	}
+	
+	public void reproduce(Animal otherParent, int distance) //this int distance should be GameMethods.getDistance
+	{
+		if(otherParent.getName().equals(name) && distance ==1) //if animal a and animal b are the same and they are close enough
 		{
-			int passedInNutrition= (a.getNutrition() + b.getNutrition() + 1) / 2;
+			int passedInNutrition= (otherParent.getNutrition() + nutrition + 1) / 2;
 			
-			String species = a.getName(); //could be A or B because they should have the same name
-			
-			Location location = new Location(/*where should I put the newly spawned thing?*/);
-			
+			String species = otherParent.getName(); //could be A or B because they should have the same name
+
 			switch(species)
 			{
 			
 			//need a way to find valid location to spawn new child. Search all adjacent squares
 			case "Minnow": 
-				Minnow minnow = new Minnow(location,  passedInNutrition); //not sure how to get this xy value pair. Needs to be adjacent to parents I think but not sure what to do past that
+				Minnow minnowBaby = new Minnow(passedInNutrition);
+				GameMethods.placeSpawn(minnowBaby, otherParent, location);
+				Controller.actorsThatNeedAHome.add(minnowBaby);
+				break;
+			case "Shark":
+				Shark sharkBaby = new Shark (passedInNutrition);
+				GameMethods.placeSpawn(sharkBaby, otherParent, location);
+				Controller.actorsThatNeedAHome.add(sharkBaby);
+				break;
 				
+				//this should create a new child then add it to actorsThatNeedAHome, which will be passed into localActors, which will be passed into Model
 					
 					//think this works
 					
 				}
-				return minnow;
 			
 			}
 			//need to make shark case too
@@ -108,7 +119,6 @@ public class Animal extends Actor{
 		
 		
 		}
-	}
 	public void move(Location target)
 	{
 		/*

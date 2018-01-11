@@ -23,6 +23,7 @@ public class Controller {
 
 	//this might not want to be a main method
 	public static int stepsTaken = 0;
+	public static ArrayList<Actor> actorsThatNeedAHome = new ArrayList<Actor>();
 	public static void main(String[] args) throws InterruptedException {
 
 		
@@ -56,14 +57,7 @@ public class Controller {
 			}			
 			Thread.sleep(500);
 			
-			if(stepsTaken % Model.halfLife == 0)
-			{
-				int numberOfAlgae = currentStatus.getNumberOfSpecificActor("Algae");
-				for(int i = 0; i < numberOfAlgae; i++)
-				{
-					GameMethods.generateActorAtRandomLocation("Algae");
-				}
-			}
+		
 			
 			
 			//algae reproduce

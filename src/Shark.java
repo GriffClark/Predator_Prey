@@ -18,6 +18,17 @@ public class Shark extends Animal{
 		thingsICanEat = Animal.Edibles.Minnow;  //not sure how to use this but I know I need it
 	}
 	
+	public Shark(int nutrition)
+	{
+		super(nutrition);
+		askiiRep = 'S';
+		speed = Model.setSharkSpeed;
+		name = "Shark";
+		isAlive = true;
+		nutrition= Model.nutritionSharksStartWith; //nutrition needs to be passed in because it is a function of the parents, or a default
+		thingsICanEat = Animal.Edibles.Minnow;  //not sure how to use this but I know I need it
+	}
+	
 	@Override
 	public void doThings()
 	{
@@ -66,16 +77,21 @@ public class Shark extends Animal{
 					//if there are any sharks right next to you reproduce
 					if(GameMethods.getDistance(location, sharksNearBy.get(i).getLocation()) <= speed)
 					{
-						//move towards the shark
-						//reproduce
-						break;
+						Location intercept = GameMethods.aquireIntercept(sharksNearBy.get(i).getLocation(), speed, location);
+						move(intercept);
+						if(sharksNearBy.get(i).getNutrition() >= 5)
+						{
+							reproduce(sharksNearBy.get(i), GameMethods.getDistance(location, sharksNearBy.get(i).getLocation()));
+							break;
+							
+						}
 					}
 				}
 			}
 			
-			else
+			else //if no nearby sharks were found
 			{
-				GameMethods.moveToRandomLocation(/*need to format this method to accept what I want it to*/);
+				GameMethods.moveToRandomLocation(location,speed);
 			}
 		}
 		else //needs food
@@ -97,14 +113,12 @@ public class Shark extends Animal{
 						 * location is passed into a move method
 						 * eats the minnow
 						 */
-						feed(minnowsNearBy.get(i));
-						break;
 					}
 				}
 			}
-			else
+			else //if no nearby minnows were found
 			{
-				GameMethods.moveToRandomLocation(/*need a way to call for this shark*/);
+				GameMethods.moveToRandomLocation(location,speed);
 			}
 		}
 	}
