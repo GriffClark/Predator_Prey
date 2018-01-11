@@ -91,6 +91,9 @@ public class Model {
 	public void CompleteStep(int step, ArrayList<Actor> localActors)
 	{
 		
+		Controller.stepsTaken += 1;
+		GameMethods.subractNutrition();
+		
 		int sharks = 0;
 		int minnows = 0;
 		int algae = 0;

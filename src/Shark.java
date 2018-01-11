@@ -75,7 +75,7 @@ public class Shark extends Animal{
 			
 			else
 			{
-				GameMethods.moveToRandomLocation(/*need a way to call for this shark*/);
+				GameMethods.moveToRandomLocation(/*need to format this method to accept what I want it to*/);
 			}
 		}
 		else //needs food
@@ -86,7 +86,17 @@ public class Shark extends Animal{
 				{
 					if (GameMethods.getDistance(minnowsNearBy.get(i).getLocation(), location) <= speed)
 					{
+						Location intercept = GameMethods.aquireIntercept(minnowsNearBy.get(i).getLocation(), speed, location);
+						move(intercept);
+						feed(minnowsNearBy.get(i));
+						break;
 						//make it so that the distance between them is less than 2
+						/*
+						 * starts searching random locations until it finds one that is less than 2 away from the target
+						 * location is then valid if it is movable by shark
+						 * location is passed into a move method
+						 * eats the minnow
+						 */
 						feed(minnowsNearBy.get(i));
 						break;
 					}

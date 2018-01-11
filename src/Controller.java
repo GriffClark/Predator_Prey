@@ -22,8 +22,9 @@ public class Controller {
 	 */
 
 	//this might not want to be a main method
+	public static int stepsTaken = 0;
 	public static void main(String[] args) throws InterruptedException {
-		int stepsTaken = 0;
+
 		
 		//after everything has been initalized, the game starts...:
 		GameMethods.start();
@@ -52,10 +53,7 @@ public class Controller {
 					localActors.get(i).doThings(); 
 				}
 				
-			}
-			
-			View.printGrid(); //eventually we will replace this with a real print statement
-			
+			}			
 			Thread.sleep(500);
 			
 			if(stepsTaken % Model.halfLife == 0)
@@ -80,11 +78,8 @@ public class Controller {
 			grid.printGrid();
 			
 			localModel.CompleteStep(stepsTaken, localActors); //makes a record of what step you are on and what actors exist
-			
-			
-			
-			stepsTaken++; //increase the number of steps taken
-
+			//I am not confident that the handoff between completing a step and starting a new step is solid
+	
 		}while(stepsTaken < Model.desiredSteps); 
 
 		

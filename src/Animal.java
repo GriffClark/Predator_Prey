@@ -52,6 +52,11 @@ public class Animal extends Actor{
 	{
 		return speed;
 	}
+	
+	public void subtractNutrition()
+	{
+		nutrition--;
+	}
 
 	
 

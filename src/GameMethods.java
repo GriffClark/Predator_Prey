@@ -10,7 +10,31 @@ import java.util.Scanner;
  */
 public class GameMethods {
 	
-	
+	public static Location aquireIntercept(Location targetLocation,  int speed, Location myLocation)
+	{
+		//neeed to make sure that this method is only called in a valid context, because this cannot handle errors
+		int numberOfTries = 0;
+		while(true) //will loop until it finds a valid location
+		{
+			Location testLocation = GameMethods.generateValidLocation();
+			if(GameMethods.getDistance(targetLocation, testLocation) <= 2)
+			{
+				if(GameMethods.getDistance(targetLocation, myLocation)<= speed )
+				{
+					return testLocation;
+				}
+				else
+				{
+					numberOfTries++;
+					if(numberOfTries > 50)
+					{
+						return null; //prevents an infinate loop
+					}
+				}
+			}
+		}
+		
+	}
 	public static int getDistance(Location a, Location b)
 	{
 		//returns the distance of two actors from each other
@@ -101,11 +125,12 @@ public class GameMethods {
 	
 	}
 	
-	public static deleteNutrition()
+	public static void subractNutrition()
 	{
 		for(int i = 0; i < GameMethods.getActorArrayList().size(); i++)
 		{
-			//subtract a nutrition
+			((Animal) GameMethods.getActorArrayList().get(i)).subtractNutrition();
+			//is algae going to cause this to error out?
 		}
 	}
 	
