@@ -2,6 +2,7 @@
  * most important thing to work on here is to make sure that each thing only has one location... right now a single object can be stored in multiple places. This can lead to many errors and make things mroe complicated then they need to be
  */
 
+import java.io.IOException;
 import java.util.ArrayList;
 /**
  *Methods here:
@@ -24,7 +25,7 @@ public class Controller {
 	//this might not want to be a main method
 	public static int stepsTaken = 0;
 	public static ArrayList<Actor> actorsThatNeedAHome = new ArrayList<Actor>();
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 
 		
 		

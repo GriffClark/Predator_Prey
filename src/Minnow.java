@@ -14,7 +14,14 @@ public class Minnow extends Animal{
 		name = "Minnow";
 		isAlive = true;
 		this.nutrition = nutrition;
-		image = ImageIO.read(new File ("minnow.png"));
+		try
+		{
+			image = ImageIO.read(new File ("minnow.png"));
+		}
+		catch (IOException e)
+		{
+			System.out.println("Something went wrong in minnow constructor");
+		}
 	}
 	
 	public Minnow(int nutrition) throws IOException
@@ -25,7 +32,16 @@ public class Minnow extends Animal{
 		name = "Minnow";
 		isAlive = true;
 		this.nutrition = nutrition;
-		image = ImageIO.read(new File ("minnow.png"));
+		try
+		{
+			image = ImageIO.read(new File ("minnow.png"));
+		}
+		catch(IOException e)
+		{
+			System.out.println("Something went wrong in minnow constructor");
+		}
+	
+		
 	}
 		
 		

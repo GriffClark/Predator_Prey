@@ -17,3 +17,5 @@ things to look into:
 * 
 NEED TO DO:
 didnt think through colisions. No 2 algae can be in same spot but a shark can be on an algae spot, right? 
+
+Right now no easy way to access records build GameMethod that allows pulling of most recent record

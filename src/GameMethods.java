@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -186,7 +187,7 @@ public class GameMethods {
 	}
 	
 	
-	public static void start() throws InterruptedException
+	public static void start() throws InterruptedException, IOException
 	{
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("how many steps would you like to see?");
@@ -250,9 +251,10 @@ public class GameMethods {
 	/**
 	 * make sure that there is a constant check running to make sure that no two objects occupy the same loocation
 	 * @return
+	 * @throws IOException 
 	 */
 	
-	public static void generateActorAtRandomLocation(String specification)
+	public static void generateActorAtRandomLocation(String specification) throws IOException
 	{
 		switch(specification)
 		{
