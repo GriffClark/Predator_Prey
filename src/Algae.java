@@ -1,9 +1,14 @@
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Algae extends Actor{
 
-	public Algae(Location location) {
+	public Algae(Location location) throws IOException {
 		super(location);
+		image = ImageIO.read(new File ("algae.jpg")); 
 		
 		// TODO Auto-generated constructor stub
 	}

@@ -11,6 +11,9 @@ public class Actor {
 	protected Location location;
 	protected char askiiRep; //this will give a rough visualization for what it will look like
 	
+	/*
+	 * getting unhandled exception IOException and not sure how to handle it
+	 */
 
 	
 	public Actor(Location location)

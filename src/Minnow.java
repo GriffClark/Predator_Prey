@@ -1,8 +1,12 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 public class Minnow extends Animal{
 		
-	public Minnow(Location location, int nutrition)
+	public Minnow(Location location, int nutrition) throws IOException
 	{
 		super(location, nutrition);
 		askiiRep = 'M';
@@ -10,9 +14,10 @@ public class Minnow extends Animal{
 		name = "Minnow";
 		isAlive = true;
 		this.nutrition = nutrition;
+		image = ImageIO.read(new File ("minnow.png"));
 	}
 	
-	public Minnow(int nutrition)
+	public Minnow(int nutrition) throws IOException
 	{
 		super(nutrition);
 		askiiRep = 'M';
@@ -20,6 +25,7 @@ public class Minnow extends Animal{
 		name = "Minnow";
 		isAlive = true;
 		this.nutrition = nutrition;
+		image = ImageIO.read(new File ("minnow.png"));
 	}
 		
 		

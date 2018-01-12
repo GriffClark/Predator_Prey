@@ -1,4 +1,8 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 /**
  * 
@@ -7,26 +11,45 @@ import java.util.ArrayList;
  */
 public class Shark extends Animal{
 	
-	public Shark( Location location, int nutrition)
+	public Shark( Location location, int nutrition) throws IOException
 	{
 		super(location, nutrition);
-		askiiRep = 'S';
-		speed = Model.setSharkSpeed;
-		name = "Shark";
-		isAlive = true;
-		nutrition= Model.nutritionSharksStartWith; //nutrition needs to be passed in because it is a function of the parents, or a default
-		thingsICanEat = Animal.Edibles.Minnow;  //not sure how to use this but I know I need it
+		try
+		{
+			askiiRep = 'S';
+			speed = Model.setSharkSpeed;
+			name = "Shark";
+			isAlive = true;
+			nutrition= Model.nutritionSharksStartWith; //nutrition needs to be passed in because it is a function of the parents, or a default
+			thingsICanEat = Animal.Edibles.Minnow;  //not sure how to use this but I know I need it
+			image = ImageIO.read(new File ("shark.png"));
+		}
+		catch (IOException e)
+		{
+			System.out.print("something went wrong in shark constructor");
+			
+		}
+		
 	}
 	
-	public Shark(int nutrition)
+	public Shark(int nutrition) throws IOException
 	{
 		super(nutrition);
-		askiiRep = 'S';
-		speed = Model.setSharkSpeed;
-		name = "Shark";
-		isAlive = true;
-		nutrition= Model.nutritionSharksStartWith; //nutrition needs to be passed in because it is a function of the parents, or a default
-		thingsICanEat = Animal.Edibles.Minnow;  //not sure how to use this but I know I need it
+		try
+		{
+			askiiRep = 'S';
+			speed = Model.setSharkSpeed;
+			name = "Shark";
+			isAlive = true;
+			nutrition= Model.nutritionSharksStartWith; //nutrition needs to be passed in because it is a function of the parents, or a default
+			thingsICanEat = Animal.Edibles.Minnow;  //not sure how to use this but I know I need it
+			image = ImageIO.read(new File ("shark.png"));
+		}
+		catch (IOException e)
+		{
+			System.out.print("something went wrong in shark constructor");
+			
+		}
 	}
 	
 	@Override
