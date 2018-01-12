@@ -31,6 +31,13 @@ public class Controller {
 		GameMethods.start();
 		do 
 		{
+			/**
+			 * get localModel and localActors
+			 * make sure that all the actors are alive
+			 * if they are, have the actors do things
+			 *debug: prints an ascii grid
+			 *
+			 */
 			GameStatus currentStatus = Model.getCurrentStatus(); //should get the status of Model.singleModel
 			Model localModel = Model.getGameModel();
 			ArrayList<Actor> localActors = new ArrayList<Actor>(); //make sure all edits that are made are made to localActors
@@ -52,10 +59,11 @@ public class Controller {
 				else 
 				{
 					localActors.get(i).doThings(); 
+					Thread.sleep(50); //slows things down a little to take a bit of the load off the processor by 50 millisecods 
 				}
 				
 			}			
-			Thread.sleep(500);
+			
 			
 		
 			
