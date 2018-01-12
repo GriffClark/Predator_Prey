@@ -27,7 +27,10 @@ public class Controller {
 	public static void main(String[] args) throws InterruptedException {
 
 		
+		
+		
 		//after everything has been initalized, the game starts...:
+		new View();
 		GameMethods.start();
 		do 
 		{
@@ -72,12 +75,10 @@ public class Controller {
 			
 			//print out a rough grid of what things look like
 			
-			Grid grid = new Grid(Model.gridSize);
-			for(int i = 0; i < localActors.size(); i++)
-			{
-				grid.placeCharAtLocation(localActors.get(i).getAskiiRep(), localActors.get(i).getLocation());
-			}
-			grid.printGrid();
+		
+			
+			 
+			
 			
 			localModel.CompleteStep(stepsTaken, localActors); //makes a record of what step you are on and what actors exist
 			//I am not confident that the handoff between completing a step and starting a new step is solid
