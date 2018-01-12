@@ -31,7 +31,7 @@ public class Controller {
 		
 		
 		//after everything has been initalized, the game starts...:
-		new View();
+//		new View();
 		GameMethods.start();
 		do 
 		{

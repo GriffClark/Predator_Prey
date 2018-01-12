@@ -55,7 +55,7 @@ public class GameMethods {
 	
 	public static Location generateValidLocation()
 	{
-		int rows = Model.gridSize.length; //nullPointerException error here
+		int rows = Model.gridSize.length; 
 		int cols = Model.gridSize[0].length;
 		int randomX = (int)(Math.random() * rows);
 		int randomY = (int)(Math.random() * cols);
@@ -189,6 +189,9 @@ public class GameMethods {
 	
 	public static void start() throws InterruptedException, IOException
 	{
+		/**
+		 * I think the runtime error here is that singleModel.actors<> or whatever its called isnt initializing until I put things into it
+		 */
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("how many steps would you like to see?");
 		int input = keyboard.nextInt(); //input will be re-used. Steps will be a constant value 
@@ -258,6 +261,7 @@ public class GameMethods {
 	{
 		switch(specification)
 		{
+		//check if there is something here to get around the NullPointerException error
 			case "Minnow":
 				Minnow minnow = new Minnow(GameMethods.generateValidLocation(), Model.nutritionMinnowsStartWith);
 				Model.addActor(minnow);

@@ -37,7 +37,7 @@ public class Model {
 		
 	}
 	//trying to make this easy to see
-	public static int[][] gridSize;
+	public static int[][] gridSize = new int[50][50];
 	public static int nutritionMinnowsStartWith = 2;
 	public static int nutritionSharksStartWith = 4;
 	public static int setSharkSpeed = 2;
@@ -95,8 +95,13 @@ public class Model {
 	
 	public static int getActorsSize()
 	{
-		//dont't want actors getting accessed directly
-		return singleModel.actors.size();
+		//nullPointerException error here
+		if(singleModel.actors.size() > 0)
+		{
+			return singleModel.actors.size();
+
+		}
+		return 0;
 	}
 	
 	
