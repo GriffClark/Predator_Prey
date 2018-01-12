@@ -20,9 +20,22 @@ public class Model {
 	private ArrayList<Record> recordLibrary;
 	private int stepsComplete;
 	public static int desiredSteps;
-	
 
-	
+	public Record getRecentRecord()
+	{
+		if(recordLibrary.size() > 0)
+		{
+			Record r;
+			r = (recordLibrary.get(recordLibrary.size() - 1)); //should get the last record 
+			return r;
+			
+		}
+		else
+		{
+			return null;
+		}
+		
+	}
 	//trying to make this easy to see
 	public static int[][] gridSize;
 	public static int nutritionMinnowsStartWith = 2;
