@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 
-public class View extends JFrame{
+public class View{
 
 	/**
 	 * using grid class figure out how to generate a view based on what the controller spits out
@@ -17,26 +17,31 @@ public class View extends JFrame{
 	
 	public void UserInterface()
 	{
-		JPanel p = new JPanel(); //
-		
-		JButton b1 = new JButton("testaroo");
-		JLabel label = new JLabel("This is a testarino");
+		JPanel p = new JPanel(); //create panel, I don't know if the order of creating of the panel or frame first matters, but it works so
+
 		
 		JFrame f = new JFrame ("Sharks and Minnows"); //create frame
 		f.setLocationRelativeTo(null);
 		f.setVisible(true);
-		f.setSize(1280, 720);
+		f.setSize(1920, 1080);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		f.setLayout(new BorderLayout()); //add the background image (Doesn't work yet) work on this!
-	    JLabel background = new JLabel(new ImageIcon("UIPNG.png"));
-	    f.add(background);
-	    background.setLayout(new FlowLayout());
 		
+		 	//add the image to the JFrame "f"
+			f.setLayout(new BorderLayout());
+		    f.setContentPane(new JLabel(new ImageIcon("UIPNG.png")));
+		    f.setLayout(new FlowLayout());
+		    //test button/label to make sure they show up as desired on the background, will be deleted later
+		    JLabel l1=new JLabel("Here is a button");
+		    JButton b1=new JButton("I am a button");
+		    f.add(l1);
+		    f.add(b1);
+		    
+		    f.setSize(399,399);//refreshes the frame (NEEDS THIS!)
+		    f.setSize(1920,1080);
 		
 		p.add(b1);
-		p.add(label);
-		p.add(background);
+		p.add(l1);
 		
 		f.add(p);
 		}
