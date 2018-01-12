@@ -8,7 +8,15 @@ public class Algae extends Actor{
 
 	public Algae(Location location) throws IOException {
 		super(location);
-		image = ImageIO.read(new File ("algae.jpg")); 
+		try
+		{
+			image = ImageIO.read(new File ("algae.jpg")); 
+
+		}
+		catch (IOException e)
+		{
+			System.out.println("Something went wrong in algae constructor");
+		}
 		
 		// TODO Auto-generated constructor stub
 	}
