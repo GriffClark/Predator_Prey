@@ -16,10 +16,10 @@ public class Model {
 	/**
 	 * also while this is getting cleaned up note that these shouldn't be static or public
 	 */
-	private ArrayList<Actor> actors;
-	private ArrayList<Record> recordLibrary;
-	private int stepsComplete;
-	public static int desiredSteps;
+	private ArrayList<Actor> actors = new ArrayList<Actor>();
+	private ArrayList<Record> recordLibrary = new ArrayList<Record>();
+	private int stepsComplete=0;
+	public static int desiredSteps=0;
 
 	public Record getRecentRecord()
 	{
@@ -42,9 +42,9 @@ public class Model {
 	public static int nutritionSharksStartWith = 4;
 	public static int setSharkSpeed = 2;
 	public static int setMinnowSpeed = 1;
-	public static int numberOfSharks;
-	public static int numberOfMinnows;
-	public static int numberOfAlgae; //a function of the number of Minnows?
+	public static int numberOfSharks = 0;
+	public static int numberOfMinnows =0;
+	public static int numberOfAlgae = 0; //a function of the number of Minnows?
 	public static int halfLife = 3; //how many steps it takes algae to reproduce	
 
 	
@@ -125,6 +125,7 @@ public class Model {
 			case "Algae": algae++; break;
 			
 			}
+			
 			
 			actors.removeAll(actors); //this should clear actors
 			

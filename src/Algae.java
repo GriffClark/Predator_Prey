@@ -22,8 +22,9 @@ public class Algae extends Actor{
 	}
 	
 	@Override
-	public void doThings()
+	public void doThings() throws IOException
 	{
+		//try catch figure this out
 		if(Controller.stepsTaken % Model.halfLife == 0)
 		{
 			int numberOfAlgae = GameMethods.getActorOfSpecifiedType("Algae").size();

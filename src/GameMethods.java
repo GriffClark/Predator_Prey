@@ -67,24 +67,30 @@ public class GameMethods {
 			localActors.add((Actor) GameMethods.getActorArrayList().get(i));
 		}
 		Location finalLocation = null;
-		Location testLocation = new Location(randomX, randomY );
-		boolean isTestLocationValid = true;
 		
-		for(int i = 0; i < localActors.size(); i++)
+		while(finalLocation == null)
 		{
-			if(testLocation == localActors.get(i).getLocation())
+			Location testLocation = new Location(randomX, randomY );
+			boolean isTestLocationValid = true;
+			
+			for(int i = 0; i < localActors.size(); i++)
 			{
-				isTestLocationValid = false;
+				if(testLocation == localActors.get(i).getLocation())
+				{
+					isTestLocationValid = false;
+				}
+				
+			}
+			if(isTestLocationValid == true)
+			{
+				testLocation = finalLocation;
 			}
 			
 		}
-		
+
 
 		
-		if(isTestLocationValid == true)
-		{
-			testLocation = finalLocation;
-		}
+		
 		return finalLocation;
 		
 	}
@@ -192,41 +198,55 @@ public class GameMethods {
 		/**
 		 * I think the runtime error here is that singleModel.actors<> or whatever its called isnt initializing until I put things into it
 		 */
+		Model.getGameModel();  // make sure the model is initialized
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("how many steps would you like to see?");
 		int input = keyboard.nextInt(); //input will be re-used. Steps will be a constant value 
-		Model.desiredSteps = input;
-		//we should add a defualt number of sharks and minnows to start with
-		System.out.println("how many sharks would you like to start with?");
-		int sharkStart = keyboard.nextInt();
-		System.out.println("how many minnows do you want to start with?");
-		int minnowStart = keyboard.nextInt();
-		System.out.println("One second while the game initializes...");
-		Thread.sleep(500); //half a second
-		Model.numberOfMinnows = minnowStart;
-		Model.numberOfSharks = sharkStart;
-		Model.numberOfAlgae = minnowStart *2; //just an idea not a solution
-		System.out.println("...");
+		if(input == 666)
+		{
+			Model.desiredSteps = 50;
+			Model.numberOfMinnows = 40;
+			Model.numberOfSharks = 20;
+			Model.numberOfAlgae = Model.numberOfMinnows *2; //just an idea not a solution
+		}
+		else
+		{
+			Model.desiredSteps = input;
+			//we should add a defualt number of sharks and minnows to start with
+			System.out.println("how many sharks would you like to start with?");
+			int sharkStart = keyboard.nextInt();
+			System.out.println("how many minnows do you want to start with?");
+			int minnowStart = keyboard.nextInt();
+			System.out.println("One second while the game initializes...");
+			Thread.sleep(500); //half a second
+			Model.numberOfMinnows = minnowStart;
+			Model.numberOfSharks = sharkStart;
+			Model.numberOfAlgae = minnowStart *2; //just an idea not a solution
+		}
+		
+		System.out.println("..."); //getting stuck here not sure why. Trying a different solution with minnows but cannot come up with a desicive reason why this keeps happening
 		for(int i = 0; i < Model.numberOfMinnows; i++)
 		{
-			GameMethods.generateActorAtRandomLocation("Minnow");
+			Location validLocation = GameMethods.generateValidLocation();
+			Minnow m = new Minnow(validLocation, Model.nutritionMinnowsStartWith);
+			Controller.actorsThatNeedAHome.add(m);
+			System.out.println("minnow added");
+			Thread.sleep(50);
 		}
 		for(int i = 0; i < Model.numberOfSharks; i++)
 		{
 			GameMethods.generateActorAtRandomLocation("Shark");
+			System.out.println("shark added");
+			Thread.sleep(50);
 		}
 		for(int i = 0; i < Model.numberOfAlgae; i++)
 		{
 			GameMethods.generateActorAtRandomLocation("Algae");
+			System.out.println("algae added");
+			Thread.sleep(50);
 		}
 		Thread.sleep(500);
 		System.out.println("Model has been initialized!");
-		
-		//debug check
-		for(int i = 0; i < GameMethods.getActorArrayList().size(); i++)
-		{
-			System.out.println(GameMethods.getActorArrayList().get(i).toString());
-		}
 		
 		//is this the correct way of going about starting?
 	}
@@ -262,11 +282,11 @@ public class GameMethods {
 		switch(specification)
 		{
 		//check if there is something here to get around the NullPointerException error
-			case "Minnow":
+			case "Minnow": //generating a minnow with null location
 				Minnow minnow = new Minnow(GameMethods.generateValidLocation(), Model.nutritionMinnowsStartWith);
 				Model.addActor(minnow);
 			case "Shark":
-				Shark shark = new Shark(GameMethods.generateValidLocation(), Model.nutritionSharksStartWith);
+				Shark shark = new Shark(GameMethods.generateValidLocation(), Model.nutritionSharksStartWith); //assertionError here...?
 				Model.addActor(shark);
 			case "Algae":
 				Algae algae = new Algae(GameMethods.generateValidLocation());

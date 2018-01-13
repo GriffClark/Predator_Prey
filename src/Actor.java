@@ -64,6 +64,7 @@ public class Actor {
 	
 	public int getX()
 	{
+		assert(location != null); //I want the assertion to file when 
 		return location.getX();
 	}
 	
