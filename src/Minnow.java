@@ -97,7 +97,12 @@ public void doThings()
 					move(intercept);
 					if(minnowsNearBy.get(i).getNutrition() >= 5)
 					{
-						reproduce(minnowsNearBy.get(i), GameMethods.getDistance(location, minnowsNearBy.get(i).getLocation()));
+						try {
+							reproduce(minnowsNearBy.get(i), GameMethods.getDistance(location, minnowsNearBy.get(i).getLocation()));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						break;
 						
 					}

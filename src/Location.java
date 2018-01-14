@@ -16,7 +16,7 @@ public class Location {
 	{
 		this.x = x;
 		this.y = y;
-		checkValidLocation(x,y);
+		
 	}
 	
 	public boolean checkValidLocation(int x, int y)
@@ -30,7 +30,8 @@ public class Location {
 		
 		ArrayList<Actor> localActors = new ArrayList<Actor>();
 		boolean isLocationEmpty = true;
-		for(int t = 0; t < GameMethods.getActorArrayList().size(); t++)
+		int arraySize = GameMethods.getActorArrayList().size();
+		for(int t = 0; t < arraySize; t++)
 		{
 			localActors.add((Actor)GameMethods.getActorArrayList().get(t));
 			//might as well create a local copy while searching if the location is occupied

@@ -2,6 +2,7 @@
  * should each Actor have it's own unique ID? Is that necessary?
  */
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Actor {
 	protected int nutritionValue; //for when it is eaten
@@ -78,7 +79,7 @@ public class Actor {
 		return name;
 	}
 	
-	public void doThings()
+	public void doThings() throws IOException
 	{
 		//only has an effect in Animal. Doesn't do anything here..3
 		

@@ -1,4 +1,5 @@
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 //all things that move are animals
 public class Animal extends Actor{
@@ -84,7 +85,7 @@ public class Animal extends Actor{
 		this.nutrition=nutrition;
 	}
 	
-	public void reproduce(Animal otherParent, int distance) //this int distance should be GameMethods.getDistance
+	public void reproduce(Animal otherParent, int distance) throws IOException //this int distance should be GameMethods.getDistance
 	{
 		if(otherParent.getName().equals(name) && distance ==1) //if animal a and animal b are the same and they are close enough
 		{
@@ -97,12 +98,25 @@ public class Animal extends Actor{
 			
 			//need a way to find valid location to spawn new child. Search all adjacent squares
 			case "Minnow": 
-				Minnow minnowBaby = new Minnow(passedInNutrition);
+				Minnow minnowBaby = new Minnow (null, 0);
+				try {
+					minnowBaby = new Minnow(passedInNutrition);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				GameMethods.placeSpawn(minnowBaby, otherParent, location);
 				Controller.actorsThatNeedAHome.add(minnowBaby);
 				break;
 			case "Shark":
-				Shark sharkBaby = new Shark (passedInNutrition);
+				Shark sharkBaby = new Shark (null, 0);
+				try {
+					sharkBaby = new Shark(passedInNutrition);
+				}
+				catch(IOException e)
+				{
+					e.printStackTrace();
+				}
 				GameMethods.placeSpawn(sharkBaby, otherParent, location);
 				Controller.actorsThatNeedAHome.add(sharkBaby);
 				break;

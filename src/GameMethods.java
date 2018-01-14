@@ -61,8 +61,8 @@ public class GameMethods {
 		int randomY = (int)(Math.random() * cols);
 		
 		ArrayList<Actor> localActors = new ArrayList<Actor>();
-		
-		for(int i = 0; i < GameMethods.getActorArrayList().size(); i++)
+		int numberOfActors = GameMethods.getActorArrayList().size();
+		for(int i = 0; i < numberOfActors; i++)
 		{
 			localActors.add((Actor) GameMethods.getActorArrayList().get(i));
 		}
@@ -83,7 +83,7 @@ public class GameMethods {
 			}
 			if(isTestLocationValid == true)
 			{
-				testLocation = finalLocation;
+				finalLocation = testLocation;
 			}
 			
 		}
@@ -231,19 +231,21 @@ public class GameMethods {
 			Minnow m = new Minnow(validLocation, Model.nutritionMinnowsStartWith);
 			Controller.actorsThatNeedAHome.add(m);
 			System.out.println("minnow added");
-			Thread.sleep(50);
+			
 		}
 		for(int i = 0; i < Model.numberOfSharks; i++)
 		{
-			GameMethods.generateActorAtRandomLocation("Shark");
+			Location validLocation = GameMethods.generateValidLocation();
+			Shark s = new Shark(validLocation, Model.nutritionSharksStartWith);
+			Controller.actorsThatNeedAHome.add(s);
 			System.out.println("shark added");
-			Thread.sleep(50);
 		}
 		for(int i = 0; i < Model.numberOfAlgae; i++)
 		{
-			GameMethods.generateActorAtRandomLocation("Algae");
+			Location validLocation = GameMethods.generateValidLocation();
+			Algae al = new Algae(validLocation);
+			Controller.actorsThatNeedAHome.add(al);
 			System.out.println("algae added");
-			Thread.sleep(50);
 		}
 		Thread.sleep(500);
 		System.out.println("Model has been initialized!");
@@ -257,8 +259,8 @@ public class GameMethods {
 		ArrayList<Actor> localCopyOfAllActors = currentStatus.actors; //is this a valid way of copying it? To tired to figure it out
 		ArrayList<Actor> specifiedActors = new ArrayList<Actor>();
 		
-		
-		for(int i = 0; i < Model.getActorsSize(); i++)
+		int actorSize = Model.getActorsSize();
+		for(int i = 0; i < actorSize; i++)
 		{
 			if(localCopyOfAllActors.get(i).getName().equals(specification))
 			{

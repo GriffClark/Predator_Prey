@@ -50,13 +50,14 @@ public class Controller {
 			GameStatus currentStatus = Model.getCurrentStatus(); //should get the status of Model.singleModel
 			Model localModel = Model.getGameModel();
 			ArrayList<Actor> localActors = new ArrayList<Actor>(); //make sure all edits that are made are made to localActors
-			
-			for (int i = 0; i < Model.getActorsSize(); i++)
+			int actorSize = Model.getActorsSize();
+			for (int i = 0; i < actorSize; i++)
 			{
 				localActors.add((Actor) GameMethods.getActorArrayList().get(i)); //cast should have no effect
 			}			
+			actorSize = Model.getActorsSize();
 			
-			for (int i = 0; i < Model.getActorsSize(); i++)
+			for (int i = 0; i < actorSize; i++)
 			{
 				//loops through all the animals and has them move and do things based on their decision trees
 				
@@ -71,8 +72,8 @@ public class Controller {
 				}
 				
 			}		
-			
-			for(int i = 0; i < Controller.actorsThatNeedAHome.size(); i++)
+			int homeSize = Controller.actorsThatNeedAHome.size();
+			for(int i = 0; i < homeSize; i++)
 			{
 				localActors.add(actorsThatNeedAHome.get(i));
 			}
