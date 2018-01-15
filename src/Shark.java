@@ -32,28 +32,6 @@ public class Shark extends Animal{
 		
 	}
 
-	
-	public Shark(int nutrition) throws IOException {
-		super(nutrition);
-		try
-		{
-			
-			speed = Model.setSharkSpeed;
-			name = "Shark";
-			isAlive = true;
-			nutrition= Model.nutritionSharksStartWith; //nutrition needs to be passed in because it is a function of the parents, or a default
-			thingsICanEat = Animal.Edibles.Minnow;  //not sure how to use this but I know I need it
-			image = ImageIO.read(new File ("shark.jpg"));
-		}
-		catch (IOException e)
-		{
-			System.out.println("error in shark constructor");
-		}
-		
-		
-		// TODO Auto-generated constructor stub
-	}
-
 
 	@Override
 	public void doThings()

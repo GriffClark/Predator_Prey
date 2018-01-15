@@ -5,14 +5,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Algae extends Actor{
-
-	int nutrition = 5; //after 5 turns they should die
-	public Algae(Location location) throws IOException {
-		super(location);
+	public Algae(Location location, int nutrition) throws IOException {
+		super(location, nutrition);
 		try
 		{
 			name = "Algae";
 			askiiRep = 'A';
+			nutrition = 5;
 			
 			image = ImageIO.read(new File ("algae.jpg")); 
 
@@ -35,8 +34,7 @@ public class Algae extends Actor{
 				int numberOfAlgae = GameMethods.getActorOfSpecifiedType("Algae").size();
 				for(int i = 0; i < numberOfAlgae; i++)
 				{
-					GameMethods.generateActorAtRandomLocation("Algae");
-					//algae will not generate on any actors and also actors will never generate on any algae
+					GameMethods.generateActorAtRandomLocation("Algae"); //need to check if this generateAtRandomLocation works as intended
 				}
 			}
 		}

@@ -27,8 +27,7 @@ public class Animal extends Actor{
 	
 	public Animal(Location location, int nutrition)
 	{
-		super(location);
-		this.nutrition = nutrition;
+		super(location,nutrition);
 	}
 	
 	public int getNutrition()
@@ -54,14 +53,9 @@ public class Animal extends Actor{
 		return speed;
 	}
 	
-	public void subtractNutrition()
-	{
-		nutrition--;
-	}
-
-	
 
 	@Override
+	//need to see if this is still doing what I told it to do in Actor
 	public void doThings()
 	{
 			ArrayList<Actor> thingsNearBy = new ArrayList<Actor>(); //I don't want to keep actors here because I only want each actor to be stored in one location, and animals do not need a running memory of what is around them, since they will always be making this check
@@ -80,64 +74,65 @@ public class Animal extends Actor{
 			//just laying the groundwork. This will be used later by Shark and Minnow
 	}
 	
-	public Animal(int nutrition)
-	{
-		this.nutrition=nutrition;
-	}
-	
 	public void reproduce(Animal otherParent, int distance) throws IOException //this int distance should be GameMethods.getDistance
 	{
 		if(otherParent.getName().equals(name) && distance ==1) //if animal a and animal b are the same and they are close enough
 		{
-			int passedInNutrition= (otherParent.getNutrition() + nutrition + 1) / 2;
+			int passedInNutrition = (otherParent.getNutrition() + nutrition + 1) / 2;
+			nutrition /= 2;
+			otherParent.nutrition /= 2;
 			
 			String species = otherParent.getName(); //could be A or B because they should have the same name
+			boolean foundLocation = false;
+			Location babyLocation = null;
+			while(foundLocation == false)
+			{
+				babyLocation = GameMethods.generateValidLocation();
+				
+				if (GameMethods.getDistance(location, babyLocation) <= 2)
+				{
+					foundLocation = true;
+				}
+			}
+			
+			Actor baby = new Actor();
 
 			switch(species)
 			{
 			
 			//need a way to find valid location to spawn new child. Search all adjacent squares
 			case "Minnow": 
-				Minnow minnowBaby = new Minnow (null, 0);
 				try {
-					minnowBaby = new Minnow(passedInNutrition);
-				} catch (IOException e) {
+				 baby = new Minnow (babyLocation, passedInNutrition);
+				}
+				 catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				GameMethods.placeSpawn(minnowBaby, otherParent, location);
-				Controller.actorsThatNeedAHome.add(minnowBaby);
+				
+				Controller.actorsThatNeedAHome.add(baby);
 				break;
 			case "Shark":
-				Shark sharkBaby = new Shark (null, 0);
+				 
 				try {
-					sharkBaby = new Shark(passedInNutrition);
+					baby = new Shark(babyLocation, passedInNutrition);
 				}
 				catch(IOException e)
 				{
 					e.printStackTrace();
 				}
-				GameMethods.placeSpawn(sharkBaby, otherParent, location);
-				Controller.actorsThatNeedAHome.add(sharkBaby);
+				Controller.actorsThatNeedAHome.add(baby);
 				break;
-				
-				//this should create a new child then add it to actorsThatNeedAHome, which will be passed into localActors, which will be passed into Model
-					
-					//think this works
 					
 				}
 			
 			}
-			//need to make shark case too
 			
-		
 		
 		}
 	public void move(Location target)
 	{
-		/*
-		 * input the location you would like to move to (you need to check validity first. After double checking to make sure there are no bugs, you move there
-		 */
+		
 		
 		if(GameMethods.getDistance(location, target) <= speed)
 		{
@@ -164,7 +159,6 @@ public class Animal extends Actor{
 			{
 				this.location = target;
 			}
-			
 		}
 		
 	}

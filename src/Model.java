@@ -36,6 +36,14 @@ public class Model {
 		}
 		
 	}
+	
+	public void printRecords()
+	{
+		for(int i = 0; i < recordLibrary.size();i++)
+		{
+			System.out.println(recordLibrary.get(i).toString());
+		}
+	}
 	//trying to make this easy to see
 	public static int[][] gridSize = new int[50][50];
 	public static int nutritionMinnowsStartWith = 2;
@@ -110,7 +118,7 @@ public class Model {
 	{
 		
 		Controller.stepsTaken += 1;
-		GameMethods.subractNutrition();
+		
 		
 		int sharks = 0;
 		int minnows = 0;
@@ -129,9 +137,10 @@ public class Model {
 			
 			actors.removeAll(actors); //this should clear actors
 			
-			for(int j = 0; i < localActors.size(); i++)
+			for(int j = 0; j < localActors.size(); j++)
 			{
-				actors.add(localActors.get(i));
+				actors.add(localActors.get(j));
+				localActors.remove(j);
 				//updates actors
 			}
 		}

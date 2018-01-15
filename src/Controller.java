@@ -53,7 +53,7 @@ public class Controller {
 			int actorSize = Model.getActorsSize();
 			for (int i = 0; i < actorSize; i++)
 			{
-				localActors.add((Actor) GameMethods.getActorArrayList().get(i)); //cast should have no effect
+				localActors.add((Actor) GameMethods.getActorArrayList().get(i));
 			}			
 			actorSize = Model.getActorsSize();
 			
@@ -91,13 +91,18 @@ public class Controller {
 			Thread.sleep(500);
 	
 		} 
-		
+		Scanner s = new Scanner (System.in);
 	
-		System.out.println("done. all " + Controller.stepsTaken + " were shown, and you wanted to see " + Model.desiredSteps + " steps");
-
+		System.out.println("done. all " + Controller.stepsTaken + " steps were shown");
 		
-	
+		System.out.println("would you like to see view full record list? 'y''n'");
+		String input = s.nextLine();
 
+		if(input.equals("y"))
+		{
+			
+		}
+		
 		
 
 	}

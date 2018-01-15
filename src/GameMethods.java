@@ -95,61 +95,6 @@ public class GameMethods {
 		
 	}
 	
-	public static void placeSpawn(Actor child, Actor parentA, Actor parentB)
-	{
-		Location a = parentA.getLocation();
-		Location b = parentB.getLocation();
-		boolean valid = false;
-		Location newLocation = GameMethods.generateValidLocation();
-		
-		while(valid == false)
-		{
-			if(GameMethods.getDistance(newLocation, a) <= 2 || GameMethods.getDistance(newLocation, b) <=2)
-			{
-				valid = true;
-			}
-			else
-			{
-				newLocation = GameMethods.generateValidLocation();
-			}
-			
-			child.setLocation(newLocation);
-		}
-		
-		}
-		
-		public static void placeSpawn(Actor child, Actor parentA, Location location)
-		{
-			Location a = parentA.getLocation();
-			Location b = location;
-			boolean valid = false;
-			Location newLocation = GameMethods.generateValidLocation();
-			
-			while(valid == false)
-			{
-				if(GameMethods.getDistance(newLocation, a) <= 2 || GameMethods.getDistance(newLocation, b) <=2)
-				{
-					valid = true;
-				}
-				else
-				{
-					newLocation = GameMethods.generateValidLocation();
-				}
-				
-				child.setLocation(newLocation);
-			}
-
-	}
-	
-	public static void subractNutrition()
-	{
-		for(int i = 0; i < GameMethods.getActorArrayList().size(); i++)
-		{
-			((Animal) GameMethods.getActorArrayList().get(i)).subtractNutrition();
-			//is algae going to cause this to error out?
-		}
-	}
-	
 	public static ArrayList getActorArrayList()
 	{
 		Model localModel = Model.getGameModel();
@@ -243,7 +188,7 @@ public class GameMethods {
 		for(int i = 0; i < Model.numberOfAlgae; i++)
 		{
 			Location validLocation = GameMethods.generateValidLocation();
-			Algae al = new Algae(validLocation);
+			Algae al = new Algae(validLocation, 5);
 			Controller.actorsThatNeedAHome.add(al);
 			System.out.println("algae added");
 		}
@@ -291,7 +236,7 @@ public class GameMethods {
 				Shark shark = new Shark(GameMethods.generateValidLocation(), Model.nutritionSharksStartWith); //assertionError here...?
 				Model.addActor(shark);
 			case "Algae":
-				Algae algae = new Algae(GameMethods.generateValidLocation());
+				Algae algae = new Algae(GameMethods.generateValidLocation(), 5);
 				Model.addActor(algae);
 		
 				

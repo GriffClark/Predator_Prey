@@ -13,5 +13,10 @@ public class Record {
 		this.minnowNo = minnows;
 		this.algaeNo = algae;
 	}
+	
+	public String toString()
+	{
+		return "at step" + step + " there were " + sharkNo  + " sharks, " + minnowNo + " minnows, and " + algaeNo + " algae";
+	}
 
 }

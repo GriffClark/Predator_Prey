@@ -8,6 +8,7 @@ public class Actor {
 	protected int nutritionValue; //for when it is eaten
 	protected BufferedImage image;
 	protected String name;
+	protected int nutrition;
 	protected boolean isAlive;
 	protected Location location;
 	protected char askiiRep; //this will give a rough visualization for what it will look like
@@ -17,14 +18,14 @@ public class Actor {
 	 */
 
 	
-	public Actor(Location location)
+	public Actor(Location location, int nutrition)
 	{
-		
+		this.location = location;
+		this.nutrition = nutrition;
 	}
-	
-	public Actor()
-	{
-		
+
+	public Actor() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public char getAskiiRep()
@@ -46,21 +47,10 @@ public class Actor {
 	{
 		return isAlive;
 	}
-	
-	public void setLocation(int x, int y)
-	{
-		this.location = new Location(x, y);
-	}
-	
-	public void setLocation(Location location)
-	{
-		this.location = location;
-	}
-	
+
 	public Location getLocation()
 	{
 		return location;
-		//what is this returning, specifically?
 	}
 	
 	public int getX()
@@ -81,8 +71,7 @@ public class Actor {
 	
 	public void doThings() throws IOException
 	{
-		//only has an effect in Animal. Doesn't do anything here..3
-		
+		nutrition--;
 	}
 	
 	public String toString()
