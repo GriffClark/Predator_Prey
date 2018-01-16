@@ -32,7 +32,6 @@ public class View{
 		f.setSize(1920, 1080);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		
 		 	//add the image to the JFrame "f"
 			f.setLayout(new BorderLayout());
 		    f.setContentPane(new JLabel(new ImageIcon("UIPNG.png")));
@@ -44,31 +43,21 @@ public class View{
 		
 		    //play button panel/button creation
 			btnPanelPlay.setBounds(157, 12, 201, 81);
-			
-			
 			play.setBounds(0, 0, 200, 80);
 			
 			//pause button panel/button creation
 			
-			
 			btnPanelPause.setBounds(380, 12, 201, 81);
-			
-			
 			pause.setBounds(0, 0, 200, 80);
 			
 			//reset button pane/button creation
 			
-		
 			btnPanelReset.setBounds(600, 12, 201, 81);
-			
 			reset.setBounds(0, 0, 200, 80);
 			
 			//options menu button panel/button creation
 			
-
 			btnPanelOptions.setBounds(1490, 12, 411, 81);
-			
-
 			options.setBounds(0, 0, 410, 80);
 			
 			//initialize and set to absolute layout for each panel
@@ -93,6 +82,37 @@ public class View{
 			f.add(btnPanelOptions);
 			    
 		}
+	
+	//getters for buttons
+	
+	public JButton getPlaybtn() {
+		return play;
+	}
+	public JButton getPausebtn() {
+		return pause;
+		}
+	public JButton getResetbtn() {
+		return reset;
+		}
+	public JButton getOptionsbtn() {
+		return options;
+		}
+	
+	//getters for panels
+	
+	public JPanel getPlayPnl() {
+		return btnPanelPlay;
+		}
+	public JPanel getPausePnl() {
+		return btnPanelPause;
+		}
+	public JPanel getResetPnl() {
+		return btnPanelReset;
+		}
+	public JPanel getOptionsPnl() {
+		return btnPanelOptions;
+		}
+	
 }
 
 
