@@ -20,6 +20,14 @@ public class Model {
 	private ArrayList<Record> recordLibrary = new ArrayList<Record>();
 	private int stepsComplete=0;
 	public static int desiredSteps=0;
+	
+	public void printRecordList()
+	{
+		for(int i = 0; i < recordLibrary.size(); i++)
+		{
+			System.out.println(recordLibrary.get(i).toString());
+		}
+	}
 
 	public Record getRecentRecord()
 	{

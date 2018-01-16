@@ -11,11 +11,15 @@ TODO:
 		Notes to self
 
 
-things to look into:
-* more effective search algorithims
+
 *do actors need unique ID
 * 
-NEED TO DO:
-didnt think through colisions. No 2 algae can be in same spot but a shark can be on an algae spot, right? 
 
-Right now no easy way to access records build GameMethod that allows pulling of most recent record
+IMPORTANT:
+
+GameMethods methods need to all access Model.singleModel. This either means moving them to Model or putting public getters into Model
+See how many methods can be worked out of gameMethods
+get rid of GameStatus
+Remove reduntant methods
+Make sure all actor constructors take location and nutrition
+check again to make sure that nothing is accessing Model incorrectly

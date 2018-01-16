@@ -53,10 +53,11 @@ public class GameMethods {
 		 
 	}
 	
+	//this needs to be moved into model
 	public static Location generateValidLocation()
 	{
-		int rows = Model.gridSize.length; 
-		int cols = Model.gridSize[0].length;
+		int rows = Model.singleModel.gridSize.length; 
+		int cols = Model.singleModel.gridSize[0].length;
 		int randomX = (int)(Math.random() * rows);
 		int randomY = (int)(Math.random() * cols);
 		
@@ -95,7 +96,7 @@ public class GameMethods {
 		
 	}
 	
-	public static ArrayList getActorArrayList()
+	public static ArrayList<Actor> getActorArrayList()
 	{
 		Model localModel = Model.getGameModel();
 		ArrayList<Actor> localActors = new ArrayList<Actor>();
@@ -107,22 +108,7 @@ public class GameMethods {
 		
 		return localActors;
 	}
-	
-	public static void moveToRandomLocation(Animal fred)
-	{
-		boolean foundValidLocation = false;
-		do
-		{
-			Location randomLocation = GameMethods.generateValidLocation();
-			if(GameMethods.getDistance(fred.getLocation(), randomLocation) <= fred.getSpeed())
-			{
-				fred.move(randomLocation);
-			}
-		}while(foundValidLocation == false);
-		
-		
-	
-	}
+
 	
 	public static void moveToRandomLocation(Location location, int speed)
 	{
@@ -149,10 +135,10 @@ public class GameMethods {
 		int input = keyboard.nextInt(); //input will be re-used. Steps will be a constant value 
 		if(input == 666)
 		{
-			Model.desiredSteps = 50;
-			Model.numberOfMinnows = 40;
-			Model.numberOfSharks = 20;
-			Model.numberOfAlgae = Model.numberOfMinnows *2; //just an idea not a solution
+			singleModel.desiredSteps = 50;
+			singleModel.numberOfMinnows = 40;
+			singleModel.numberOfSharks = 20;
+			singleModel.numberOfAlgae = Model.numberOfMinnows *2; //just an idea not a solution
 		}
 		else
 		{
@@ -164,13 +150,13 @@ public class GameMethods {
 			int minnowStart = keyboard.nextInt();
 			System.out.println("One second while the game initializes...");
 			Thread.sleep(500); //half a second
-			Model.numberOfMinnows = minnowStart;
-			Model.numberOfSharks = sharkStart;
-			Model.numberOfAlgae = minnowStart *2; //just an idea not a solution
+			singleModel.numberOfMinnows = minnowStart;
+			singleModel.numberOfSharks = sharkStart;
+			singleModel.numberOfAlgae = minnowStart *2; //just an idea not a solution
 		}
 		
 		System.out.println("..."); //getting stuck here not sure why. Trying a different solution with minnows but cannot come up with a desicive reason why this keeps happening
-		for(int i = 0; i < Model.numberOfMinnows; i++)
+		for(int i = 0; i < singleModel.numberOfMinnows; i++)
 		{
 			Location validLocation = GameMethods.generateValidLocation();
 			Minnow m = new Minnow(validLocation, Model.nutritionMinnowsStartWith);
@@ -178,14 +164,14 @@ public class GameMethods {
 			System.out.println("minnow added");
 			
 		}
-		for(int i = 0; i < Model.numberOfSharks; i++)
+		for(int i = 0; i < singleModel.numberOfSharks; i++)
 		{
 			Location validLocation = GameMethods.generateValidLocation();
 			Shark s = new Shark(validLocation, Model.nutritionSharksStartWith);
 			Controller.actorsThatNeedAHome.add(s);
 			System.out.println("shark added");
 		}
-		for(int i = 0; i < Model.numberOfAlgae; i++)
+		for(int i = 0; i < singleModel.numberOfAlgae; i++)
 		{
 			Location validLocation = GameMethods.generateValidLocation();
 			Algae al = new Algae(validLocation, 5);
@@ -198,7 +184,7 @@ public class GameMethods {
 		//is this the correct way of going about starting?
 	}
 	
-	public static ArrayList getActorOfSpecifiedType (String specification)
+	public static ArrayList<Actor> getActorOfSpecifiedType (String specification)
 	{ //based on the current status of the game gets you all actors of a specific type
 		GameStatus currentStatus = Model.getCurrentStatus();
 		ArrayList<Actor> localCopyOfAllActors = currentStatus.actors; //is this a valid way of copying it? To tired to figure it out
@@ -224,6 +210,7 @@ public class GameMethods {
 	 * @throws IOException 
 	 */
 	
+	//this needs to be moved to Model
 	public static void generateActorAtRandomLocation(String specification) throws IOException
 	{
 		switch(specification)
@@ -231,13 +218,13 @@ public class GameMethods {
 		//check if there is something here to get around the NullPointerException error
 			case "Minnow": //generating a minnow with null location
 				Minnow minnow = new Minnow(GameMethods.generateValidLocation(), Model.nutritionMinnowsStartWith);
-				Model.addActor(minnow);
+				singleModel.addActor(minnow);
 			case "Shark":
 				Shark shark = new Shark(GameMethods.generateValidLocation(), Model.nutritionSharksStartWith); //assertionError here...?
-				Model.addActor(shark);
+				singleModel.addActor(shark);
 			case "Algae":
 				Algae algae = new Algae(GameMethods.generateValidLocation(), 5);
-				Model.addActor(algae);
+				singleModel.addActor(algae);
 		
 				
 		

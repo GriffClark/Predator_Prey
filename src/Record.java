@@ -16,7 +16,7 @@ public class Record {
 	
 	public String toString()
 	{
-		return "at step" + step + " there were " + sharkNo  + " sharks, " + minnowNo + " minnows, and " + algaeNo + " algae";
+		return "at step " + step + " there were " + sharkNo  + " sharks, " + minnowNo + " minnows, and " + algaeNo + " algae";
 	}
 
 }
