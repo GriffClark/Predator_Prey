@@ -86,45 +86,55 @@ public class Animal extends Actor{
 			boolean foundLocation = false;
 			Location babyLocation = null;
 			while(foundLocation == false)
-			{
-				babyLocation = GameMethods.generateValidLocation();
-				
-				if (GameMethods.getDistance(location, babyLocation) <= 2)
-				{
-					foundLocation = true;
-				}
-			}
-			
-			Actor baby = new Actor();
-
-			switch(species)
-			{
-			
-			//need a way to find valid location to spawn new child. Search all adjacent squares
-			case "Minnow": 
 				try {
-				 baby = new Minnow (babyLocation, passedInNutrition);
-				}
-				 catch (IOException e) {
+					{
+						babyLocation = GameMethods.generateValidLocation();
+						
+						if (GameMethods.getDistance(location, babyLocation) <= 2)
+						{
+							foundLocation = true;
+						}
+					}
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				Controller.actorsThatNeedAHome.add(baby);
-				break;
-			case "Shark":
-				 
-				try {
-					baby = new Shark(babyLocation, passedInNutrition);
-				}
-				catch(IOException e)
+			
+			Actor baby = new Actor();
+
+			try {
+				switch(species)
 				{
-					e.printStackTrace();
-				}
-				Controller.actorsThatNeedAHome.add(baby);
-				break;
+				
+				//need a way to find valid location to spawn new child. Search all adjacent squares
+				case "Minnow": 
+					try {
+					 baby = new Minnow (babyLocation, passedInNutrition);
+					}
+					 catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
-				}
+					Controller.actorsThatNeedAHome.add(baby);
+					break;
+				case "Shark":
+					 
+					try {
+						baby = new Shark(babyLocation, passedInNutrition);
+					}
+					catch(IOException e)
+					{
+						e.printStackTrace();
+					}
+					Controller.actorsThatNeedAHome.add(baby);
+					break;
+						
+					}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			}
 			

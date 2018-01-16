@@ -11,8 +11,7 @@ public class Algae extends Actor{
 		{
 			name = "Algae";
 			askiiRep = 'A';
-			nutrition = 5;
-			
+			nutrition = 5;			
 			image = ImageIO.read(new File ("algae.jpg")); 
 
 		}
@@ -29,12 +28,12 @@ public class Algae extends Actor{
 	{
 		try {
 			//try catch figure this out
-			if(Controller.stepsTaken % Model.halfLife == 0)
+			if(Controller.stepsTaken % Model.getGameModel().getHalfLife() == 0)
 			{
-				int numberOfAlgae = GameMethods.getActorOfSpecifiedType("Algae").size();
+				int numberOfAlgae = Model.getGameModel().getNumberOfAlgae();
 				for(int i = 0; i < numberOfAlgae; i++)
 				{
-					GameMethods.generateActorAtRandomLocation("Algae"); //need to check if this generateAtRandomLocation works as intended
+					Algae al = new Algae(GameMethods.generateValidLocation(), 5); 
 				}
 			}
 		}

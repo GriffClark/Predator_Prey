@@ -34,11 +34,12 @@ public class Controller {
 		//after everything has been initalized, the game starts...:
 //		new View();
 		GameMethods.start();
-		while(stepsTaken < Model.desiredSteps)
+		do
 		{
 			if(stepsTaken == 0)
 			{
 				System.out.println("game has started");
+
 			}
 			/**
 			 * get localModel and localActors
@@ -47,31 +48,33 @@ public class Controller {
 			 *debug: prints an ascii grid
 			 *
 			 */
-			GameStatus currentStatus = Model.getCurrentStatus(); //should get the status of Model.singleModel
 			Model localModel = Model.getGameModel();
-			ArrayList<Actor> localActors = new ArrayList<Actor>(); //make sure all edits that are made are made to localActors
-			int actorSize = Model.getActorsSize();
+			ArrayList<Actor> localActors = new ArrayList<Actor>(); //this should wipe it every time
+			int actorSize = Model.getGameModel().getActorsSize();
 			for (int i = 0; i < actorSize; i++)
 			{
-				localActors.add((Actor) GameMethods.getActorArrayList().get(i));
+				localActors.add((Actor) Model.getGameModel().getActor(i));
 			}			
-			actorSize = Model.getActorsSize();
+			actorSize = localActors.size();
 			
 			for (int i = 0; i < actorSize; i++)
 			{
 				//loops through all the animals and has them move and do things based on their decision trees
-				
+				//rangeCheck here unknown source
 				if(localActors.get(i).getIsAlive() == false)
 				{
-					localActors.remove(i); //this should kill off the thing
+					localActors.remove(i);
+					i--;
 				}
-				
-				else 
-				{
-					localActors.get(i).doThings(); 
-				}
-				
-			}		
+			}	
+			actorSize = localActors.size();
+			for(int i = 0; i < actorSize; i++)
+			{
+				localActors.get(i).doThings(); 
+			}
+		
+			
+			
 			int homeSize = Controller.actorsThatNeedAHome.size();
 			for(int i = 0; i < homeSize; i++)
 			{
@@ -79,18 +82,18 @@ public class Controller {
 			}
 			actorsThatNeedAHome = new ArrayList<Actor>(); //should wipe it
 
-			localModel.CompleteStep(stepsTaken, localActors); //makes a record of what step you are on and what actors exist
+			localModel.CompleteStep(stepsTaken, localActors, localActors.size()); //makes a record of what step you are on and what actors exist
 			//I am not confident that the handoff between completing a step and starting a new step is solid
 			
 			System.out.println("Step complete");
-			System.out.println("there are currently " + GameMethods.getActorOfSpecifiedType("Minnow").size() + " minnows");
+			System.out.println("there are currently " + Model.getGameModel().getNumberOfMinnows() + " minnows");
 			Thread.sleep(50);
-			System.out.println("there are currently " + GameMethods.getActorOfSpecifiedType("Shark").size() + " sharks" );
+			System.out.println("there are currently " + Model.getGameModel().getNumberOfSharks() + " sharks" );
 			Thread.sleep(50);
-			System.out.println("there are currently " + GameMethods.getActorOfSpecifiedType("algae").size() + " algae");
+			System.out.println("there are currently " + Model.getGameModel().getNumberOfAlgae() + " algae");
 			Thread.sleep(500);
 	
-		} 
+		} while(stepsTaken < Model.getGameModel().getDesiredSteps());
 		Scanner s = new Scanner (System.in);
 	
 		System.out.println("done. all " + Controller.stepsTaken + " steps were shown");
@@ -100,7 +103,7 @@ public class Controller {
 
 		if(input.equals("y"))
 		{
-			
+			 Model.getGameModel().printRecords();
 		}
 		
 		

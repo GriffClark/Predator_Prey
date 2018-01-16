@@ -17,10 +17,10 @@ public class Shark extends Animal{
 		try
 		{
 			askiiRep = 'S';
-			speed = Model.setSharkSpeed;
+			speed = Model.getGameModel().getSetSharkSpeed();
 			name = "Shark";
 			isAlive = true;
-			nutrition= Model.nutritionSharksStartWith; //nutrition needs to be passed in because it is a function of the parents, or a default
+			nutrition= Model.getGameModel().getNutritionSharksStartWith(); //nutrition needs to be passed in because it is a function of the parents, or a default
 			thingsICanEat = Animal.Edibles.Minnow;  //not sure how to use this but I know I need it
 			image = ImageIO.read(new File ("shark.jpg"));
 		}

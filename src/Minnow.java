@@ -10,7 +10,7 @@ public class Minnow extends Animal{
 	{
 		super(location, nutrition);
 		askiiRep = 'M';
-		speed = Model.setMinnowSpeed;
+		speed = Model.getGameModel().getSetMinnowSpeed();
 		name = "Minnow";
 		isAlive = true;
 		this.nutrition = nutrition;
@@ -23,32 +23,13 @@ public class Minnow extends Animal{
 			System.out.println("Something went wrong in minnow constructor");
 		}
 	}
-	
-	public Minnow(int nutrition) throws IOException
-	{
-		super(nutrition);
-		askiiRep = 'M';
-		speed = Model.setMinnowSpeed;
-		name = "Minnow";
-		isAlive = true;
-		this.nutrition = nutrition;
-		try
-		{
-			image = ImageIO.read(new File ("minnow.png"));
-		}
-		catch(IOException e)
-		{
-			System.out.println("Something went wrong in minnow constructor");
-		}
-	
-		
-	}
 		
 		
 
 @Override
 public void doThings()
 {
+
 
 	//can I use the part of the method in Animal without having to copy paste?
 	
@@ -159,6 +140,7 @@ public void doThings()
 	}
 }
 }
+
 
 	
 	//I think this should go in Animal but I don't know how to do it without knowing the animal type before hand

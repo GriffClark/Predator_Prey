@@ -11,7 +11,8 @@ public class Actor {
 	protected int nutrition;
 	protected boolean isAlive;
 	protected Location location;
-	protected char askiiRep; //this will give a rough visualization for what it will look like
+	protected char askiiRep;
+	protected int UID;
 	
 	/*
 	 * getting unhandled exception IOException and not sure how to handle it
@@ -42,6 +43,8 @@ public class Actor {
 		isAlive = false;
 		//so from here though I need to find a way to remove the dead thing
 	}
+	
+
 	
 	public boolean getIsAlive()
 	{
