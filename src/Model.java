@@ -135,6 +135,8 @@ public class Model {
 	public void CompleteStep(int step, ArrayList<Actor> localActors, int localActorSize)
 	{
 		
+		 ArrayList<Actor> temporaryStorage = new ArrayList<Actor>();
+		
 		Controller.stepsTaken += 1;
 		int sharks = 0;
 		int minnows = 0;
@@ -153,11 +155,17 @@ public class Model {
 			
 			//everything has been accounted for 
 			
-			singleModel.actors = new ArrayList<Actor>();
 			for(int j = 0; j < localActorSize; j++)
 			{
-				addActor(localActors.get(i));
+				temporaryStorage.add(localActors.get(j));
 				//updates actors
+			}
+			int tempSize = temporaryStorage.size();
+			
+			singleModel.actors.clear();
+			for(int q = 0; q < tempSize; q++)
+			{
+				singleModel.actors.add(temporaryStorage.get(q));
 			}
 		}
 		

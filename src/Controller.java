@@ -51,18 +51,27 @@ public class Controller {
 			Model localModel = Model.getGameModel();
 			ArrayList<Actor> localActors = new ArrayList<Actor>(); //this should wipe it every time
 			int actorSize = Model.getGameModel().getActorsSize();
+			localActors.clear();
 			for (int i = 0; i < actorSize; i++)
 			{
 				localActors.add((Actor) Model.getGameModel().getActor(i));
 			}			
-			actorSize = localActors.size();
-			
-			for (int i = 0; i < actorSize; i++)
+		
+			/**
+			 * extra crap being added in here
+			 */
+			for (int i = 0; i < localActors.size(); i++)
 			{
+				System.out.println(" i = " + i  +", " + "localActorSize = " + localActors.size());
+				System.out.println(Model.getGameModel().getNumberOfSharks() + " sharks");
+				System.out.println(Model.getGameModel().getNumberOfMinnows() + " minnows");
+				System.out.println(Model.getGameModel().getNumberOfAlgae() + " algae");
+				
 				//loops through all the animals and has them move and do things based on their decision trees
 				//rangeCheck here unknown source
 				if(localActors.get(i).getIsAlive() == false)
 				{
+					
 					localActors.remove(i);
 					i--;
 				}

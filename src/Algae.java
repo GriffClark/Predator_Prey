@@ -39,7 +39,7 @@ public class Algae extends Actor{
 		}
 		catch (IOException e)
 		{
-			System.out.println("error in algae doThings");
+			e.getStackTrace();
 		}
 	
 	}
