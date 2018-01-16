@@ -14,10 +14,18 @@ public class View{
 	}
 	
 	
+	public JFrame f = new JFrame ("Sharks and Minnows"); //create frame
+	public JPanel btnPanelPlay = new JPanel();
+	public JButton play = new JButton("Play");
+	public JPanel btnPanelPause = new JPanel();
+	public JButton pause = new JButton("Pause");
+	public JPanel btnPanelReset = new JPanel();
+	public JButton reset = new JButton("Reset");
+	public JPanel btnPanelOptions = new JPanel();
+	public JButton options = new JButton("Options");
 	
 	public void UserInterface()
 	{
-		JFrame f = new JFrame ("Sharks and Minnows"); //create frame
 		
 		f.setLocationRelativeTo(null);
 		f.setVisible(true);
@@ -35,34 +43,32 @@ public class View{
 		    f.setSize(1920,1080);
 		
 		    //play button panel/button creation
-			JPanel btnPanelPlay = new JPanel();
 			btnPanelPlay.setBounds(157, 12, 201, 81);
 			
-			JButton play = new JButton("Play");
+			
 			play.setBounds(0, 0, 200, 80);
 			
 			//pause button panel/button creation
 			
-			JPanel btnPanelPause = new JPanel();
+			
 			btnPanelPause.setBounds(380, 12, 201, 81);
 			
-			JButton pause = new JButton("Pause");
+			
 			pause.setBounds(0, 0, 200, 80);
 			
 			//reset button pane/button creation
 			
-			JPanel btnPanelReset = new JPanel();
+		
 			btnPanelReset.setBounds(600, 12, 201, 81);
 			
-			JButton reset = new JButton("Reset");
 			reset.setBounds(0, 0, 200, 80);
 			
 			//options menu button panel/button creation
 			
-			JPanel btnPanelOptions = new JPanel();
+
 			btnPanelOptions.setBounds(1490, 12, 411, 81);
 			
-			JButton options = new JButton("Options");
+
 			options.setBounds(0, 0, 410, 80);
 			
 			//initialize and set to absolute layout for each panel
@@ -78,7 +84,7 @@ public class View{
 			btnPanelOptions.setLayout(null);
 			btnPanelOptions.add(options);
 			
-			
+			//actually add them to the frame
 			    
 			f.setLayout(null);
 			f.add(btnPanelPlay);
@@ -86,15 +92,6 @@ public class View{
 			f.add(btnPanelReset);
 			f.add(btnPanelOptions);
 			    
-		//JPanel mainPanel = new JPanel( new BorderLayout()); //create panel, I don't know if the order of creating of the panel or frame first matters, but it works so
-		//JPanel westPanel = new JPanel();
-		
-		//westPanel.add(play);
-		
-		//mainPanel.add(westPanel, BorderLayout.WEST);
-		//f.add(mainPanel);
-		
-
 		}
 }
 
