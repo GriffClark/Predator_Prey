@@ -72,7 +72,7 @@ public class Actor {
 		return name;
 	}
 	
-	public void doThings() throws IOException
+	public void doThings()
 	{
 		nutrition--;
 	}

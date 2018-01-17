@@ -16,10 +16,9 @@ TODO:
 * 
 
 IMPORTANT:
-
+In orange notebook make better move nested loop to test only legal locations
 GameMethods methods need to all access Model.singleModel. This either means moving them to Model or putting public getters into Model
 See how many methods can be worked out of gameMethods
 get rid of GameStatus
-Remove reduntant methods
 Make sure all actor constructors take location and nutrition
 check again to make sure that nothing is accessing Model incorrectly

@@ -18,25 +18,28 @@ public class GameMethods {
 		while(true) //will loop until it finds a valid location
 		{
 			Location testLocation = GameMethods.generateValidLocation();
-			if(GameMethods.getDistance(targetLocation, testLocation) <= 2)
+			if(GameMethods.getDistance(targetLocation, testLocation) < 2)
 			{
 				if(GameMethods.getDistance(targetLocation, myLocation)<= speed )
 				{
 					return testLocation;
 				}
-				else
-				{
+				else {
 					numberOfTries++;
-					if(numberOfTries > 50)
-					{
-						return null; //prevents an infinate loop
-					}
 				}
+			}
+			else
+			{
+				numberOfTries++;
+			}
+			if(numberOfTries > 20)
+			{
+				return myLocation; //prevents an infinite loop, give up and stay where you are.
 			}
 		}
 		
 	}
-	public static int getDistance(Location a, Location b)
+	public static int getDistance(Location a, Location b) //@TODO make this a double
 	{
 		//returns the distance of two actors from each other
 		double dis;
@@ -54,13 +57,11 @@ public class GameMethods {
 	}
 	
 	//this needs to be moved into model
-	public static Location generateValidLocation()
+	public static Location generateValidLocation() //have a second version that takes a location and will test for only valid locations. Pass in current location and speed
 	{
 		int[][] useMe = Model.getGrid();
 		int rows = useMe.length; 
 		int cols = useMe[0].length;
-		int randomX = (int)(Math.random() * rows);
-		int randomY = (int)(Math.random() * cols);
 		
 		ArrayList<Actor> localActors = new ArrayList<Actor>();
 		int numberOfActors = GameMethods.getActorArrayList().size();
@@ -72,6 +73,8 @@ public class GameMethods {
 		
 		while(finalLocation == null)
 		{
+			int randomX = (int)(Math.random() * rows);
+			int randomY = (int)(Math.random() * cols);
 			Location testLocation = new Location(randomX, randomY );
 			boolean isTestLocationValid = true;
 			
@@ -102,7 +105,8 @@ public class GameMethods {
 		Model localModel = Model.getGameModel();
 		ArrayList<Actor> localActors = new ArrayList<Actor>();
 		
-		for (int i = 0; i < localModel.getActorsSize(); i++)
+		int localModelSize = localModel.getActorsSize();
+		for (int i = 0; i < localModelSize; i++)
 		{
 			localActors.add((Actor) localModel.copyOfActors().get(i));
 		}	
@@ -114,14 +118,21 @@ public class GameMethods {
 	public static void moveToRandomLocation(Location location, int speed)
 	{
 		boolean foundValidLocation = false;
+		int maxTries = 400; //need a better way to do this if time
+		int tries = 0;
 		do
 		{
 			Location randomLocation = GameMethods.generateValidLocation();
 			if(GameMethods.getDistance(location, randomLocation) <= speed)
 			{
 				location = randomLocation;
+				foundValidLocation = true;
 			}
-		}while(foundValidLocation == false);
+			else 
+			{
+				tries++;
+			}
+		}while(foundValidLocation == false && tries<maxTries);
 	}
 	/**
 	 * make sure that there is a constant check running to make sure that no two objects occupy the same loocation

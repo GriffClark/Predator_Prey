@@ -10,7 +10,6 @@ public class Animal extends Actor{
 	}
 	
 	protected int speed;	
-	protected int nutrition; //for how much food it has eaten
 	protected Edibles thingsICanEat;
 
 	/*Things animals need:
@@ -58,6 +57,8 @@ public class Animal extends Actor{
 	//need to see if this is still doing what I told it to do in Actor
 	public void doThings()
 	{
+         super.doThings();
+         /*
 			ArrayList<Actor> thingsNearBy = new ArrayList<Actor>(); //I don't want to keep actors here because I only want each actor to be stored in one location, and animals do not need a running memory of what is around them, since they will always be making this check
 			//need a way to scan all locations within your speed, which is also how far you can see around you
 			
@@ -70,13 +71,13 @@ public class Animal extends Actor{
 					thingsNearBy.add((Actor) GameMethods.getActorArrayList().get(i));
 					//if there is a thing that you can move to, you are aware that it's there
 				}
-			}
+			}*/
 			//just laying the groundwork. This will be used later by Shark and Minnow
 	}
 	
 	public void reproduce(Animal otherParent, int distance) throws IOException //this int distance should be GameMethods.getDistance
 	{
-		if(otherParent.getName().equals(name) && distance ==1) //if animal a and animal b are the same and they are close enough
+		if(otherParent.getName().equals(name) && distance <=2) //if animal a and animal b are the same and they are close enough
 		{
 			int passedInNutrition = (otherParent.getNutrition() + nutrition + 1) / 2;
 			nutrition /= 2;

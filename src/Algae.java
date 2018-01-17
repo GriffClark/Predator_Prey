@@ -11,7 +11,8 @@ public class Algae extends Actor{
 		{
 			name = "Algae";
 			askiiRep = 'A';
-			nutrition = 5;			
+			this.nutrition = nutrition;	
+			isAlive = true;
 			image = ImageIO.read(new File ("algae.jpg")); 
 
 		}
@@ -24,17 +25,15 @@ public class Algae extends Actor{
 	}
 	
 	@Override
-	public void doThings() throws IOException
+	public void doThings()
 	{
+		super.doThings();
 		try {
 			//try catch figure this out
 			if(Controller.stepsTaken % Model.getGameModel().getHalfLife() == 0)
 			{
-				int numberOfAlgae = Model.getGameModel().getNumberOfAlgae();
-				for(int i = 0; i < numberOfAlgae; i++)
-				{
-					Algae al = new Algae(GameMethods.generateValidLocation(), 5); 
-				}
+				Algae al = new Algae(GameMethods.generateValidLocation(), 5); 
+			    Controller.actorsThatNeedAHome.add(al);
 			}
 		}
 		catch (IOException e)

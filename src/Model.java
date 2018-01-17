@@ -62,7 +62,8 @@ public class Model {
 	
 	public void printRecords()
 	{
-		for(int i = 0; i < recordLibrary.size();i++)
+		int size =  recordLibrary.size();
+		for(int i = 0; i < size;i++)
 		{
 			System.out.println(recordLibrary.get(i).toString());
 		}
@@ -105,8 +106,8 @@ public class Model {
 	public ArrayList<Actor> copyOfActors()
 	{
 		ArrayList<Actor> returnActors = new ArrayList<Actor>();
-		
-		for (int i = 0; i < singleModel.actors.size(); i++)
+		int size = singleModel.actors.size();
+		for (int i = 0; i <size ; i++)
 		{
 			returnActors.add( singleModel.actors.get(i));
 		}
@@ -123,6 +124,10 @@ public class Model {
 	
 	public void addActor (Actor actor)
 	{
+		if (actor == null)
+		{
+			System.out.println("bugger");
+		}
 		singleModel.actors.add(actor);
 	}
 	
@@ -166,7 +171,7 @@ public class Model {
 		singleModel.actors.clear();
 		for(int q = 0; q < tempSize; q++)
 		{
-			singleModel.actors.add(temporaryStorage.get(q));
+			singleModel.addActor(temporaryStorage.get(q));
 		}
 	
 		

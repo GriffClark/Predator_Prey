@@ -67,7 +67,8 @@ public class Controller {
 			int actorSize = Model.getGameModel().getActorsSize();
 			for (int i = 0; i < actorSize; i++)
 			{
-				localActors.add((Actor) Model.getGameModel().getActor(i));
+				Actor newActor =  Model.getGameModel().getActor(i);
+				localActors.add(newActor);
 			}			
 		
 			/**
@@ -101,7 +102,7 @@ public class Controller {
 			}	
 			
 			actorSize = localActors.size();
-			for(int i = localActors.size() - 1; i >=0; i--)
+			for(int i = actorSize - 1; i >=0; i--)
 			{
 				localActors.get(i).doThings(); 
 				//stops working here
@@ -124,7 +125,7 @@ public class Controller {
 				}
 			}
 
-			localModel.CompleteStep(stepsTaken, localActors, localActors.size()); //makes a record of what step you are on and what actors exist
+			Model.getGameModel().CompleteStep(stepsTaken, localActors, localActors.size()); //makes a record of what step you are on and what actors exist
 			//I am not confident that the handoff between completing a step and starting a new step is solid
 			
 			System.out.println("Step " + Controller.stepsTaken + " complete sucessfully");

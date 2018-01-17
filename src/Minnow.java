@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-
+ 
 public class Minnow extends Animal{
 		
 	public Minnow(Location location, int nutrition) throws IOException
@@ -30,12 +30,12 @@ public class Minnow extends Animal{
 public void doThings()
 {
 
-
+	super.doThings();
 	//can I use the part of the method in Animal without having to copy paste?
 	
 	ArrayList<Minnow> minnowsNearBy = new ArrayList<Minnow>(); //I don't want to keep actors here because I only want each actor to be stored in one location, and animals do not need a running memory of what is around them, since they will always be making this check
 	//need a way to scan all locations within your speed, which is also how far you can see around you
-	ArrayList<Shark>sharksNearBy = new ArrayList<Shark>();
+	ArrayList<Shark> sharksNearBy = new ArrayList<Shark>();
 	ArrayList<Algae> algaeNearBy = new ArrayList<Algae>();
 	
 	//in order for this to work, need to make each actor self-aware. This might also work, though

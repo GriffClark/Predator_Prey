@@ -36,7 +36,7 @@ public class Shark extends Animal{
 	@Override
 	public void doThings()
 	{
-
+        super.doThings();
 		//can I use the part of the method in Animal without having to copy paste?
 		
 		ArrayList<Minnow> minnowsNearBy = new ArrayList<Minnow>(); //I don't want to keep actors here because I only want each actor to be stored in one location, and animals do not need a running memory of what is around them, since they will always be making this check
