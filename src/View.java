@@ -13,16 +13,18 @@ public class View{
 		UserInterface();
 	}
 	
-	
-	public JFrame f = new JFrame ("Sharks and Minnows"); //create frame
-	public JPanel btnPanelPlay = new JPanel();
-	public JButton play = new JButton("Play");
-	public JPanel btnPanelPause = new JPanel();
-	public JButton pause = new JButton("Pause");
-	public JPanel btnPanelReset = new JPanel();
-	public JButton reset = new JButton("Reset");
-	public JPanel btnPanelOptions = new JPanel();
-	public JButton options = new JButton("Options");
+	public boolean playbool;
+	public boolean pausebool;
+	JFrame f2 = new JFrame ("Options"); //options menu frame
+	public JFrame f = new JFrame ("Sharks and Minnows"); //create main frame
+	public JPanel btnPanelPlay = new JPanel();//play button panel
+	public JButton play = new JButton("Play");//play button button
+	public JPanel btnPanelPause = new JPanel();//pause button panel
+	public JButton pause = new JButton("Pause");//pause button
+	public JPanel btnPanelReset = new JPanel();//reset button panel
+	public JButton reset = new JButton("Reset");//reset button
+	public JPanel btnPanelOptions = new JPanel();//option menu panel
+	public JButton options = new JButton("Options");//option menu button
 	
 	public void UserInterface()
 	{
@@ -31,6 +33,12 @@ public class View{
 		f.setVisible(true);
 		f.setSize(1920, 1080);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
+		f2.setLocationRelativeTo(null);
+		f2.setVisible(false);
+		f2.setSize(720, 720);
+		f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		 	//add the image to the JFrame "f"
 			f.setLayout(new BorderLayout());
@@ -60,6 +68,18 @@ public class View{
 			btnPanelOptions.setBounds(1490, 12, 411, 81);
 			options.setBounds(0, 0, 410, 80);
 			
+			//play button action listener
+			
+			options.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent e) {
+					f2.setVisible(true); //open the option frame if the option button is pressed
+				}
+				
+			});
+			
+			
+			
 			//initialize and set to absolute layout for each panel
 			btnPanelPlay.setLayout(null);
 			btnPanelPlay.add(play);
@@ -82,6 +102,45 @@ public class View{
 			f.add(btnPanelOptions);
 			    
 		}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//getters for buttons
 	
@@ -134,20 +193,3 @@ public class View{
 
 
 
-
-//Grid charGrid = new Grid(Model.gridSize);
-//	GameStatus currentStatus = Model.getCurrentStatus(); //should get the status of Model.singleModel
-//	Model localModel = Model.getGameModel();
-//	ArrayList<Actor> localActors = new ArrayList<Actor>();
-	
-//	for (int i = 0; i < Model.getActorsSize(); i++)
-//	{
-//		localActors.add((Actor) localModel.copyOfActors().get(i)); //cast should have no effect
-//	}
-	
-//	for(int i = 0; i < localActors.size(); i++)
-//	{
-//		charGrid.placeCharAtLocation(localActors.get(i).getAskiiRep(), localActors.get(i).getX(), localActors.get(i).getY());
-//	}
-	
-//	charGrid.printGrid();
