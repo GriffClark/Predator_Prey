@@ -1,6 +1,4 @@
 
-public class View {
-
 	import java.util.ArrayList;
 	import java.awt.*;
 	import javax.swing.*;
@@ -8,13 +6,9 @@ public class View {
 
 
 	public class View{
-
-		/**
-		 * using grid class figure out how to generate a view based on what the controller spits out
-		 */
-		public View()  {
-			UserInterface();
-		}
+		
+		public JPanel grid = new JPanel(); // GRID/PANEL FOR GRIFFIN TO MAKE THE GRID, BOUNDARIES CAN BE FOUND UNDER LINE VVVVVV
+		
 		
 		public boolean playbool;
 		public boolean pausebool;
@@ -28,6 +22,14 @@ public class View {
 		public JButton reset = new JButton("Reset");//reset button
 		public JPanel btnPanelOptions = new JPanel();//option menu panel
 		public JButton options = new JButton("Options");//option menu button
+		
+		/**
+		 * using grid class figure out how to generate a view based on what the controller spits out
+		 */
+		public View()  {
+			UserInterface();
+		}
+		
 		
 		public void UserInterface()
 		{
@@ -103,49 +105,32 @@ public class View {
 				f.add(btnPanelPause);
 				f.add(btnPanelReset);
 				f.add(btnPanelOptions);
-				    
+				
+	//_______________________________________________________________________________________________________________________________________			
+				
+				grid.setBounds();
+				
+
+				
 			}
+		
+		public void grid() {
+//			 JPanel grid = new JPanel();
+//			 JButton test = new JButton();
+//			grid.setBounds(200, 200, 1200, 1200);
+//			test.setBounds(0, 0, 1199, 1199);
+//			Controller.mainJFrame.getf().add(grid);
+//			Controller.mainJFrame.getf().add(test);
+//					btnPanelPlay.setBounds(157, 12, 201, 81);
+//			      play.setBounds(0, 0, 200, 80);
+		}
+			
+
 		
 		public JFrame getf() {
 			return f;
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 		//getters for buttons
 		
@@ -177,6 +162,8 @@ public class View {
 			return btnPanelOptions;
 			}
 		
+		
+		
 	}
 
 
@@ -198,5 +185,3 @@ public class View {
 
 
 
-
-}

@@ -93,9 +93,6 @@ public class GameMethods {
 			
 		}
 
-
-		
-		
 		return finalLocation;
 		
 	}
