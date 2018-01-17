@@ -28,10 +28,9 @@ public class Controller {
 	//this might not want to be a main method
 	public static int stepsTaken = 0;
 	public static ArrayList<Actor> actorsThatNeedAHome = new ArrayList<Actor>();
-	public static void main(String[] args) throws InterruptedException, IOException { //need to throw in ea AssertTest I think or enableassertions AssertTest
 	
-
-		//after everything has been initalized, the game starts...:
+	public static void main(String[] args) throws InterruptedException, IOException { //need to throw in ea AssertTest I think or enableassertions AssertTest
+	    //after everything has been initalized, the game starts...:
 //		new View();
 		boolean debugMode;
 		System.out.println("run in debug mode?");
@@ -39,9 +38,7 @@ public class Controller {
 		String input = keyboard.nextLine();
 		GameMethods.start();
 		do
-		{
-			
-			
+		{			
 			if(input.equals("y"))
 			{
 				debugMode = true;
@@ -53,7 +50,6 @@ public class Controller {
 			if(stepsTaken == 0)
 			{
 				System.out.println("game has started");
-
 			}
 			else if (debugMode == true)
 			{
@@ -69,7 +65,6 @@ public class Controller {
 			Model localModel = Model.getGameModel();
 			ArrayList<Actor> localActors = new ArrayList<Actor>(); //this should wipe it every time
 			int actorSize = Model.getGameModel().getActorsSize();
-			localActors.clear();
 			for (int i = 0; i < actorSize; i++)
 			{
 				localActors.add((Actor) Model.getGameModel().getActor(i));
@@ -78,14 +73,18 @@ public class Controller {
 			/**
 			 * extra crap being added in here
 			 */
-			for (int i = 0; i < localActors.size(); i++)
+			int oneTimeSize =localActors.size();
+			for (int i =  oneTimeSize- 1; i >=0; i--)
 			{
 				if(debugMode == true)
 				{
 					System.out.println(" i = " + i  +", " + "localActorSize = " + localActors.size());
 					System.out.println(localActors.get(i).toString());
 				}
-				
+				/*
+				 * so for each actor is it generating a full set of actors ie there are 4 actors and generates 1 shark 1 minnow and 2 algae for each actor I wanted
+				 * and then also it will not go past one step so infinite loop?
+				 */
 				
 				/**
 				 * blockchain integration to show full history of where everything came from so I can tell what is falsely generated
@@ -97,24 +96,33 @@ public class Controller {
 				{
 					
 					localActors.remove(i);
-					i--;
+	
 				}
 			}	
 			
 			actorSize = localActors.size();
-			for(int i = 0; i < actorSize; i++)
+			for(int i = localActors.size() - 1; i >=0; i--)
 			{
 				localActors.get(i).doThings(); 
+				//stops working here
+				
 			}
 		
-			
-			
 			int homeSize = Controller.actorsThatNeedAHome.size();
 			for(int i = 0; i < homeSize; i++)
 			{
 				localActors.add(actorsThatNeedAHome.get(i));
 			}
 			actorsThatNeedAHome.clear(); //should wipe it
+			oneTimeSize = localActors.size();
+			for(int i =  - 1; i >=0; i--)
+			{
+				if(localActors.get(i).getIsAlive() == false)
+				{
+					
+					localActors.remove(i);
+				}
+			}
 
 			localModel.CompleteStep(stepsTaken, localActors, localActors.size()); //makes a record of what step you are on and what actors exist
 			//I am not confident that the handoff between completing a step and starting a new step is solid
@@ -129,7 +137,7 @@ public class Controller {
 		System.out.println("done. all " + Controller.stepsTaken + " steps were shown");
 		
 		System.out.println("would you like to see view full record list? 'y''n'");
-		String input = s.nextLine();
+		input = s.nextLine();
 
 		if(input.equals("y"))
 		{

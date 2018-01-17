@@ -152,22 +152,23 @@ public class Model {
 			case "Algae": algae++; break;
 			
 			}
-			
-			//everything has been accounted for 
-			
-			for(int j = 0; j < localActorSize; j++)
-			{
-				temporaryStorage.add(localActors.get(j));
-				//updates actors
-			}
-			int tempSize = temporaryStorage.size();
-			
-			singleModel.actors.clear();
-			for(int q = 0; q < tempSize; q++)
-			{
-				singleModel.actors.add(temporaryStorage.get(q));
-			}
 		}
+			
+		//everything has been accounted for 
+		
+		for(int j = 0; j < localActorSize; j++)
+		{
+			temporaryStorage.add(localActors.get(j));
+			//updates actors
+		}
+		int tempSize = temporaryStorage.size();
+		
+		singleModel.actors.clear();
+		for(int q = 0; q < tempSize; q++)
+		{
+			singleModel.actors.add(temporaryStorage.get(q));
+		}
+	
 		
 	  Record newRecord = new Record(step, sharks, minnows, algae);
 	  recordLibrary.add(newRecord); //stores newStatus
