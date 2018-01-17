@@ -29,14 +29,6 @@ public class Animal extends Actor{
 		super(location,nutrition);
 	}
 	
-	public int getNutrition()
-	{
-		return nutrition;
-	}
-
-	
-
-	
 	@Override //this method is slightly different for animals then for Algae
 	public boolean getIsAlive()
 	{
@@ -173,11 +165,13 @@ public class Animal extends Actor{
 		}
 		
 	}
+	
+	
 	//do I need some way to check that the move was valid? Maybe there should also be a checkValidMove(location,target)
 
 	public void feed(Actor deadThing)
 	{
-		nutrition += deadThing.getNutritionValue();
+		nutrition += deadThing.getNutrition();
 		deadThing.getEaten();
 	}
 

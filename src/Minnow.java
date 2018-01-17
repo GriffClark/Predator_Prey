@@ -63,7 +63,7 @@ public void doThings()
 	}
 
 	//do I do nested if/else or do i make a bunch of isHungry type booleans and run checks?
-	if(nutrition >=8)
+	if(nutrition >=4)
 	{
 		if(minnowsNearBy.size() >= 1)
 		{

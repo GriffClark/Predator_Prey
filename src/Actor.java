@@ -81,6 +81,10 @@ public class Actor {
 	{
 		return name + " " + location;
 	}
+
+	public int getNutrition() {
+		return nutrition;
+	}
 	
 
 }

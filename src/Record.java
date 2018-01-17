@@ -14,6 +14,26 @@ public class Record {
 		this.algaeNo = algae;
 	}
 	
+	public int getStep()
+	{
+		return step;
+	}
+	
+	public int getSharkNo()
+	{
+		return sharkNo;
+		
+	}
+	
+	public int getMinnowNo()
+	{
+		return minnowNo;
+	}
+	
+	public int getAlgaeNo()
+	{
+		return algaeNo;
+	}
 	public String toString()
 	{
 		return "at step " + step + " there were " + sharkNo  + " sharks, " + minnowNo + " minnows, and " + algaeNo + " algae";

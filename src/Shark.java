@@ -70,7 +70,7 @@ public class Shark extends Animal{
 		}
 	
 		//do I do nested if/else or do i make a bunch of isHungry type booleans and run checks?
-		if(nutrition >=10)
+		if(nutrition >=6)
 		{
 			if(sharksNearBy.size() >= 1)
 			{
