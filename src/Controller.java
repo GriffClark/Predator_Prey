@@ -129,6 +129,7 @@ public class Controller {
 			//I am not confident that the handoff between completing a step and starting a new step is solid
 			
 			System.out.println("Step " + Controller.stepsTaken + " complete sucessfully");
+			new ButtonGrid();
 			Thread.sleep(500);
 		} while(stepsTaken < Model.getGameModel().getDesiredSteps());
 		

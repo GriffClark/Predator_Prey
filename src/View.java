@@ -123,6 +123,8 @@
 //			Controller.mainJFrame.getf().add(test);
 //					btnPanelPlay.setBounds(157, 12, 201, 81);
 //			      play.setBounds(0, 0, 200, 80);
+			
+			
 		}
 			
 
