@@ -19,7 +19,22 @@ public class Model {
 	private ArrayList<Actor> actors = new ArrayList<Actor>();
 	private ArrayList<Record> recordLibrary = new ArrayList<Record>();
 	private int stepsComplete=0;
-	public static int desiredSteps=0;
+	private int desiredSteps=0;
+	private int[][] gridSize = new int[50][50];
+	private int nutritionMinnowsStartWith = 2;
+	private int nutritionSharksStartWith = 4;
+	private int setSharkSpeed = 2;
+	private int setMinnowSpeed = 1;
+	private int numberOfSharks = 0;
+	private int numberOfMinnows =0;
+	private int numberOfAlgae = 0; //a function of the number of Minnows?
+	private int halfLife = 3; //how many steps it takes algae to reproduce
+	
+	@SuppressWarnings("static-access")
+	public void setDesiredSteps(int desiredSteps)
+	{
+		singleModel.desiredSteps = desiredSteps;
+	}
 	
 	public void printRecordList()
 	{
@@ -47,21 +62,14 @@ public class Model {
 	
 	public void printRecords()
 	{
-		for(int i = 0; i < recordLibrary.size();i++)
+		int size =  recordLibrary.size();
+		for(int i = 0; i < size;i++)
 		{
 			System.out.println(recordLibrary.get(i).toString());
 		}
 	}
 	//trying to make this easy to see
-	public static int[][] gridSize = new int[50][50];
-	public static int nutritionMinnowsStartWith = 2;
-	public static int nutritionSharksStartWith = 4;
-	public static int setSharkSpeed = 2;
-	public static int setMinnowSpeed = 1;
-	public static int numberOfSharks = 0;
-	public static int numberOfMinnows =0;
-	public static int numberOfAlgae = 0; //a function of the number of Minnows?
-	public static int halfLife = 3; //how many steps it takes algae to reproduce	
+	
 
 	
 	/**
@@ -72,6 +80,11 @@ public class Model {
      * this makes it impossible to create 2 GameModel instances by accident.
      */
 	private static Model singleModel = null;
+	
+	public static int[][] getGrid()
+	{
+		return singleModel.gridSize;
+	}
 	
     public static Model getGameModel()
     {
@@ -88,18 +101,13 @@ public class Model {
     {     
 
 	}
+
 	
-	public static void addActor(Actor actor)
-	{
-		singleModel.actors.add(actor);
-		
-	}
-	
-	public ArrayList copyOfActors()
+	public ArrayList<Actor> copyOfActors()
 	{
 		ArrayList<Actor> returnActors = new ArrayList<Actor>();
-		
-		for (int i = 0; i < singleModel.actors.size(); i++)
+		int size = singleModel.actors.size();
+		for (int i = 0; i <size ; i++)
 		{
 			returnActors.add( singleModel.actors.get(i));
 		}
@@ -109,30 +117,38 @@ public class Model {
 	
 
 	
-	public static int getActorsSize()
+	public int getActorsSize()
 	{
-		//nullPointerException error here
-		if(singleModel.actors.size() > 0)
+		return singleModel.actors.size();
+	}
+	
+	public void addActor (Actor actor)
+	{
+		if (actor == null)
 		{
-			return singleModel.actors.size();
-
+			System.out.println("bugger");
 		}
-		return 0;
+		singleModel.actors.add(actor);
+	}
+	
+	public Actor getActor(int index)
+	{
+		return singleModel.actors.get(index);
 	}
 	
 	
-	
-	public void CompleteStep(int step, ArrayList<Actor> localActors)
+	public void CompleteStep(int step, ArrayList<Actor> localActors, int localActorSize)
 	{
 		
+		 ArrayList<Actor> temporaryStorage = new ArrayList<Actor>();
+		
 		Controller.stepsTaken += 1;
-		
-		
 		int sharks = 0;
 		int minnows = 0;
 		int algae = 0;
 		
-		for(int i = 0; i < localActors.size(); i++)
+		
+		for(int i = 0; i < localActorSize; i++)
 		{
 			switch(localActors.get(i).getName())
 			{
@@ -141,20 +157,41 @@ public class Model {
 			case "Algae": algae++; break;
 			
 			}
-			
-			
-			actors.removeAll(actors); //this should clear actors
-			
-			for(int j = 0; j < localActors.size(); j++)
-			{
-				actors.add(localActors.get(j));
-				localActors.remove(j);
-				//updates actors
-			}
 		}
+			
+		//everything has been accounted for 
+		
+		for(int j = 0; j < localActorSize; j++)
+		{
+			temporaryStorage.add(localActors.get(j));
+			//updates actors
+		}
+		int tempSize = temporaryStorage.size();
+		
+		singleModel.actors.clear();
+		for(int q = 0; q < tempSize; q++)
+		{
+			singleModel.addActor(temporaryStorage.get(q));
+		}
+	
 		
 	  Record newRecord = new Record(step, sharks, minnows, algae);
 	  recordLibrary.add(newRecord); //stores newStatus
+	}
+	
+	public ArrayList<Actor> getActorOfSpecificType(String specification)
+	{
+		ArrayList<Actor> localActors = new ArrayList<Actor>();
+		
+		for(int i = 0; i < singleModel.actors.size(); i++)
+		{
+			if(singleModel.actors.get(i).getName().equals(specification))
+			{
+				localActors.add(singleModel.actors.get(i));
+			}
+		}
+		
+		return localActors;
 	}
 	
 	public static GameStatus getCurrentStatus()
@@ -164,7 +201,76 @@ public class Model {
 		//makes a copy of the current gameStatus and returns it 
 			
 	}
+
+	public int getNumberOfAlgae() {
+		return numberOfAlgae;
+	}
+
+	public void setNumberOfAlgae(int numberOfAlgae) {
+		this.numberOfAlgae = numberOfAlgae;
+	}
+
+	public int getHalfLife() {
+		return halfLife;
+	}
+
+	public void setHalfLife(int halfLife) {
+		this.halfLife = halfLife;
+	}
+
+	public int getNumberOfMinnows() {
+		return numberOfMinnows;
+	}
+
+	public void setNumberOfMinnows(int numberOfMinnows) {
+		this.numberOfMinnows = numberOfMinnows;
+	}
+
+	public int getNumberOfSharks() {
+		return numberOfSharks;
+	}
+
+	public void setNumberOfSharks(int numberOfSharks) {
+		this.numberOfSharks = numberOfSharks;
+	}
+
+	public int getSetMinnowSpeed() {
+		return setMinnowSpeed;
+	}
+
+	public void setSetMinnowSpeed(int setMinnowSpeed) {
+		this.setMinnowSpeed = setMinnowSpeed;
+	}
+
+	public int getSetSharkSpeed() {
+		return setSharkSpeed;
+	}
+
+	public void setSetSharkSpeed(int setSharkSpeed) {
+		this.setSharkSpeed = setSharkSpeed;
+	}
+
+	public int getNutritionSharksStartWith() {
+		return nutritionSharksStartWith;
+	}
+
+	public void setNutritionSharksStartWith(int nutritionSharksStartWith) {
+		this.nutritionSharksStartWith = nutritionSharksStartWith;
+	}
+
+	public int getNutritionMinnowsStartWith() {
+		return nutritionMinnowsStartWith;
+	}
+
+	public void setNutritionMinnowsStartWith(int nutritionMinnowsStartWith) {
+		this.nutritionMinnowsStartWith = nutritionMinnowsStartWith;
+	}
+
+	public int getDesiredSteps() {
+		return desiredSteps;
+	}
 	
+
 
 	
 

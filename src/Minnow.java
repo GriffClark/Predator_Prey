@@ -3,14 +3,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-
+ 
 public class Minnow extends Animal{
 		
 	public Minnow(Location location, int nutrition) throws IOException
 	{
 		super(location, nutrition);
 		askiiRep = 'M';
-		speed = Model.setMinnowSpeed;
+		speed = Model.getGameModel().getSetMinnowSpeed();
 		name = "Minnow";
 		isAlive = true;
 		this.nutrition = nutrition;
@@ -23,26 +23,6 @@ public class Minnow extends Animal{
 			System.out.println("Something went wrong in minnow constructor");
 		}
 	}
-	
-	public Minnow(int nutrition) throws IOException
-	{
-		super(nutrition);
-		askiiRep = 'M';
-		speed = Model.setMinnowSpeed;
-		name = "Minnow";
-		isAlive = true;
-		this.nutrition = nutrition;
-		try
-		{
-			image = ImageIO.read(new File ("minnow.png"));
-		}
-		catch(IOException e)
-		{
-			System.out.println("Something went wrong in minnow constructor");
-		}
-	
-		
-	}
 		
 		
 
@@ -50,11 +30,12 @@ public class Minnow extends Animal{
 public void doThings()
 {
 
+	super.doThings();
 	//can I use the part of the method in Animal without having to copy paste?
 	
 	ArrayList<Minnow> minnowsNearBy = new ArrayList<Minnow>(); //I don't want to keep actors here because I only want each actor to be stored in one location, and animals do not need a running memory of what is around them, since they will always be making this check
 	//need a way to scan all locations within your speed, which is also how far you can see around you
-	ArrayList<Shark>sharksNearBy = new ArrayList<Shark>();
+	ArrayList<Shark> sharksNearBy = new ArrayList<Shark>();
 	ArrayList<Algae> algaeNearBy = new ArrayList<Algae>();
 	
 	//in order for this to work, need to make each actor self-aware. This might also work, though
@@ -149,9 +130,51 @@ public void doThings()
 		{
 			if(sharksNearBy.size() >= 1)
 			{
-				//move aways form shark
+				Location useLocation = null;
+				Shark meanShark = null;
+				for(int i = 0; i < sharksNearBy.size(); i++)
+				{
+					//picks a shark to move away from
+					meanShark = sharksNearBy.get(i);
+					break;
+				}
+				//move away from shark
+				ArrayList<Location> validLocations = new ArrayList<Location>();
+				//this is a bad way to fill validLocations but idk a better one
+				for(int i = 0; i < 50; i++) //adds hopefully all valid locations
+				{
+					Location testLocation = GameMethods.generateValidLocation(location, speed);
+					int vlSize = validLocations.size();
+					boolean inHere = false;
+					for(int j = 0; i < vlSize; j++)
+					{
+						if(testLocation.getX() == validLocations.get(j).getX() && testLocation.getY() == validLocations.get(j).getY() ) //if the two locations have = x and y
+						{
+							inHere = true;
+						}
+					}
+					
+					if(inHere == false)
+					{
+						validLocations.add(testLocation);
+					}
+				}
+				int vlSize = validLocations.size();
+				for(int i = 0; i < vlSize; i++)
+				{
+					if(useLocation == null)
+					{
+						useLocation = validLocations.get(i);
+					}
+					else if (GameMethods.getDistance(validLocations.get(i), meanShark.getLocation()) > GameMethods.getDistance(useLocation, meanShark.getLocation()))
+					{
+						useLocation = validLocations.get(i);
+					}
+				}
+				move(useLocation); //should move it away from the shark
+				
 			}
-			else
+			else 
 			{
 				GameMethods.moveToRandomLocation(location,speed);
 			}
@@ -159,6 +182,7 @@ public void doThings()
 	}
 }
 }
+
 
 	
 	//I think this should go in Animal but I don't know how to do it without knowing the animal type before hand

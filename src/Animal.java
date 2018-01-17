@@ -10,7 +10,6 @@ public class Animal extends Actor{
 	}
 	
 	protected int speed;	
-	protected int nutrition; //for how much food it has eaten
 	protected Edibles thingsICanEat;
 
 	/*Things animals need:
@@ -58,6 +57,8 @@ public class Animal extends Actor{
 	//need to see if this is still doing what I told it to do in Actor
 	public void doThings()
 	{
+         super.doThings();
+         /*
 			ArrayList<Actor> thingsNearBy = new ArrayList<Actor>(); //I don't want to keep actors here because I only want each actor to be stored in one location, and animals do not need a running memory of what is around them, since they will always be making this check
 			//need a way to scan all locations within your speed, which is also how far you can see around you
 			
@@ -70,13 +71,13 @@ public class Animal extends Actor{
 					thingsNearBy.add((Actor) GameMethods.getActorArrayList().get(i));
 					//if there is a thing that you can move to, you are aware that it's there
 				}
-			}
+			}*/
 			//just laying the groundwork. This will be used later by Shark and Minnow
 	}
 	
 	public void reproduce(Animal otherParent, int distance) throws IOException //this int distance should be GameMethods.getDistance
 	{
-		if(otherParent.getName().equals(name) && distance ==1) //if animal a and animal b are the same and they are close enough
+		if(otherParent.getName().equals(name) && distance <=2) //if animal a and animal b are the same and they are close enough
 		{
 			int passedInNutrition = (otherParent.getNutrition() + nutrition + 1) / 2;
 			nutrition /= 2;
@@ -86,45 +87,55 @@ public class Animal extends Actor{
 			boolean foundLocation = false;
 			Location babyLocation = null;
 			while(foundLocation == false)
-			{
-				babyLocation = GameMethods.generateValidLocation();
-				
-				if (GameMethods.getDistance(location, babyLocation) <= 2)
-				{
-					foundLocation = true;
-				}
-			}
-			
-			Actor baby = new Actor();
-
-			switch(species)
-			{
-			
-			//need a way to find valid location to spawn new child. Search all adjacent squares
-			case "Minnow": 
 				try {
-				 baby = new Minnow (babyLocation, passedInNutrition);
-				}
-				 catch (IOException e) {
+					{
+						babyLocation = GameMethods.generateValidLocation();
+						
+						if (GameMethods.getDistance(location, babyLocation) <= 2)
+						{
+							foundLocation = true;
+						}
+					}
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				Controller.actorsThatNeedAHome.add(baby);
-				break;
-			case "Shark":
-				 
-				try {
-					baby = new Shark(babyLocation, passedInNutrition);
-				}
-				catch(IOException e)
+			
+			Actor baby = new Actor();
+
+			try {
+				switch(species)
 				{
-					e.printStackTrace();
-				}
-				Controller.actorsThatNeedAHome.add(baby);
-				break;
+				
+				//need a way to find valid location to spawn new child. Search all adjacent squares
+				case "Minnow": 
+					try {
+					 baby = new Minnow (babyLocation, passedInNutrition);
+					}
+					 catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
-				}
+					Controller.actorsThatNeedAHome.add(baby);
+					break;
+				case "Shark":
+					 
+					try {
+						baby = new Shark(babyLocation, passedInNutrition);
+					}
+					catch(IOException e)
+					{
+						e.printStackTrace();
+					}
+					Controller.actorsThatNeedAHome.add(baby);
+					break;
+						
+					}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			}
 			

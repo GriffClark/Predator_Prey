@@ -17,26 +17,29 @@ public class GameMethods {
 		int numberOfTries = 0;
 		while(true) //will loop until it finds a valid location
 		{
-			Location testLocation = GameMethods.generateValidLocation();
-			if(GameMethods.getDistance(targetLocation, testLocation) <= 2)
+			Location testLocation = GameMethods.generateValidLocation(myLocation, speed);
+			if(GameMethods.getDistance(targetLocation, testLocation) < 2)
 			{
 				if(GameMethods.getDistance(targetLocation, myLocation)<= speed )
 				{
 					return testLocation;
 				}
-				else
-				{
+				else {
 					numberOfTries++;
-					if(numberOfTries > 50)
-					{
-						return null; //prevents an infinate loop
-					}
 				}
+			}
+			else
+			{
+				numberOfTries++;
+			}
+			if(numberOfTries > 20)
+			{
+				return myLocation; //prevents an infinite loop, give up and stay where you are.
 			}
 		}
 		
 	}
-	public static int getDistance(Location a, Location b)
+	public static int getDistance(Location a, Location b) //@TODO make this a double
 	{
 		//returns the distance of two actors from each other
 		double dis;
@@ -54,12 +57,11 @@ public class GameMethods {
 	}
 	
 	//this needs to be moved into model
-	public static Location generateValidLocation()
+	public static Location generateValidLocation() //have a second version that takes a location and will test for only valid locations. Pass in current location and speed
 	{
-		int rows = Model.singleModel.gridSize.length; 
-		int cols = Model.singleModel.gridSize[0].length;
-		int randomX = (int)(Math.random() * rows);
-		int randomY = (int)(Math.random() * cols);
+		int[][] useMe = Model.getGrid();
+		int rows = useMe.length; 
+		int cols = useMe[0].length;
 		
 		ArrayList<Actor> localActors = new ArrayList<Actor>();
 		int numberOfActors = GameMethods.getActorArrayList().size();
@@ -71,6 +73,8 @@ public class GameMethods {
 		
 		while(finalLocation == null)
 		{
+			int randomX = (int)(Math.random() * rows);
+			int randomY = (int)(Math.random() * cols);
 			Location testLocation = new Location(randomX, randomY );
 			boolean isTestLocationValid = true;
 			
@@ -96,12 +100,53 @@ public class GameMethods {
 		
 	}
 	
+	public static Location generateValidLocation (Location location, int speed)
+	{
+		ArrayList<Actor> localActors = new ArrayList<Actor>();
+		int numberOfActors = GameMethods.getActorArrayList().size();
+		for(int i = 0; i < numberOfActors; i++)
+		{
+			localActors.add((Actor) GameMethods.getActorArrayList().get(i));
+		}
+		Location finalLocation = null;
+		int xRange = (location.getX() + speed) - (location.getX() - speed) + 1;
+		int yRange = (location.getY() + speed) - (location.getY() - speed) +1;
+		while(finalLocation == null)
+		{
+			//should also put something in here to make sure the same locations don't get tested over and over
+			int randomX = (int)((Math.random() * xRange) + (location.getX() - speed));
+			int randomY = (int)((Math.random() * yRange) + (location.getY()  -speed));
+			Location testLocation = new Location(randomX, randomY );
+			boolean isTestLocationValid = true;
+			
+			for(int i = 0; i < localActors.size(); i++)
+			{
+				if(testLocation == localActors.get(i).getLocation())
+				{
+					isTestLocationValid = false;
+				}
+				
+			}
+			if(isTestLocationValid == true)
+			{
+				finalLocation = testLocation;
+			}
+			
+		}
+
+
+		
+		
+		return finalLocation;
+	}
+	
 	public static ArrayList<Actor> getActorArrayList()
 	{
 		Model localModel = Model.getGameModel();
 		ArrayList<Actor> localActors = new ArrayList<Actor>();
 		
-		for (int i = 0; i < Model.getActorsSize(); i++)
+		int localModelSize = localModel.getActorsSize();
+		for (int i = 0; i < localModelSize; i++)
 		{
 			localActors.add((Actor) localModel.copyOfActors().get(i));
 		}	
@@ -113,125 +158,83 @@ public class GameMethods {
 	public static void moveToRandomLocation(Location location, int speed)
 	{
 		boolean foundValidLocation = false;
+		int maxTries = 400; //need a better way to do this if time
+		int tries = 0;
 		do
 		{
-			Location randomLocation = GameMethods.generateValidLocation();
+			Location randomLocation = GameMethods.generateValidLocation(location, speed);
 			if(GameMethods.getDistance(location, randomLocation) <= speed)
 			{
 				location = randomLocation;
+				foundValidLocation = true;
 			}
-		}while(foundValidLocation == false);
-	}
-	
-	
-	public static void start() throws InterruptedException, IOException
-	{
-		/**
-		 * I think the runtime error here is that singleModel.actors<> or whatever its called isnt initializing until I put things into it
-		 */
-		Model.getGameModel();  // make sure the model is initialized
-		Scanner keyboard = new Scanner(System.in);
-		System.out.println("how many steps would you like to see?");
-		int input = keyboard.nextInt(); //input will be re-used. Steps will be a constant value 
-		if(input == 666)
-		{
-			singleModel.desiredSteps = 50;
-			singleModel.numberOfMinnows = 40;
-			singleModel.numberOfSharks = 20;
-			singleModel.numberOfAlgae = Model.numberOfMinnows *2; //just an idea not a solution
-		}
-		else
-		{
-			Model.desiredSteps = input;
-			//we should add a defualt number of sharks and minnows to start with
-			System.out.println("how many sharks would you like to start with?");
-			int sharkStart = keyboard.nextInt();
-			System.out.println("how many minnows do you want to start with?");
-			int minnowStart = keyboard.nextInt();
-			System.out.println("One second while the game initializes...");
-			Thread.sleep(500); //half a second
-			singleModel.numberOfMinnows = minnowStart;
-			singleModel.numberOfSharks = sharkStart;
-			singleModel.numberOfAlgae = minnowStart *2; //just an idea not a solution
-		}
-		
-		System.out.println("..."); //getting stuck here not sure why. Trying a different solution with minnows but cannot come up with a desicive reason why this keeps happening
-		for(int i = 0; i < singleModel.numberOfMinnows; i++)
-		{
-			Location validLocation = GameMethods.generateValidLocation();
-			Minnow m = new Minnow(validLocation, Model.nutritionMinnowsStartWith);
-			Controller.actorsThatNeedAHome.add(m);
-			System.out.println("minnow added");
-			
-		}
-		for(int i = 0; i < singleModel.numberOfSharks; i++)
-		{
-			Location validLocation = GameMethods.generateValidLocation();
-			Shark s = new Shark(validLocation, Model.nutritionSharksStartWith);
-			Controller.actorsThatNeedAHome.add(s);
-			System.out.println("shark added");
-		}
-		for(int i = 0; i < singleModel.numberOfAlgae; i++)
-		{
-			Location validLocation = GameMethods.generateValidLocation();
-			Algae al = new Algae(validLocation, 5);
-			Controller.actorsThatNeedAHome.add(al);
-			System.out.println("algae added");
-		}
-		Thread.sleep(500);
-		System.out.println("Model has been initialized!");
-		
-		//is this the correct way of going about starting?
-	}
-	
-	public static ArrayList<Actor> getActorOfSpecifiedType (String specification)
-	{ //based on the current status of the game gets you all actors of a specific type
-		GameStatus currentStatus = Model.getCurrentStatus();
-		ArrayList<Actor> localCopyOfAllActors = currentStatus.actors; //is this a valid way of copying it? To tired to figure it out
-		ArrayList<Actor> specifiedActors = new ArrayList<Actor>();
-		
-		int actorSize = Model.getActorsSize();
-		for(int i = 0; i < actorSize; i++)
-		{
-			if(localCopyOfAllActors.get(i).getName().equals(specification))
+			else 
 			{
-				specifiedActors.add(localCopyOfAllActors.get(i));
+				tries++;
 			}
-		}
-		
-		return specifiedActors;
-		//this way I don't need to create a new getter for each type of actor created
-		
-		
+		}while(foundValidLocation == false && tries<maxTries);
 	}
 	/**
 	 * make sure that there is a constant check running to make sure that no two objects occupy the same loocation
 	 * @return
 	 * @throws IOException 
 	 */
-	
-	//this needs to be moved to Model
-	public static void generateActorAtRandomLocation(String specification) throws IOException
+	public static void start() throws InterruptedException, IOException
 	{
-		switch(specification)
+		/**
+		 * I think the runtime error here is that singleModel.actors<> or whatever its called isnt initializing until I put things into it
+		 */
+		Model realModel = Model.getGameModel();  // make sure the model is initialized
+		Scanner keyboard = new Scanner(System.in);
+		realModel.setSetSharkSpeed(2);
+		realModel.setSetMinnowSpeed(1);
+		System.out.println("how many steps would you like to see?");
+		int input = keyboard.nextInt(); //input will be re-used. Steps will be a constant value 
+		if(input == 666)
 		{
-		//check if there is something here to get around the NullPointerException error
-			case "Minnow": //generating a minnow with null location
-				Minnow minnow = new Minnow(GameMethods.generateValidLocation(), Model.nutritionMinnowsStartWith);
-				singleModel.addActor(minnow);
-			case "Shark":
-				Shark shark = new Shark(GameMethods.generateValidLocation(), Model.nutritionSharksStartWith); //assertionError here...?
-				singleModel.addActor(shark);
-			case "Algae":
-				Algae algae = new Algae(GameMethods.generateValidLocation(), 5);
-				singleModel.addActor(algae);
-		
-				
-		
+			realModel.setDesiredSteps(5);
+			realModel.setHalfLife(3);
+			realModel.setNumberOfMinnows(20);
+			realModel.setNumberOfSharks(10);
+			realModel.setNumberOfAlgae(realModel.getNumberOfMinnows() * 2);
+			realModel.setNutritionMinnowsStartWith(7);
+			realModel.setNutritionSharksStartWith(8);
+			
+		}
+		else
+		{
+			realModel.setDesiredSteps(input); 
+			//we should add a defualt number of sharks and minnows to start with
+			realModel.setNumberOfSharks(keyboard.nextInt());
+			realModel.setNumberOfMinnows(keyboard.nextInt());
+			realModel.setNumberOfAlgae(realModel.getNumberOfMinnows() * 2);
 		}
 		
-	
+		for(int i = 0; i < realModel.getNumberOfMinnows(); i++)
+		{
+			Location validLocation = GameMethods.generateValidLocation();
+			Minnow m = new Minnow(validLocation, realModel.getNutritionMinnowsStartWith());
+			Controller.actorsThatNeedAHome.add(m);
+			
+		}
+		for(int i = 0; i < realModel.getNumberOfSharks(); i++)
+		{
+			Location validLocation = GameMethods.generateValidLocation();
+			Shark s = new Shark(validLocation, realModel.getNutritionSharksStartWith());
+			Controller.actorsThatNeedAHome.add(s);
+		}
+		for(int i = 0; i < realModel.getNumberOfAlgae(); i++)
+		{
+			Location validLocation = GameMethods.generateValidLocation();
+			Algae al = new Algae(validLocation, 5);
+			Controller.actorsThatNeedAHome.add(al);
+ 		}
+		Thread.sleep(500);
+		System.out.println("Model has been initialized!");
+		
+		//is this the correct way of going about starting?
 	}
+	//this needs to be moved to Model
 
 	
 
