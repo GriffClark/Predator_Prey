@@ -103,7 +103,9 @@ public class View{
 			    
 		}
 	
-
+	public JFrame getf() {
+		return f;
+	}
 	
 	
 	
