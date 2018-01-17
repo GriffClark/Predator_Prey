@@ -17,7 +17,7 @@ public class GameMethods {
 		int numberOfTries = 0;
 		while(true) //will loop until it finds a valid location
 		{
-			Location testLocation = GameMethods.generateValidLocation();
+			Location testLocation = GameMethods.generateValidLocation(myLocation, speed);
 			if(GameMethods.getDistance(targetLocation, testLocation) < 2)
 			{
 				if(GameMethods.getDistance(targetLocation, myLocation)<= speed )
@@ -100,6 +100,46 @@ public class GameMethods {
 		
 	}
 	
+	public static Location generateValidLocation (Location location, int speed)
+	{
+		ArrayList<Actor> localActors = new ArrayList<Actor>();
+		int numberOfActors = GameMethods.getActorArrayList().size();
+		for(int i = 0; i < numberOfActors; i++)
+		{
+			localActors.add((Actor) GameMethods.getActorArrayList().get(i));
+		}
+		Location finalLocation = null;
+		int xRange = (location.getX() + speed) - (location.getX() - speed) + 1;
+		int yRange = (location.getY() + speed) - (location.getY() - speed) +1;
+		while(finalLocation == null)
+		{
+			//should also put something in here to make sure the same locations don't get tested over and over
+			int randomX = (int)((Math.random() * xRange) + (location.getX() - speed));
+			int randomY = (int)((Math.random() * yRange) + (location.getY()  -speed));
+			Location testLocation = new Location(randomX, randomY );
+			boolean isTestLocationValid = true;
+			
+			for(int i = 0; i < localActors.size(); i++)
+			{
+				if(testLocation == localActors.get(i).getLocation())
+				{
+					isTestLocationValid = false;
+				}
+				
+			}
+			if(isTestLocationValid == true)
+			{
+				finalLocation = testLocation;
+			}
+			
+		}
+
+
+		
+		
+		return finalLocation;
+	}
+	
 	public static ArrayList<Actor> getActorArrayList()
 	{
 		Model localModel = Model.getGameModel();
@@ -122,7 +162,7 @@ public class GameMethods {
 		int tries = 0;
 		do
 		{
-			Location randomLocation = GameMethods.generateValidLocation();
+			Location randomLocation = GameMethods.generateValidLocation(location, speed);
 			if(GameMethods.getDistance(location, randomLocation) <= speed)
 			{
 				location = randomLocation;
@@ -165,22 +205,16 @@ public class GameMethods {
 		{
 			realModel.setDesiredSteps(input); 
 			//we should add a defualt number of sharks and minnows to start with
-			System.out.println("how many sharks would you like to start with?");
 			realModel.setNumberOfSharks(keyboard.nextInt());
-			System.out.println("how many minnows do you want to start with?");
 			realModel.setNumberOfMinnows(keyboard.nextInt());
 			realModel.setNumberOfAlgae(realModel.getNumberOfMinnows() * 2);
-			System.out.println("One second while the game initializes...");
-			Thread.sleep(500); //half a second
 		}
 		
-		System.out.println("..."); //getting stuck here not sure why. Trying a different solution with minnows but cannot come up with a desicive reason why this keeps happening
 		for(int i = 0; i < realModel.getNumberOfMinnows(); i++)
 		{
 			Location validLocation = GameMethods.generateValidLocation();
 			Minnow m = new Minnow(validLocation, realModel.getNutritionMinnowsStartWith());
 			Controller.actorsThatNeedAHome.add(m);
-			System.out.println("minnow added");
 			
 		}
 		for(int i = 0; i < realModel.getNumberOfSharks(); i++)
@@ -188,15 +222,13 @@ public class GameMethods {
 			Location validLocation = GameMethods.generateValidLocation();
 			Shark s = new Shark(validLocation, realModel.getNutritionSharksStartWith());
 			Controller.actorsThatNeedAHome.add(s);
-			System.out.println("shark added");
 		}
 		for(int i = 0; i < realModel.getNumberOfAlgae(); i++)
 		{
 			Location validLocation = GameMethods.generateValidLocation();
 			Algae al = new Algae(validLocation, 5);
 			Controller.actorsThatNeedAHome.add(al);
-			System.out.println("algae added");
-		}
+ 		}
 		Thread.sleep(500);
 		System.out.println("Model has been initialized!");
 		
