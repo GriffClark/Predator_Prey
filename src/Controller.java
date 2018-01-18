@@ -31,7 +31,8 @@ public class Controller {
 	
 	public static void main(String[] args) throws InterruptedException, IOException { //need to throw in ea AssertTest I think or enableassertions AssertTest
 	    //after everything has been initalized, the game starts...:
-//		new View();
+		new View();
+		
 		boolean debugMode;
 		System.out.println("run in debug mode?");
 		Scanner keyboard = new Scanner(System.in);
