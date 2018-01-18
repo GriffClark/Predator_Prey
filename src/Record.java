@@ -22,7 +22,6 @@ public class Record {
 	public int getSharkNo()
 	{
 		return sharkNo;
-		
 	}
 	
 	public int getMinnowNo()

@@ -29,10 +29,11 @@ public class Controller {
 	public static int stepsTaken = 0;
 	public static ArrayList<Actor> actorsThatNeedAHome = new ArrayList<Actor>();
 	
+	
 	public static void main(String[] args) throws InterruptedException, IOException { //need to throw in ea AssertTest I think or enableassertions AssertTest
 	    //after everything has been initalized, the game starts...:
 //		new View();
-		
+		LineGraph mGraph = new LineGraph("Matt 1", "Matt 2"); //Matt 1 and Matt 2 are placeholder strings
 		boolean debugMode;
 		System.out.println("run in debug mode?");
 		Scanner keyboard = new Scanner(System.in);
@@ -128,7 +129,8 @@ public class Controller {
 
 			Model.getGameModel().CompleteStep(stepsTaken, localActors, localActors.size()); //makes a record of what step you are on and what actors exist
 			//I am not confident that the handoff between completing a step and starting a new step is solid
-			
+			//put LineGraph methods here
+			mGraph.showGraph();
 			System.out.println("Step " + Controller.stepsTaken + " complete sucessfully");
 			new ButtonGrid();
 			Thread.sleep(500);
