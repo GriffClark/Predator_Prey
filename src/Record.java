@@ -13,6 +13,17 @@ public class Record {
 		this.minnowNo = minnows;
 		this.algaeNo = algae;
 	}
+	public int getStep() {
+		return step;
+	}
+	
+	public int getShark() {
+		return sharkNo;
+	}
+	
+	public int getMinnow() {
+		return minnowNo;
+	}
 	
 	public String toString()
 	{

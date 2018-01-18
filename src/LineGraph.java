@@ -11,7 +11,7 @@ import java.awt.Dimension;
 
 public class LineGraph extends ApplicationFrame {
 	
-	private Record population = new Record(1,2,1,1);
+	private Record population = new Record(1,2,1,1); //put numbers in here or use a different record object
 	private Dimension chartSize = new Dimension(560,367);
 	private int steps = population.getStep();
 
@@ -68,7 +68,6 @@ public class LineGraph extends ApplicationFrame {
 		testset.addValue(56, "Population", "Step 7");
 		return testset; */
 	}
-	
 	
 	public static void main (String[] args) {
 		LineGraph testChart = new LineGraph("Sharks and Minnows Simulation", "Shark/Minnow Population over time");
