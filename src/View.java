@@ -3,7 +3,9 @@
 	import java.awt.*;
 	import javax.swing.*;
 	import java.awt.event.*;
-
+	import javax.swing.JButton; //imports JButton library
+	import java.awt.GridLayout; //imports GridLayout library
+	import java.util.ArrayList;
 
 	public class View{
 		
@@ -83,6 +85,47 @@
 					
 				});
 				
+				JPanel panelGrid = new JPanel(); // creates frame
+				JButton[][] grid; // names the grid of buttons
+				int width = Model.getGrid().length;
+				int length = Model.getGrid()[0].length;
+				panelGrid.setLayout(new GridLayout(width, length)); // set layout
+				grid = new JButton[width][length]; // allocate the size of grid
+				int size = Model.getGameModel().copyOfActors().size();
+
+				for (int y = 0; y < length; y++) {
+					for (int x = 0; x < width; x++) {
+						size = Model.getGameModel().copyOfActors().size();
+						// don't think this for loop is written correctly. See if there is an actor with
+						// location == grid[x][y] and if not put a *
+						// shouldn't need this for loop at all
+						
+						boolean foundAnActor = false;
+						
+						for (int i = 0; i < size; i++) {
+							if (Model.getGameModel().copyOfActors().get(i).getX() == x
+									&& Model.getGameModel().copyOfActors().get(i).getY() == y && foundAnActor == false) {
+								grid[x][y] = new JButton(new ImageIcon(Model.getGameModel().copyOfActors().get(i).image)); // this
+																															// should
+																															// put
+																															// the
+																															// image
+																															// on
+																															// the
+																															// button
+
+								foundAnActor = true;
+							}
+						}
+						if (foundAnActor == false) {
+							grid[x][y] = new JButton(String.valueOf(Controller.stepsTaken)); // creates new button
+						}
+						panelGrid.setBounds(400,400,1000,1000);
+						panelGrid.add(grid[x][y]);
+						panelGrid.setVisible(true);
+						// tried to add a frame
+					}
+				}
 				
 				
 				//initialize and set to absolute layout for each panel
@@ -106,17 +149,29 @@
 				f.add(btnPanelReset);
 				f.add(btnPanelOptions);
 				
+				f.add(panelGrid);
 	//_______________________________________________________________________________________________________________________________________			
 				
+			
 				
-				
-				
-				
-				
-				
-				
+
 				
 			}
+		
+		//public void grid() {
+//			 JPanel grid = new JPanel();
+//			 JButton test = new JButton();
+//			grid.setBounds(200, 200, 1200, 1200);
+//			test.setBounds(0, 0, 1199, 1199);
+//			Controller.mainJFrame.getf().add(grid);
+//			Controller.mainJFrame.getf().add(test);
+//					btnPanelPlay.setBounds(157, 12, 201, 81);
+//			      play.setBounds(0, 0, 200, 80);
+			
+			
+		
+			
+
 		
 		public JFrame getf() {
 			return f;
@@ -152,6 +207,8 @@
 		public JPanel getOptionsPnl() {
 			return btnPanelOptions;
 			}
+		
+		
 		
 	}
 
