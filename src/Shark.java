@@ -17,10 +17,10 @@ public class Shark extends Animal{
 		try
 		{
 			askiiRep = 'S';
-			speed = Model.setSharkSpeed;
+			speed = Model.getGameModel().getSetSharkSpeed();
 			name = "Shark";
 			isAlive = true;
-			nutrition= Model.nutritionSharksStartWith; //nutrition needs to be passed in because it is a function of the parents, or a default
+			nutrition= Model.getGameModel().getNutritionSharksStartWith(); //nutrition needs to be passed in because it is a function of the parents, or a default
 			thingsICanEat = Animal.Edibles.Minnow;  //not sure how to use this but I know I need it
 			image = ImageIO.read(new File ("shark.jpg"));
 		}
@@ -36,7 +36,7 @@ public class Shark extends Animal{
 	@Override
 	public void doThings()
 	{
-
+        super.doThings();
 		//can I use the part of the method in Animal without having to copy paste?
 		
 		ArrayList<Minnow> minnowsNearBy = new ArrayList<Minnow>(); //I don't want to keep actors here because I only want each actor to be stored in one location, and animals do not need a running memory of what is around them, since they will always be making this check
@@ -70,7 +70,7 @@ public class Shark extends Animal{
 		}
 	
 		//do I do nested if/else or do i make a bunch of isHungry type booleans and run checks?
-		if(nutrition >=10)
+		if(nutrition >=6)
 		{
 			if(sharksNearBy.size() >= 1)
 			{

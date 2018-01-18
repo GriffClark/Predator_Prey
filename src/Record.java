@@ -13,18 +13,27 @@ public class Record {
 		this.minnowNo = minnows;
 		this.algaeNo = algae;
 	}
-	public int getStep() {
+	
+	public int getStep()
+	{
 		return step;
 	}
 	
-	public int getShark() {
+	public int getSharkNo()
+	{
 		return sharkNo;
+		
 	}
 	
-	public int getMinnow() {
+	public int getMinnowNo()
+	{
 		return minnowNo;
 	}
 	
+	public int getAlgaeNo()
+	{
+		return algaeNo;
+	}
 	public String toString()
 	{
 		return "at step " + step + " there were " + sharkNo  + " sharks, " + minnowNo + " minnows, and " + algaeNo + " algae";
