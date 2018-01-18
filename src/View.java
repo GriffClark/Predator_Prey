@@ -1,9 +1,10 @@
-
-	import java.util.ArrayList;
+import java.util.ArrayList;
 	import java.awt.*;
 	import javax.swing.*;
 	import java.awt.event.*;
-
+	import javax.swing.JButton; //imports JButton library
+	import java.awt.GridLayout; //imports GridLayout library
+	import java.util.ArrayList;
 
 	public class View{
 		
@@ -209,23 +210,4 @@
 		
 		
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
