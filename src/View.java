@@ -8,8 +8,9 @@ import java.util.ArrayList;
 
 	public class View{
 		
-		public JPanel grid = new JPanel(); // GRID/PANEL FOR GRIFFIN TO MAKE THE GRID, BOUNDARIES CAN BE FOUND UNDER LINE VVVVVV
 		
+		public JPanel panelGrid = new JPanel(); // creates frame
+		public JButton[][] grid; // names the grid of buttons
 		
 		public boolean playbool;
 		public boolean pausebool;
@@ -44,7 +45,7 @@ import java.util.ArrayList;
 			f2.setLocationRelativeTo(null);
 			f2.setVisible(false);
 			f2.setSize(720, 720);
-			f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			f2.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 			
 			 	//add the image to the JFrame "f"
 				f.setLayout(new BorderLayout());
@@ -84,8 +85,31 @@ import java.util.ArrayList;
 					
 				});
 				
-				JPanel panelGrid = new JPanel(); // creates frame
-				JButton[][] grid; // names the grid of buttons
+				
+				
+				
+				
+				//initialize and set to absolute layout for each panel
+				btnPanelPlay.setLayout(null);
+				btnPanelPlay.add(play);
+				
+				btnPanelPause.setLayout(null);
+				btnPanelPause.add(pause);
+				
+				btnPanelReset.setLayout(null);
+				btnPanelReset.add(reset);
+				
+				btnPanelOptions.setLayout(null);
+				btnPanelOptions.add(options);
+				
+				//actually add them to the frame
+				
+				f.setLayout(null);
+				f.add(btnPanelPlay);
+				f.add(btnPanelPause);
+				f.add(btnPanelReset);
+				f.add(btnPanelOptions);
+
 				int width = Model.getGrid().length;
 				int length = Model.getGrid()[0].length;
 				panelGrid.setLayout(new GridLayout(width, length)); // set layout
@@ -119,42 +143,13 @@ import java.util.ArrayList;
 						if (foundAnActor == false) {
 							grid[x][y] = new JButton(String.valueOf(Controller.stepsTaken)); // creates new button
 						}
-						panelGrid.setBounds(400,400,1000,1000);
 						panelGrid.add(grid[x][y]);
+						panelGrid.setBounds(0,0,400,400);
 						panelGrid.setVisible(true);
+						f.add(panelGrid);
 						// tried to add a frame
 					}
 				}
-				
-				
-				//initialize and set to absolute layout for each panel
-				btnPanelPlay.setLayout(null);
-				btnPanelPlay.add(play);
-				
-				btnPanelPause.setLayout(null);
-				btnPanelPause.add(pause);
-				
-				btnPanelReset.setLayout(null);
-				btnPanelReset.add(reset);
-				
-				btnPanelOptions.setLayout(null);
-				btnPanelOptions.add(options);
-				
-				//actually add them to the frame
-				    
-				f.setLayout(null);
-				f.add(btnPanelPlay);
-				f.add(btnPanelPause);
-				f.add(btnPanelReset);
-				f.add(btnPanelOptions);
-				
-				f.add(panelGrid);
-	//_______________________________________________________________________________________________________________________________________			
-				
-			
-				
-
-				
 			}
 		
 		//public void grid() {

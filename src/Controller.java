@@ -11,6 +11,8 @@ import java.util.ArrayList;
  *	main
  */
 import java.util.Scanner;
+
+import javax.swing.SwingUtilities;
 public class Controller {
 	
 	//C:\Users\Griffin\Documents\GitHub\Predator_Prey 
@@ -31,7 +33,7 @@ public class Controller {
 	
 	public static void main(String[] args) throws InterruptedException, IOException { //need to throw in ea AssertTest I think or enableassertions AssertTest
 	    //after everything has been initalized, the game starts...:
-		new View();
+//n new View();
 		
 		boolean debugMode;
 		System.out.println("run in debug mode?");
@@ -130,7 +132,9 @@ public class Controller {
 			//I am not confident that the handoff between completing a step and starting a new step is solid
 			
 			System.out.println("Step " + Controller.stepsTaken + " complete sucessfully");
+			
 			new ButtonGrid();
+	
 			Thread.sleep(500);
 		} while(stepsTaken < Model.getGameModel().getDesiredSteps());
 		
