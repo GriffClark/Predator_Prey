@@ -63,8 +63,8 @@ public void doThings()
 	}
 
 	//do I do nested if/else or do i make a bunch of isHungry type booleans and run checks?
-	if(nutrition >=4)
-	{
+	if(nutrition >=4) {
+	
 		if(minnowsNearBy.size() >= 1)
 		{
 			//move so that the distance between the two sharks is less than two
@@ -90,20 +90,15 @@ public void doThings()
 				}
 			}
 		}
-		
-		else //if no nearby sharks were found
+		else
 		{
-			
-			if(sharksNearBy.size() >= 1)
-			{
-				//move aways form shark
-			}
-			else
-			{
-				GameMethods.moveToRandomLocation(location,speed);
-			}
+			//maybe add a move away from sharks clause if there is time
 		}
+			GameMethods.moveToRandomLocation(location,speed);
 	}
+	
+		
+	
 	else //needs food
 	{
 		if(algaeNearBy.size() >= 1)
@@ -178,10 +173,18 @@ public void doThings()
 			{
 				GameMethods.moveToRandomLocation(location,speed);
 			}
-		}
-	}
+			
+	} //ends decision tree
+
+	
+}
+	System.out.println(name + " " + location);
 }
 }
+		
+	
+	
+
 
 
 	

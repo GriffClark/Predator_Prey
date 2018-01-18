@@ -20,9 +20,9 @@ public class Model {
 	private ArrayList<Record> recordLibrary = new ArrayList<Record>();
 	private int stepsComplete=0;
 	private int desiredSteps=0;
-	private int[][] gridSize = new int[10][10];
-	private int nutritionMinnowsStartWith = 2;
-	private int nutritionSharksStartWith = 4;
+	private int[][] gridSize = new int[30][30];
+	private int nutritionMinnowsStartWith = 7;
+	private int nutritionSharksStartWith = 10;
 	private int setSharkSpeed = 2;
 	private int setMinnowSpeed = 1;
 	private int numberOfSharks = 0;

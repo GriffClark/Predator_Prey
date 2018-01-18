@@ -14,8 +14,8 @@ public class ButtonGrid {
         public ButtonGrid(){ //constructor
         	JFrame frame=new JFrame(); //creates frame
             JButton[][] grid; //names the grid of buttons
-        	int width = 10;
-        	int length = 10;
+        	int width = Model.getGrid().length;
+        	int length = Model.getGrid()[0].length;
                 frame.setLayout(new GridLayout(width,length)); //set layout
                 grid=new JButton[width][length]; //allocate the size of grid
                 int size = Model.getGameModel().copyOfActors().size();

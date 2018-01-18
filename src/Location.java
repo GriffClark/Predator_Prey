@@ -21,7 +21,8 @@ public class Location {
 	
 	public boolean checkValidLocation(int x, int y)
 	{
-		while (x > Model.gridSize.length || y > Model.gridSize[0].length)
+		
+		while (x > Model.getGrid().length || y > Model.getGrid()[0].length)
 		{
 			this.x--;
 			this.y--;
@@ -55,6 +56,11 @@ public class Location {
 	
 	public int getX() { return x; }
 	public int getY() { return y; }
+	
+	public String toString()
+	{
+		return "(x,y)";
+	}
 
 }
 
