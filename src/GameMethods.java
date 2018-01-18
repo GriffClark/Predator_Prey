@@ -70,9 +70,10 @@ public class GameMethods {
 			localActors.add((Actor) GameMethods.getActorArrayList().get(i));
 		}
 		Location finalLocation = null;
-		
-		while(finalLocation == null)
+		int tries = 0;
+		while(finalLocation == null && tries < 100)
 		{
+			tries++;
 			int randomX = (int)(Math.random() * rows);
 			int randomY = (int)(Math.random() * cols);
 			Location testLocation = new Location(randomX, randomY );
@@ -92,7 +93,12 @@ public class GameMethods {
 			}
 			
 		}
-
+		if(finalLocation == null)
+		{
+			System.out.println("unhandled error generating actor at null location GameMethods.generateValidLocation();");
+			return null;
+		}
+		
 		return finalLocation;
 		
 	}
@@ -108,8 +114,10 @@ public class GameMethods {
 		Location finalLocation = null;
 		int xRange = (location.getX() + speed) - (location.getX() - speed) + 1;
 		int yRange = (location.getY() + speed) - (location.getY() - speed) +1;
+		int tries = 0;
 		while(finalLocation == null)
 		{
+			tries ++;
 			//should also put something in here to make sure the same locations don't get tested over and over
 			int randomX = (int)((Math.random() * xRange) + (location.getX() - speed));
 			int randomY = (int)((Math.random() * yRange) + (location.getY()  -speed));
@@ -132,7 +140,10 @@ public class GameMethods {
 		}
 
 
-		
+		if(finalLocation == null)
+		{
+			return location;
+		}
 		
 		return finalLocation;
 	}

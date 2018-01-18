@@ -29,6 +29,7 @@ public class Minnow extends Animal{
 @Override
 public void doThings()
 {
+	Location l = location;
 
 	super.doThings();
 	//can I use the part of the method in Animal without having to copy paste?
@@ -90,6 +91,8 @@ public void doThings()
 			{//if there are no minnows nearby
 				//maybe add a move away from sharks clause if there is time
 				GameMethods.moveToRandomLocation(location,speed);
+				System.out.println(name + " moved from " + l.toString() + " to " + location);
+
 			}
 			
 		}
@@ -105,6 +108,8 @@ public void doThings()
 					Location intercept = GameMethods.aquireIntercept(algaeNearBy.get(i).getLocation(), speed, location);
 					move(intercept);
 					feed(algaeNearBy.get(i));
+					System.out.println(name + " moved from " + l.toString() + " to " + location);
+
 					break;
 					//make it so that the distance between them is less than 2
 					/*
@@ -119,10 +124,12 @@ public void doThings()
 		else //no algae nearby
 		{
 			GameMethods.moveToRandomLocation(location,speed);
+			System.out.println(name + " moved from " + l.toString() + " to " + location);
+
 
 			
 	} //ends decision tree
-
+		
 	
 }
 
