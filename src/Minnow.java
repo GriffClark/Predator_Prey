@@ -63,50 +63,45 @@ public void doThings()
 	}
 
 	//do I do nested if/else or do i make a bunch of isHungry type booleans and run checks?
-	if(nutrition >=4) {
+	if(nutrition >=4) { //if you have lots of nutrition
 	
 		if(minnowsNearBy.size() >= 1)
-		{
+		{ //if there are minnows nearby
 			//move so that the distance between the two sharks is less than two
 			//create and place a new shark
 			for(int i = 0; i < minnowsNearBy.size(); i++)
-			{
-				//if there are any sharks right next to you reproduce
+			{ //for each nearby minnow
 				if(GameMethods.getDistance(location, minnowsNearBy.get(i).getLocation()) <= speed)
-				{
+				{ //if you can move to the nearby minnows
 					Location intercept = GameMethods.aquireIntercept(minnowsNearBy.get(i).getLocation(), speed, location);
 					move(intercept);
-					if(minnowsNearBy.get(i).getNutrition() >= 5)
-					{
+					
 						try {
 							reproduce(minnowsNearBy.get(i), GameMethods.getDistance(location, minnowsNearBy.get(i).getLocation()));
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						break;
-						
-					}
-				}
+						break;	
+					} //close if loop 
+				} //close for loop
 			}
+			else
+			{//if there are no minnows nearby
+				//maybe add a move away from sharks clause if there is time
+				GameMethods.moveToRandomLocation(location,speed);
+			}
+			
 		}
-		else
-		{
-			//maybe add a move away from sharks clause if there is time
-		}
-			GameMethods.moveToRandomLocation(location,speed);
-	}
-	
-		
-	
 	else //needs food
 	{
 		if(algaeNearBy.size() >= 1)
-		{
-			for(int i = 0; i < algaeNearBy.size(); i++)
-			{
+		{ //there are algae nearby
+			int a = algaeNearBy.size();
+			for(int i = 0; i < a; i++)
+			{ //for each algae nearby
 				if (GameMethods.getDistance(algaeNearBy.get(i).getLocation(), location) <= speed)
-				{
+				{ //you can get to the algae
 					Location intercept = GameMethods.aquireIntercept(algaeNearBy.get(i).getLocation(), speed, location);
 					move(intercept);
 					feed(algaeNearBy.get(i));
@@ -120,65 +115,17 @@ public void doThings()
 					 */
 				}
 			}
-		}
-		else //if no nearby minnows were found
+		} //ends algae nearby
+		else //no algae nearby
 		{
-			if(sharksNearBy.size() >= 1)
-			{
-				Location useLocation = null;
-				Shark meanShark = null;
-				for(int i = 0; i < sharksNearBy.size(); i++)
-				{
-					//picks a shark to move away from
-					meanShark = sharksNearBy.get(i);
-					break;
-				}
-				//move away from shark
-				ArrayList<Location> validLocations = new ArrayList<Location>();
-				//this is a bad way to fill validLocations but idk a better one
-				for(int i = 0; i < 50; i++) //adds hopefully all valid locations
-				{
-					Location testLocation = GameMethods.generateValidLocation(location, speed);
-					int vlSize = validLocations.size();
-					boolean inHere = false;
-					for(int j = 0; i < vlSize; j++)
-					{
-						if(testLocation.getX() == validLocations.get(j).getX() && testLocation.getY() == validLocations.get(j).getY() ) //if the two locations have = x and y
-						{
-							inHere = true;
-						}
-					}
-					
-					if(inHere == false)
-					{
-						validLocations.add(testLocation);
-					}
-				}
-				int vlSize = validLocations.size();
-				for(int i = 0; i < vlSize; i++)
-				{
-					if(useLocation == null)
-					{
-						useLocation = validLocations.get(i);
-					}
-					else if (GameMethods.getDistance(validLocations.get(i), meanShark.getLocation()) > GameMethods.getDistance(useLocation, meanShark.getLocation()))
-					{
-						useLocation = validLocations.get(i);
-					}
-				}
-				move(useLocation); //should move it away from the shark
-				
-			}
-			else 
-			{
-				GameMethods.moveToRandomLocation(location,speed);
-			}
+			GameMethods.moveToRandomLocation(location,speed);
+
 			
 	} //ends decision tree
 
 	
 }
-	System.out.println(name + " " + location);
+
 }
 }
 		
