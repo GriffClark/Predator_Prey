@@ -5,5 +5,8 @@
 	<classpathentry kind="lib" path="C:/Users/mooree6139/Desktop/predator prey matts files/jcommon-1.0.22.jar"/>
 	<classpathentry kind="lib" path="C:/Users/mooree6139/Desktop/predator prey matts files/jfreechart-1.0.19.jar"/>
 	<classpathentry kind="lib" path="C:/Users/mooree6139/Desktop/predator prey matts files/jfreechart-1.0.19-experimental.jar"/>
+	<classpathentry kind="lib" path="H:/Necessary Files/jcommon-1.0.22.jar"/>
+	<classpathentry kind="lib" path="H:/Necessary Files/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="H:/Necessary Files/jfreechart-1.0.19-experimental.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
