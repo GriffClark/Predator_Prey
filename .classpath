@@ -5,5 +5,8 @@
 	<classpathentry kind="lib" path="/Users/janellewilson/Downloads/jfreechart-1.0.19/lib/jcommon-1.0.23.jar"/>
 	<classpathentry kind="lib" path="/Users/janellewilson/Downloads/jfreechart-1.0.19/lib/jfreechart-1.0.19-experimental.jar"/>
 	<classpathentry kind="lib" path="/Users/janellewilson/Downloads/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="H:/Necessary Files/jcommon-1.0.22.jar"/>
+	<classpathentry kind="lib" path="H:/Necessary Files/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="H:/Necessary Files/jfreechart-1.0.19-experimental.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -8,7 +8,6 @@ import org.jfree.data.xy.XYSeriesCollection;
 //import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 import java.awt.Dimension;
-
 import javax.swing.JFrame;
 
 public class LineGraph extends JFrame {//ApplicationFrame {
