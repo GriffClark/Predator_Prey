@@ -36,6 +36,7 @@ public class Shark extends Animal{
 	@Override
 	public void doThings()
 	{
+		GameMethods.moveToRandomLocation(location,speed);
 		Location l = location;
         super.doThings();
 		//can I use the part of the method in Animal without having to copy paste?

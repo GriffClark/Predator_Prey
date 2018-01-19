@@ -29,6 +29,7 @@ public class Minnow extends Animal{
 @Override
 public void doThings()
 {
+	GameMethods.moveToRandomLocation(location,speed);
 	Location l = location;
 
 	super.doThings();
