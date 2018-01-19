@@ -129,7 +129,6 @@ public class Controller {
 
 			Model.getGameModel().CompleteStep(stepsTaken, localActors, localActors.size()); //makes a record of what step you are on and what actors exist
 			//I am not confident that the handoff between completing a step and starting a new step is solid
-			//put LineGraph methods here
 			mGraph.showGraph();
 			System.out.println("Step " + Controller.stepsTaken + " complete sucessfully");
 			new ButtonGrid();
