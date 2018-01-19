@@ -165,10 +165,10 @@ public class GameMethods {
 	
 	public static void moveToRandomLocation(Location location, int speed)
 	{
+		//not sure if this is working right or not
 		boolean foundValidLocation = false;
-		int maxTries = 400; //need a better way to do this if time
-		int tries = 0;
-		do
+
+		while(foundValidLocation == false)
 		{
 			Location randomLocation = GameMethods.generateValidLocation(location, speed);
 			if(GameMethods.getDistance(location, randomLocation) <= speed)
@@ -176,11 +176,8 @@ public class GameMethods {
 				location = randomLocation;
 				foundValidLocation = true;
 			}
-			else 
-			{
-				tries++;
-			}
-		}while(foundValidLocation == false && tries<maxTries);
+
+		}
 	}
 	/**
 	 * make sure that there is a constant check running to make sure that no two objects occupy the same loocation
