@@ -14,12 +14,23 @@ public class ButtonGrid {
 	 * multiple grids but thats later. It works!
 	 */
 
+	
+	
+	
 	public ButtonGrid() { // constructor
-		JPanel panel = new JPanel(); // creates frame
+		GridWork();
+		
+	}
+	
+	public void GridWork() {
+		JFrame frame = new JFrame(); // creates frame
+		frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		JButton[][] grid; // names the grid of buttons
+		
 		int width = Model.getGrid().length;
 		int length = Model.getGrid()[0].length;
-		panel.setLayout(new GridLayout(width, length)); // set layout
+		frame.setLayout(new GridLayout(width, length)); // set layout
+		frame.setVisible(true);
 		grid = new JButton[width][length]; // allocate the size of grid
 		int size = Model.getGameModel().copyOfActors().size();
 
@@ -48,7 +59,7 @@ public class ButtonGrid {
 				if (foundAnActor == false) {
 					grid[x][y] = new JButton(String.valueOf(Controller.stepsTaken)); // creates new button
 				}
-				panel.add(grid[x][y]);
+				frame.add(grid[x][y]);
 				// tried to add a frame
 			}
 		}
