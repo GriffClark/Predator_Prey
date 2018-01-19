@@ -18,16 +18,7 @@ public class ButtonGrid {
 	
 	
 	
-	public ButtonGrid() { // constructor
-		GridWork();
-		
-          SwingUtilities.updateComponentTreeUI(frame);
-          frame.invalidate();
 
-          frame.revalidate();
-
-          frame.repaint();
-	}
 	
 	public void GridWork() {
         JButton[][] grid; //names the grid of button
@@ -67,6 +58,11 @@ public class ButtonGrid {
 				// tried to add a frame
             
 		}
+	public void showGrid() {
+		GridWork();
+		frame.pack();
+		frame.setVisible(true);
+	}
 	public JFrame getFrame() {
 		return frame;
 	}

@@ -4,6 +4,8 @@
 
 // C:\Users\Griffin\Documents\GitHub\Predator_Prey
 import java.io.IOException;
+import java.awt.*;
+import javax.swing.*;
 import java.util.ArrayList;
 /**
  *Methods here:
@@ -30,6 +32,8 @@ public class Controller {
 	//this might not want to be a main method
 	public static int stepsTaken = 0;
 	public static ArrayList<Actor> actorsThatNeedAHome = new ArrayList<Actor>();
+	
+	public static ButtonGrid finalframe = new ButtonGrid();
 	
 	public static void main(String[] args) throws InterruptedException, IOException { //need to throw in ea AssertTest I think or enableassertions AssertTest
 	    //after everything has been initalized, the game starts...:
@@ -132,8 +136,8 @@ public class Controller {
 			//I am not confident that the handoff between completing a step and starting a new step is solid
 			
 			System.out.println("Step " + Controller.stepsTaken + " complete sucessfully");
-			
-			new ButtonGrid();
+			// here
+			finalframe.showGrid();
 	
 			Thread.sleep(500);
 		} while(stepsTaken < Model.getGameModel().getDesiredSteps());
