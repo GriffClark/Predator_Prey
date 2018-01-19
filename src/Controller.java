@@ -71,12 +71,15 @@ public class Controller {
 			{
 				Actor newActor =  Model.getGameModel().getActor(i);
 				localActors.add(newActor);
+				
 			}			
 		
 			/**
 			 * extra crap being added in here
 			 */
 			int oneTimeSize =localActors.size();
+			
+			
 			for (int i =  oneTimeSize- 1; i >=0; i--)
 			{
 				if(debugMode == true)
